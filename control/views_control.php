@@ -10,7 +10,7 @@ class viewsControl extends viewModel{
             $ruta = explode("/", $_GET["views"]);
             $response = viewModel::get_view($ruta[0]);
         }else{
-            $response = "index.php";
+            $response = "index";
         }
         return $response;
     }
