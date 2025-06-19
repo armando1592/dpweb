@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,6 +75,7 @@
                 <div class="card">
                     <center>
                         <h5>Registro de Usuario</h5>
+                        <h2> complete el formulario</s></h2>
                     </center>
 
                     <div class="card-body">
@@ -141,10 +143,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="" class="col-sm-4 col-form-label"></label>
-
-                        <div class="col-sm-8"> 
+                        <div class="mb-3 row">  
+                            <label for=""class="col-sm-4 col-form-label"></label>
+                        <div class> 
                             <button type="submit" class="btn btn-success">Registrar</button>
                             <button type="reset" class="btn btn-info">Limpiar</button>
                             <button type="button" class="btn btn-danger">Cancelar</button>
@@ -155,7 +156,6 @@
 
                 </div>
             </div>
-            
 
         </form>
     </header>
