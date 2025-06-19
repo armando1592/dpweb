@@ -16,7 +16,12 @@ function validar_form() {
     alert("Error: Existen campos vacios");
     return;
    }
-   alert("Procederemos a registrar")
+   Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: '<a href="#">Why do I have this issue?</a>'
+});
 }
 
 // Evita que se envie el formulario xd
