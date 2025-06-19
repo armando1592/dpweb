@@ -141,17 +141,21 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                            <label for="" class="col-sm-4 col-form-label"></label>
 
-                        <div> <center>
+                        <div class="col-sm-8"> 
                             <button type="submit" class="btn btn-success">Registrar</button>
                             <button type="reset" class="btn btn-info">Limpiar</button>
                             <button type="button" class="btn btn-danger">Cancelar</button>
-                            </center>
+                            
+                        </div>
                         </div>
                     </div>
 
                 </div>
             </div>
+            
 
         </form>
     </header>
