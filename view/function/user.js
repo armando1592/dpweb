@@ -16,7 +16,7 @@ function validar_form() {
     alert("Error: Existen campos vacios");
     return;
    }
-   Swal.fire("SweetAlert2 is working!");
+   alert("Procederemos a registrar")
 }
 
 // Evita que se envie el formulario xd
