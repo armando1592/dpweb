@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bennito</title>
     <link rel="stylesheet" href="<?php echo BASE_URL ?>view/bootstrap/css/bootstrap.min.css">
+    <script>
+        const base_url = '<?php echo BASE_URL; ?>';
+    </script>
 </head>
 
 <body>
@@ -18,7 +21,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Logo </a>
+                <a class="navbar-brand" href="#"><img src="https://logopond.com/logos/ed0f647072c2187bd75f55bf4301c2ed.png"alt="logo" width="80px" height="80px"alt=""> </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -69,97 +72,93 @@
             </div>
         </nav>
 
-        <form id="frm-user" action="" method="" >
+        <div class="container-fluid">
+        <div class="card">
+            <center>
+                <h5 class="card-header">INGRESA TUS DATOS</h5>
+            </center>
+            <form id="frm_user" action="" method="">
+                <div class="card-body">
+                    <div class="mb-3 row">
 
-            <div class="container-fluid">
-                <div class="card">
-                    <center>
-                        <h5>Registro de Usuario</h5>
-                        <h2> complete el formulario</s></h2>
-                    </center>
-
-                    <div class="card-body">
                         <div class="mb-3 row">
-                            <label for="nro_identidad" class="col-sm-4 col-form-label">Numero de documento:</label>
+                            <label for="nro_identidad" class="col-sm-4 col-form-label"><strong>nro documento:</strong></label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="nro_identidad" name="nro_identidad" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="razon_social" class="col-sm-4 col-form-label">Razon social:</label>
+                            <label for="razon_social" class="col-sm-4 col-form-label"><strong>razon social:</strong></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="razon_social" name="razon_social" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="telefono	" class="col-sm-4 col-form-label">Telefono:</label>
+                            <label for="telefono" class="col-sm-4 col-form-label"><strong>telefono:</strong></label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="telefono" name="telefono" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="correo" class="col-sm-4 col-form-label">Correo:</label>
+                            <label for="correo" class="col-sm-4 col-form-label"><strong>correo:</strong></label>
                             <div class="col-sm-8">
                                 <input type="email" class="form-control" id="correo" name="correo" required>
                             </div>
                         </div>
+
                         <div class="mb-3 row">
-                            <label for="departamento" class="col-sm-4 col-form-label">Departamento:</label>
+                            <label for="departamento" class="col-sm-4 col-form-label"><strong>departamento:</strong></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="departamento" name="departamento" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="provincia" class="col-sm-4 col-form-label">provincia:</label>
+                            <label for="provincia" class="col-sm-4 col-form-label"><strong>provincia:</strong></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="provincia" name="provincia" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="distrito" class="col-sm-4 col-form-label">distrito:</label>
+                            <label for="distrito" class="col-sm-4 col-form-label"><strong>distrito:</strong></label>
                             <div class="col-sm-8">
-
                                 <input type="text" class="form-control" id="distrito" name="distrito" required>
-
-                                <input type="text" class="form-control" id="istrito" name="distrito" required>
-
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="cod_postal" class="col-sm-4 col-form-label">codigo postal:</label>
+                            <label for="cod_postal" class="col-sm-4 col-form-label"><strong>cod postal:</strong></label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="cod_postal" name="cod_postal" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="direccion" class="col-sm-4 col-form-label">direccion:</label>
+                            <label for="direccion" class="col-sm-4 col-form-label"><strong>direccion:</strong></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="direccion" name="direccion" required>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="rol" class="col-sm-4 col-form-label">rol:</label>
+                            <label for="rol" class="col-sm-4 col-form-label"><strong>rol:</strong></label>
                             <div class="col-sm-8">
-                                <select class="form-control" require name="rol" id="rol" required>
-                                    <option value="" aria-placeholder="">seleccione</option>
+                                <select class="form-control" name="rol" id="rol" required>
+                                    <option value="" disabled selected>seleccione</option>
                                     <option value="administrador">administrador</option>
                                     <option value="vendedor">vendedor</option>
                                 </select>
                             </div>
                         </div>
-
-                        <div> <center>
-                            <button type="submit" class="btn btn-success">Registrar</button>
-                            <button type="reset" class="btn btn-info">Limpiar</button>
-                            <button type="button" class="btn btn-danger">Cancelar</button>
-                            </center>
+                        <div class="mb-3 row">
+                            <label for="" class="col-sm-4 col-form-label"></label>
+                            <div class="col-sm-8">
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                                <button type="reset" class="btn btn-warning">Limpiar</button>
+                                <button type="button" class="btn btn-danger">Cancelar</button>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
-
-        </form>
+            </form>
+        </div>
+    </div>
     </header>
 
 </body>

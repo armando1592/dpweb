@@ -16,12 +16,7 @@ function validar_form() {
     alert("Error: Existen campos vacios");
     return;
    }
-   Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: "Something went wrong!",
-  footer: '<a href="#">Why do I have this issue?</a>'
-});
+   registrarUsuario();
 }
 
 // Evita que se envie el formulario xd
@@ -33,4 +28,20 @@ if (document.querySelector('#frm_user')) {
         validar_form();
     }
     
+}
+
+async function registrarUsuario() {
+    try {
+        // capturar campos de formulario(HTML)
+        const datos = new FormData(frm_user);
+        //enviar datos al controlador
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=registrar', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+    } catch (error) {
+        console.log("Error al registrar usuario:" + error);
+    }
 }
