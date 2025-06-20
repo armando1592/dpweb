@@ -69,19 +69,13 @@
             </div>
         </nav>
 
-<<<<<<< HEAD
-        <form id="frm_user" action="" method="" >
-=======
         <form id="frm-user" action="" method="" >
->>>>>>> dfdf1d10b5425e3c87eeb4a8ec2744581c9aed9b
+
             <div class="container-fluid">
                 <div class="card">
                     <center>
                         <h5>Registro de Usuario</h5>
-<<<<<<< HEAD
-=======
                         <h2> complete el formulario</s></h2>
->>>>>>> dfdf1d10b5425e3c87eeb4a8ec2744581c9aed9b
                     </center>
 
                     <div class="card-body">
@@ -124,11 +118,11 @@
                         <div class="mb-3 row">
                             <label for="distrito" class="col-sm-4 col-form-label">distrito:</label>
                             <div class="col-sm-8">
-<<<<<<< HEAD
+
                                 <input type="text" class="form-control" id="distrito" name="distrito" required>
-=======
+
                                 <input type="text" class="form-control" id="istrito" name="distrito" required>
->>>>>>> dfdf1d10b5425e3c87eeb4a8ec2744581c9aed9b
+
                             </div>
                         </div>
                         <div class="mb-3 row">
