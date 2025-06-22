@@ -43,12 +43,12 @@
 
         <section class="featured-sections">
             <div class="container featured-grid">
-                <div class="featured-item red-bg">
+                <div class="featured-item red-bg"> <img src="https://itusers.today/wp-content/uploads/2024/04/aprovecha-grandes-descuentos-en-laptop-lenovo-televisores-y-celulares-samsung-1024x640.jpg" width="100%" height="400px" alt="">
                     <h3>Hasta 30% menos</h3>
                     <p>Ofertas por tiempo limitado</p>
                     <button class="btn secondary-btn">Ver más</button>
                 </div>
-                <div class="featured-item purple-bg">
+                <div class="featured-item purple-bg"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF0VNF7BU_O2NIyg0g1wl4CJ-CaRE0kM6X5W9AEWxkF-mijJQSw1updfnG7IltowEqY78&usqp=CAU" width="100%" height="400px" alt="">
                     <h3>Sonido portátil</h3>
                     <p>Audífonos desde S/ 49.90</p>
                     <button class="btn secondary-btn">Comprar</button>
@@ -79,34 +79,34 @@
                 <div class="product-grid">
                     <div class="product-card">
                         <span class="badge new-badge">Nuevo</span>
-                        <img src="https://st.depositphotos.com/1000128/2454/i/450/depositphotos_24542943-stock-photo-mobile-devices-wireless-communication-technology.jpg" alt="Smartwatch Pro">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiz6Qe3Edh95cKiHXOAVNVNPrva2dDX9VyHQ&s" alt="Smartwatch Pro">
                         <h3>Smartwatch Pro</h3>
                         <button class="btn add-to-cart-btn">Agregar al carrito</button>
                     </div>
                     <div class="product-card">
                         <span class="badge new-badge">Nuevo</span>
-                        <img src="https://via.placeholder.com/200x200/cccccc/ffffff?text=Laptop" alt="Laptop X290">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_VgYI7trlDBm95IflL0w1HNIz0GDNXBCDA&s" alt="Laptop X290">
                         <h3>Laptop X290</h3>
                         <button class="btn add-to-cart-btn">Agregar al carrito</button>
                     </div>
                     <div class="product-card">
-                        <img src="https://via.placeholder.com/200x200/cccccc/ffffff?text=Drone" alt="Drone HD">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_oVTXTdkEUPGZuGA7gwG0T1SKX1Ow1BrPLA&s" alt="Drone HD">
                         <h3>Drone HD</h3>
                         <button class="btn add-to-cart-btn">Agregar al carrito</button>
                     </div>
                     <div class="product-card">
-                        <img src="https://via.placeholder.com/200x200/cccccc/ffffff?text=Celular" alt="Celular Nova">
+                        <img src="https://oechsle.vteximg.com.br/arquivos/ids/13389336-1000-1000/2291765-01.jpg?v=638091393937070000" alt="Celular Nova">
                         <h3>Celular Nova</h3>
                         <button class="btn add-to-cart-btn">Agregar al carrito</button>
                     </div>
                     <div class="product-card">
                         <span class="badge new-badge">Nuevo</span>
-                        <img src="https://via.placeholder.com/200x200/cccccc/ffffff?text=Audifonos" alt="Audífonos Wireless">
+                        <img src="https://http2.mlstatic.com/D_NQ_NP_896193-MLA78048221180_082024-O.webp" alt="Audífonos Wireless">
                         <h3>Audífonos Wireless</h3>
                         <button class="btn add-to-cart-btn">Agregar al carrito</button>
                     </div>
                     <div class="product-card">
-                        <img src="https://via.placeholder.com/200x200/cccccc/ffffff?text=VR+Glasses" alt="VR Glasses">
+                        <img src="https://cdn.mos.cms.futurecdn.net/u5cggJUjzeNhRQnAo2bdtm.jpg" alt="VR Glasses">
                         <h3>VR Glasses</h3>
                         <button class="btn add-to-cart-btn">Agregar al carrito</button>
                     </div>
