@@ -22,7 +22,7 @@
             </nav>
             <div class="header-icons">
                 <i class="fas fa-search"></i>
-                <i class="fas fa-user"></i>
+                                     <i class="fas fa-user"></i>
                 <i class="fas fa-shopping-cart"></i>
             </div>
         </div>
