@@ -18,7 +18,7 @@ if ($tipo == "registrar") {
     $distrito = $_POST['distrito'];
     $cod_postal = $_POST['cod_postal'];
     $direccion = $_POST['direccion'];
-    $rol = $_POST['rol'];
+    $rol = $_POST['rol'];                                                               
     //ENCRIPTANDO  nro_identidad PARA UTILIZAR COMO PASSWORD
     $password = password_hash($nro_identidad, PASSWORD_DEFAULT);
 

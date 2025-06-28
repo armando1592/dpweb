@@ -1,5 +1,7 @@
  <?php
-require_once "./model/views_model.php";
+/*Importa el archivo views_model.php, que contiene la clase viewModel. */
+
+require_once "./model/views_model.php"; 
 
 class viewsControl extends viewModel{
     public function getPlantillaControl(){
@@ -10,7 +12,7 @@ class viewsControl extends viewModel{
             $ruta = explode("/", $_GET["views"]);
             $response = viewModel::get_view($ruta[0]);
         }else{
-            $response = "index";
+            $response = "index.php";
         }
         return $response;
     }
