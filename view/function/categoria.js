@@ -5,7 +5,7 @@ function validar_Form(){
 if (nombre=="" || detalle=="")  {
     alert("Error: Existen campos vacios");
     return;
-    guardarCategoria();
+    registrarCategoria();
    }
 
 if (document.querySelector('#categoriaForm')) {
@@ -16,12 +16,12 @@ if (document.querySelector('#categoriaForm')) {
     }
     }
 
-async function guardarCategoria() {
+async function registrarCategoria() {
     try {
         // capturar campos de formulario(HTML)
         const datos = new FormData(categoriaForm);
         //enviar datos al controlador
-        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=Guardar', {
+        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=registrar', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
