@@ -1,14 +1,21 @@
 <?php
-require_once("../model/UsuarioModel.php");
+/* 
+   require_once-incluye archivos
+   Model-contiene la lógica para interactuar con la base de datos.
+    Se crea un objeto $objPersona que usará los métodos definidos en UsuarioModel
+ */
+ require_once("../model/UsuarioModel.php");
 $objPersona = new UsuarioModel();
 
 
 
 
-$tipo = $_GET['tipo'];
+//Toma el valor del parámetro tipo enviado por GET en la URL.
 
-if ($tipo == "registrar") {
-    // print_r($_POST);
+$tipo = $_GET['tipo'];
+if ($tipo == "registrar")
+{ 
+    //Se capturan los datos enviados por el formulario HTML mediante el método POST
     $nro_identidad = $_POST['nro_identidad'];
     $razon_social = $_POST['razon_social'];
     $telefono = $_POST['telefono'];
@@ -18,10 +25,10 @@ if ($tipo == "registrar") {
     $distrito = $_POST['distrito'];
     $cod_postal = $_POST['cod_postal'];
     $direccion = $_POST['direccion'];
-    $rol = $_POST['rol'];                                                               
-    //ENCRIPTANDO  nro_identidad PARA UTILIZAR COMO PASSWORD
+    $rol = $_POST['rol'];                                                           
+    //Se encripta el número de identidad (nro_identidad) usando password_hash para usarlo como contraseña.
     $password = password_hash($nro_identidad, PASSWORD_DEFAULT);
-
+    //Si algún campo está vacío, no se realiza el registro y se envía un mensaje de error.
     if ($nro_identidad == "" || $razon_social == "" || $telefono == "" || $correo == "" || $departamento == "" || $provincia == "" || $distrito == "" || $cod_postal == "" || $direccion == "" || $rol == "") {
         $arrResponse = array('status' => false, 'msg' => 'Error, campos  vacios');
     } else {
@@ -29,6 +36,7 @@ if ($tipo == "registrar") {
         $existePersona = $objPersona->existePersona($nro_identidad);
        if ($existePersona>0) {
         $arrResponse = array('status' => false, 'msg' => 'Error, nro documento ya existe');
+        //Si el DNI no existe, se llama al método registrar() del modelo.
        }else {
         $respuesta = $objPersona->registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password);
         if ($respuesta) {
@@ -38,5 +46,6 @@ if ($tipo == "registrar") {
         }
         }
     }
+    //Devuelve la respuesta al navegador o a la aplicación cliente en formato JSON.
     echo json_encode($arrResponse);
 }
