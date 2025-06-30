@@ -1,106 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categoria</title>
+    <title>Registro de Categoría</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>view/bootstrap/css/bootstrap.min.css">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Definir base_url desde PHP -->
     <script>
         const base_url = '<?php echo BASE_URL; ?>';
     </script>
+
+    <style>
+        .nav-brand {
+            color: yellowgreen;
+        }
+    </style>
 </head>
+
 <body>
-    
-  <div class="form-container">
-    <h2>Categoria</h2>
-    <form id="categoriaForm" action="" method="">
-      <label for="nombre">Nombre de la Categoría:</label>
-      <input type="text" id="nombre" name="nombre" placeholder="nombre..." required>
+    <div class="container-fluid mt-4">
+        <div class="card mx-auto" style="max-width: 600px;">
+            <h5 class="card-header text-center">CATEGORÍA</h5>
+            <form id="categoriaForm">
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="nombre" class="col-sm-4 col-form-label"><strong>Nombre</strong></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                    </div>
 
-      <label for="descripcion">Descripción Detallada:</label>
-      <textarea id="descripcion" name="descripcion" placeholder="Describe el contenido y alcance de la categoría..." required></textarea>
+                    <div class="mb-3 row">
+                        <label for="detalle" class="col-sm-4 col-form-label"><strong>Detalle</strong></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="detalle" name="detalle" required>
+                        </div>
+                    </div>
 
-      <button type="submit">Guardar Categoría</button>
-      <button type="submit">Cancelar Categoría</button>
-    </form>
-
-    <div class="success-message" id="successMsg">
-      ✅ Categoría guardada correctamente.
+                    <div class="mb-3 row">
+                        <div class="col-sm-8 offset-sm-4">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                            <button type="reset" class="btn btn-warning">Limpiar</button>
+                            <button type="button" class="btn btn-danger" onclick="window.location.href=base_url">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-       <div class="success-message" id="successMsg">
-      ✅ Categoría se cancelo.
-    </div>
-  </div>
 
-  <style>
-.form-container {
-      max-width: 600px;
-      margin: auto;
-      background-color: #fff;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+    <!-- Bootstrap JS -->
+    <script src="<?php echo BASE_URL; ?>view/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    h2 {
-      color: #1a1a1a;
-      text-align: center;
-    }
+    <!-- Script de validación -->
+    <script>
+        function validar_Form() {
+            let nombre = document.getElementById("nombre").value.trim();
+            let detalle = document.getElementById("detalle").value.trim();
 
-    p.subtitle {
-      text-align: center;
-      color: #555;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
+            if (nombre === "" || detalle === "") {
+                Swal.fire("Error", "Campos vacíos", "warning");
+                return;
+            }
+            registrarCategoria();
+        }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #333;
-    }
+        if (document.querySelector('#categoriaForm')) {
+            let frm_user = document.querySelector('#categoriaForm');
+            frm_user.onsubmit = function (e) {
+                e.preventDefault();
+                validar_Form();
+            }
+        }
 
-    input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-      font-size: 1rem;
-    }
+        async function registrarCategoria() {
+            try {
+                const datos = new FormData(document.getElementById('categoriaForm'));
 
-    textarea {
-      resize: vertical;
-      height: 120px;
-    }
+                let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=registrar', {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    body: datos
+                });
 
-    button {
-      margin-top: 20px;
-      background-color: #007bff;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-    }
+                let json = await respuesta.json();
 
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .success-message {
-      color: green;
-      text-align: center;
-      margin-top: 15px;
-      display: none;
-    }
-  </style>
-
-<script src="<?php echo BASE_URL; ?>view/function/categoria.js"></script>
-
+                if (json.status) {
+                    Swal.fire("Éxito", json.msg, "success");
+                    document.getElementById('categoriaForm').reset();
+                } else {
+                    Swal.fire("Error", json.msg, "error");
+                }
+            } catch (error) {
+                Swal.fire("Error", "Fallo al enviar datos", "error");
+                console.error("Error al registrar categoría: " + error);
+            }
+        }
+    </script>
 </body>
+
 </html>
+
+
+
+
+

@@ -1,32 +1,32 @@
 <?php
 require_once("../model/categoriaModel.php");
+
+header('Content-Type: application/json'); // Asegura que devuelva JSON
+
 $objcategoria = new categoriaModel();
 
+$tipo = $_GET['tipo'] ?? '';
 
+if ($tipo == "registrar") {
+    $nombre = $_POST['nombre'] ?? '';
+    $detalle = $_POST['detalle'] ?? '';
 
-
-$tipo = $_GET['tipo'];
-
-if ($tipo == "Guardar") {
-    // print_r($_POST);
-    $nro_identidad = $_POST['nombre'];
-    $razon_social = $_POST['detalle'];
-
-    if ($nombre == "" || $detalle =="") {
-        $arrResponse = array('status' => false, 'msg' => 'Error, campos  vacios');
-    } else {
-        //validacion si existe persona con el mismo dni
-        $existeCategoria = $objcategoria->existeCategoria($nombre);
-       if ($existeCategoria>0) {
-        $arrResponse = array('status' => false, 'msg' => 'Error, nombre de categoria ya existe');
-       }else {
-        $respuesta = $objcategoria->Guardar($nombre, $detalle);
-        if ($respuesta) {
-            $arrResponse = array('status' => true, 'msg' => 'Resgistrado Correctamente');
-        } else {
-            $arrResponse = array('status' => false, 'msg' => 'Error, fallo en registro');
-        }
-        }
+    if (trim($nombre) == "" || trim($detalle) == "") {
+        echo json_encode(['status' => false, 'msg' => 'Error, campos vacíos']);
+        exit;
     }
-    echo json_encode($arrResponse);
+
+    $existe = $objcategoria->existeCategoria($nombre);
+    if ($existe > 0) {
+        echo json_encode(['status' => false, 'msg' => 'Error, nombre de categoría ya existe']);
+        exit;
+    }
+
+    $respuesta = $objcategoria->registrar($nombre, $detalle);
+    if ($respuesta > 0) {
+        echo json_encode(['status' => true, 'msg' => 'Se registró correctamente']);
+    } else {
+        echo json_encode(['status' => false, 'msg' => 'Error al registrar categoría']);
+    }
 }
+?>

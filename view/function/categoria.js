@@ -1,43 +1,43 @@
-function validar_Form(){
-    let nro_documento = document.getElementById("nombre").value;
-    let razon_social = document.getElementById("detalle").value;
-}
-if (nombre=="" || detalle=="")  {
-    alert("Error: Existen campos vacios");
-    return;
+function validar_Form() {
+    let nombre = document.getElementById("nombre").value.trim();
+    let detalle = document.getElementById("detalle").value.trim();
+
+    if (nombre === "" || detalle === "") {
+        Swal.fire("Error", "Campos vacíos", "warning");
+        return;
+    }
     registrarCategoria();
-   }
+}
 
 if (document.querySelector('#categoriaForm')) {
     let frm_user = document.querySelector('#categoriaForm');
-    frm_user.onsubmit = function(e){
+    frm_user.onsubmit = function (e) {
         e.preventDefault();
         validar_Form();
     }
-    }
+}
 
 async function registrarCategoria() {
     try {
-        // capturar campos de formulario(HTML)
-        const datos = new FormData(categoriaForm);
-        //enviar datos al controlador
+        const datos = new FormData(document.getElementById('categoriaForm'));
+
         let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=registrar', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
             body: datos
         });
-        let json =await respuesta.json();
-        //validamos que json.status sea = true
-        if (json.status) { // true
-            alert(json.msg);
-            document.getElementById ('categoriaForm').reset();
-        }else{
-            alert(json.msg);
+
+        let json = await respuesta.json();
+
+        if (json.status) {
+            Swal.fire("Éxito", json.msg, "success");
+            document.getElementById('categoriaForm').reset();
+        } else {
+            Swal.fire("Error", json.msg, "error");
         }
     } catch (error) {
-        console.log("Error al registrar categoria:" + error);
+        Swal.fire("Error", "Fallo al enviar datos", "error");
+        console.error("Error al registrar categoría: " + error);
     }
 }
-
-
