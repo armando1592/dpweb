@@ -32,4 +32,5 @@ if ($tipo=="registrar") {
 }
 if ($tipo =="listar") {
     $arr_Respuesta = array('status' => false, 'contenido' => '');
+    
 }
