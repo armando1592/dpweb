@@ -41,3 +41,18 @@ async function registrarCategoria() {
         console.error("Error al registrar categoría: " + error);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
