@@ -19,13 +19,13 @@
 
     <style>
         body {
-            background-color: #f5faff;
+            background-color:hsl(0, 0.00%, 96.90%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .navbar {
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color:rgba(67, 104, 182, 0.7);
+            box-shadow: 0 2px 5px rgba(231, 226, 226, 0.95);
         }
 
         .navbar-brand img {
@@ -45,11 +45,11 @@
         .card {
             margin-top: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(236, 230, 230, 0.08);
         }
 
         .card-header {
-            background-color: #007bff;
+            background-color:rgb(62, 158, 158);
             color: #fff;
             font-size: 1.2rem;
             font-weight: bold;
@@ -68,14 +68,14 @@
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color:rgb(34, 70, 18);
             border: none;
         }
 
         .btn-warning {
-            background-color: #ffc107;
+            background-color:rgb(97, 24, 180);
             border: none;
-            color: #212529;
+            color:rgb(188, 201, 214);
         }
 
         .btn-danger {
@@ -126,10 +126,10 @@
                 </div>
             </div>
         </nav>
-
+    <!-- INICIO CUERPO DE LA PAGINA-->
         <div class="container-fluid">
             <div class="card mx-auto" style="max-width: 800px;">
-                <div class="card-header">INGRESA TUS DATOS</div>
+                <div class="card-header">Registrarse</div>
                 <form id="frm_user" action="" method="">
                     <div class="card-body">
                         <div class="mb-3 row">
@@ -217,6 +217,10 @@
                 </form>
             </div>
         </div>
+         <!-- INICIO CUERPO DE LA PAGINA-->
+
+
+
     </header>
 
     <!-- JS -->
