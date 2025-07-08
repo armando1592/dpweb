@@ -37,7 +37,7 @@
                             <a class="nav-link" href="#">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Categaries</a>
+                            <a class="nav-link" href="#">Categories</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">clients</a>

@@ -1,582 +1,275 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LunaTec - Tu tienda de tecnología</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title> productos </title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>view/bootstrap/css/bootstrap.min.css">
+    <script>
+        const base_url = '<?php echo BASE_URL; ?>';
+    </script>
 </head>
+
 <body>
-    <header class="header">
-        <div class="container header-content">
-            <a class="logo" href="#"><img src="https://logopond.com/logos/ed0f647072c2187bd75f55bf4301c2ed.png"alt="logo" width="80px" height="80px"  margin-left="0" alt=""> </a>    
-            <nav class="nav">
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Celulares</a></li>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Accesorios</a></li>
+    <style>
+        /*
+        body {
+            background-color: skyblue;
+        }*/
+
+        .nav-link {
+            color: black;
+        }
+
+        .home {
+            color: red;
+        }
+
+        .collapse {
+            background-color: whitesmoke;
+        }
+
+        img {
+            border: 1px solid black;
+        }
+
+        .card-header {
+            background-color: silver;
+            color: black;
+        }
+
+        .form-control {
+            border: solid black;
+        }
+
+        #navbarSupportedContent {
+            background-color: rgb(43, 255, 0);
+        }
+
+        #menu {
+            background-color: rgb(255, 0, 0);
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" id="menu">
+            <a class="navbar-brand" href=""><img src="view/img/logo-lobo.jpg" alt="logo" width="80px" height="80px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="<?php echo BASE_URL; ?>home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>new-user">User</a>
+                        <!--
+                        <a href="<?php echo BASE_URL; ?>new-user">User</a>
+                        -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>category">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>compras">Shops</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>venta">Sales</a>
+                    </li>
+
                 </ul>
-            </nav>
-            <div class="header-icons">
-                <i class="fas fa-search"></i>
-                                     <i class="fas fa-user"></i>
-                <i class="fas fa-shopping-cart"></i>
+                <form class="d-flex" role="search">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item dropdow">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                profile
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="#">logout</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </form>
             </div>
         </div>
-    </header>
+    </nav>
+    <div class="container-fluid">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
 
-    <main>
-        <section class="hero-section">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <h1>Súper precios en tus artículos favoritos</h1>
-                    <p>Encuentra todo lo que buscas y más.</p>
-                    <button class="btn primary-btn">Comprar ahora</button>
-                </div>
-                <div class="hero-image"> <img src="https://cloudfront-us-east-1.images.arcpublishing.com/semana/5J2P52X3FBF4TJNKQGLGKH7ELA.jpg" width="780px" height="400px"  alt="">
+            .container {
+                max-width: 1200px;
+                margin: 20px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .product {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 15px;
+            }
+
+            .product img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 8px;
+                margin-right: 20px;
+            }
+
+            .product-details {
+                flex: 1;
+            }
+
+            .product-name {
+                font-size: 18px;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            .product-description {
+                font-size: 14px;
+                color: #555;
+                margin: 5px 0;
+            }
+
+            .product-price {
+                font-size: 16px;
+                color:rgb(40, 137, 167);
+                font-weight: bold;
+            }
+
+            .buy-button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .buy-button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+
+        <div class="container-fluid">
+            <div class="card">
+                <center>
+                    <h5 class="card-header">INGRESA LOS DATOS</h5>
+                </center>
+                <form id="frm_products" action="" method="">
+                    <div class="card-body">
+                        <div class="mb-3 row">
+
+                            <div class="mb-3 row">
+                                <label for="codigo" class="col-sm-4 col-form-label"><strong>
+                                        codigo:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="codigo" name="codigo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="nombre" class="col-sm-4 col-form-label"><strong>
+                                        nombre:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="detalle" class="col-sm-4 col-form-label"><strong>detalle:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="detalle" name="detalle" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="precio" class="col-sm-4 col-form-label"><strong>precio:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="precio" name="precio" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="stock" class="col-sm-4 col-form-label"><strong>stock:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="stock" name="stock" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="id_categoria " class="col-sm-4 col-form-label"><strong>id_categoria
+                                        :</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="id_categoria" name="id_categoria"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="fecha_vencimiento"
+                                    class="col-sm-4 col-form-label"><strong>fecha_vencimiento:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="fecha_vencimiento"
+                                        name="fecha_vencimiento" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="imagen" class="col-sm-4 col-form-label"><strong>
+                                        imagen:</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="imagen" name="imagen" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="id_proveedor " class="col-sm-4 col-form-label"><strong>id_proveedor
+                                        :</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="id_proveedor" name="id_proveedor"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-form-label"></label>
+                                <div class="col-sm-8">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                    <button type="reset" class="btn btn-warning">Limpiar</button>
+                                    <button type="button" class="btn btn-danger">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </form>
             </div>
-        </section>
+        </div>
 
-        <section class="featured-sections">
-            <div class="container featured-grid">
-                <div class="featured-item red-bg"> <img src="https://itusers.today/wp-content/uploads/2024/04/aprovecha-grandes-descuentos-en-laptop-lenovo-televisores-y-celulares-samsung-1024x640.jpg" width="100%" height="400px" alt="">
-                    <h3>Hasta 30% menos</h3>
-                    <p>Ofertas por tiempo limitado</p>
-                    <button class="btn secondary-btn">Ver más</button>
-                </div>
-                <div class="featured-item purple-bg"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF0VNF7BU_O2NIyg0g1wl4CJ-CaRE0kM6X5W9AEWxkF-mijJQSw1updfnG7IltowEqY78&usqp=CAU" width="100%" height="400px" alt="">
-                    <h3>Sonido portátil</h3>
-                    <p>Audífonos desde S/ 49.90</p>
-                    <button class="btn secondary-btn">Comprar</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="info-banners">
-            <div class="container info-grid">
-                <div class="info-item">
-                    <i class="fas fa-truck"></i>
-                    <p>Envíos gratis</p>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-credit-card"></i>
-                    <p>Pagos seguros</p>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-headset"></i>
-                    <p>Soporte 24/7</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="most-sold-section">
-            <div class="container">
-                <h2>Más vendidos</h2>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <span class="badge new-badge">Nuevo</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiz6Qe3Edh95cKiHXOAVNVNPrva2dDX9VyHQ&s" alt="Smartwatch Pro">
-                        <h3>Smartwatch Pro</h3>
-                        <button class="btn add-to-cart-btn">Agregar al carrito</button>
-                    </div>
-                    <div class="product-card">
-                        <span class="badge new-badge">Nuevo</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_VgYI7trlDBm95IflL0w1HNIz0GDNXBCDA&s" alt="Laptop X290">
-                        <h3>Laptop X290</h3>
-                        <button class="btn add-to-cart-btn">Agregar al carrito</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_oVTXTdkEUPGZuGA7gwG0T1SKX1Ow1BrPLA&s" alt="Drone HD">
-                        <h3>Drone HD</h3>
-                        <button class="btn add-to-cart-btn">Agregar al carrito</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://oechsle.vteximg.com.br/arquivos/ids/13389336-1000-1000/2291765-01.jpg?v=638091393937070000" alt="Celular Nova">
-                        <h3>Celular Nova</h3>
-                        <button class="btn add-to-cart-btn">Agregar al carrito</button>
-                    </div>
-                    <div class="product-card">
-                        <span class="badge new-badge">Nuevo</span>
-                        <img src="https://http2.mlstatic.com/D_NQ_NP_896193-MLA78048221180_082024-O.webp" alt="Audífonos Wireless">
-                        <h3>Audífonos Wireless</h3>
-                        <button class="btn add-to-cart-btn">Agregar al carrito</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://cdn.mos.cms.futurecdn.net/u5cggJUjzeNhRQnAo2bdtm.jpg" alt="VR Glasses">
-                        <h3>VR Glasses</h3>
-                        <button class="btn add-to-cart-btn">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <style>
-        /* General Styles */
-:root {
-    --primary-color: #6C5CE7; /* A purple tone */
-    --secondary-color: #E84393; /* A red/pink tone */
-    --text-color: #333;
-    --light-text-color: #fff;
-    --background-light: #f8f8f8;
-    --background-dark: #eee;
-    --border-color: #ddd;
-    --red-promo: #E74C3C;
-    --purple-promo: #8e44ad;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-light);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header */
-.header {
-    background-color: var(--light-text-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-}
-
-.nav ul li {
-    margin-left: 30px;
-}
-
-.nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav ul li a:hover {
-    color: var(--primary-color);
-}
-
-.header-icons {
-    display: flex;
-    gap: 20px;
-}
-
-.header-icons i {
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: var(--text-color);
-    transition: color 0.3s ease;
-}
-
-.header-icons i:hover {
-    color: var(--primary-color);
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn.primary-btn {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-}
-
-.btn.primary-btn:hover {
-    background-color: #5a4acb;
-    transform: translateY(-2px);
-}
-
-.btn.secondary-btn {
-    background-color: var(--light-text-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-}
-
-.btn.secondary-btn:hover {
-    background-color: var(--background-dark);
-    transform: translateY(-2px);
-}
-
-.btn.add-to-cart-btn {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    width: 100%;
-    margin-top: 15px;
-}
-
-.btn.add-to-cart-btn:hover {
-    background-color: #5a4acb;
-    transform: none; /* No translateY for cart buttons for a different feel */
-}
-
-/* Hero Section */
-.hero-section {
-    background-color: var(--background-light); /* Base for content, image will overlay/complement */
-    padding: 80px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-content {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.hero-text {
-    flex: 1;
-    z-index: 1;
-}
-
-.hero-text h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #666;
-}
-
-.hero-image {
-    flex: 1;
-    min-height: 350px;
-    background-image: url('https://via.placeholder.com/600x400/8e44ad/ffffff?text=Tecnologia'); /* Placeholder, replace with your image */
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 0;
-}
-
-/* Featured Sections */
-.featured-sections {
-    padding: 50px 0;
-    background-color: var(--background-light);
-}
-
-.featured-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 30px;
-}
-
-.featured-item {
-    padding: 40px;
-    border-radius: 10px;
-    color: var(--light-text-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 250px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.featured-item h3 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.featured-item p {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-.featured-item .btn.secondary-btn {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: var(--text-color);
-    font-weight: 600;
-}
-
-.featured-item .btn.secondary-btn:hover {
-    background-color: var(--light-text-color);
-}
-
-.red-bg {
-    background-color: var(--red-promo);
-    background-image: url('https://via.placeholder.com/500x300/E74C3C/ffffff?text=Ofertas'); /* Replace with your image */
-}
-
-.purple-bg {
-    background-color: var(--purple-promo);
-    background-image: url('https://via.placeholder.com/500x300/8e44ad/ffffff?text=Sonido'); /* Replace with your image */
-}
-
-
-/* Info Banners */
-.info-banners {
-    background-color: var(--light-text-color);
-    padding: 40px 0;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    text-align: center;
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background-color: var(--light-text-color);
-}
-
-.info-item i {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.info-item p {
-    font-size: 1.1rem;
-    font-weight: 500;
-}
-
-/* Most Sold Section */
-.most-sold-section {
-    padding: 60px 0;
-    background-color: var(--background-light);
-}
-
-.most-sold-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: var(--text-color);
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-}
-
-.product-card {
-    background-color: var(--light-text-color);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.product-card .badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: var(--red-promo);
-    color: var(--light-text-color);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.product-card img {
-    max-width: 100%;
-    height: 150px; /* Fixed height for product images */
-    object-fit: contain; /* Ensures the image fits without distortion */
-    margin-bottom: 15px;
-}
-
-.product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: var(--text-color);
-    flex-grow: 1; /* Allows title to take available space */
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .header-content {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .nav ul {
-        margin-top: 15px;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .header-icons {
-        margin-top: 15px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .hero-content {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-
-    .hero-image {
-        margin-bottom: 30px;
-    }
-
-    .hero-text h1 {
-        font-size: 2.5rem;
-    }
-
-    .featured-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav ul li {
-        margin: 0 15px;
-    }
-
-    .hero-text h1 {
-        font-size: 2rem;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    .nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .nav ul li {
-        margin: 10px 0;
-    }
-
-    .hero-text h1 {
-        font-size: 1.8rem;
-    }
-
-    .hero-text p {
-        font-size: 1rem;
-    }
-
-    .featured-item {
-        padding: 30px 20px;
-    }
-
-    .featured-item h3 {
-        font-size: 1.5rem;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-}
-    </style>
-    <script>document.addEventListener('DOMContentLoaded', () => {
-    console.log('NovoTec website loaded!');
-
-    // Example of a simple interactive element:
-    // Adding a click listener to the "Add to Cart" buttons (for demonstration)
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const productName = event.target.closest('.product-card').querySelector('h3').textContent;
-            alert(`"${productName}" ha sido agregado al carrito! (Esta es una función de demostración)`);
-            // In a real application, you'd add logic here to update a cart icon,
-            // send data to a backend, etc.
-        });
-    });
-
-    // Optional: Scroll to top button (uncomment HTML if you want to use this)
-    /*
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.classList.add('scroll-to-top');
-    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    document.body.appendChild(scrollToTopBtn);
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollToTopBtn.classList.add('show');
-        } else {
-            scrollToTopBtn.classList.remove('show');
-        }
-    });
-
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    */
-});</script>
-    
-
-
+    </div>
 </body>
+<script src="<?php echo BASE_URL; ?>view/funtion/product.js"></script>
+<script src="<?php echo BASE_URL; ?>view/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- importar sweet aler 2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </html>
