@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login</title>
-  <link rel="stylesheet" href="../view/bootstrap/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>const base_url = '<?= BASE_URL; ?>';</script>
 </head>
 <body>
   <div class="container">
-    <form class="login-box" id="loginForm" method="POST">
+    <form class="login-box" id="frm_login" >
       <h2>LOGIN FORM</h2>
       <label for="username">USERNAME</label>
       <input type="text" id="username" name="username" placeholder="Enter Username" required>
@@ -17,7 +17,7 @@
       <label for="password">PASSWORD</label>
       <input type="password" id="password" name="password" placeholder="Enter Password" required>
 
-      <button type="submit">LOGIN</button>
+      <button type="button" onclick="iniciar_sesion();">GET INTO</button>
     </form>
   </div>
 
@@ -104,6 +104,9 @@
     }
   </style>
 
-  
+<script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
+
+
+
 </body>
 </html>

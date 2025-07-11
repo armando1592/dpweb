@@ -9,45 +9,29 @@ class UsuarioModel
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->connect();
     }
-    public function registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password){
+    public function registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password)
+    {
         $consulta = "INSERT INTO persona (nro_identidad, razon_social, telefono, correo, departamento, provincia, distrito, cod_postal, direccion, rol, password) VALUES ('$nro_identidad', '$razon_social', '$telefono', '$correo', '$departamento', '$provincia', '$distrito', '$cod_postal', '$direccion', '$rol', '$password')";
-        $sql = $this->conexion->query($consulta);    
+        $sql = $this->conexion->query($consulta);
         if ($sql) {
-           $sql = $this->conexion->insert_id;
-        }else {
+            $sql = $this->conexion->insert_id;
+        } else {
             $sql = 0;
         }
         return $sql;
     }
-    public function existePersona($nro_identidad){
-        $consulta= "SELECT* FROM persona Where nro_identidad = '$nro_identidad'";
+    public function existePersona($nro_identidad)
+    {
+        $consulta = "SELECT* FROM persona Where nro_identidad = '$nro_identidad'";
         $sql = $this->conexion->query($consulta);
-       return $sql->num_rows;
+        return $sql->num_rows;
+    }
+
+    /*metodo para buscar una persona atraves de su numero de identidad */
+    public function buscarPersonaPorNroIdentidad($nro_identidad)
+    {
+        $consulta = "SELECT id, razon_social, password from persona where nro_identidad = '$nro_identidad' limit 1;";
+        $sql = $this->conexion->query($consulta);
+        return $sql->fetch_object();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//-----   "./ salir ala carpeta raiz"
-// ------ "../ salir de la carpeta"
