@@ -1,25 +1,35 @@
-document.getElementById("loginForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
 
-      const formData = new FormData(this);
 
-      try {
-        const res = await fetch("../control/loginController.php", {
-          method: "POST",
-          body: formData
+// innicias sesion
+/*async function iniciar_sesion() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    if (username == "" || password == "") {
+        alert("Error, campos vacios!");
+        return;
+    }
+    try {
+        const datos = new FormData(frm_login);
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=iniciar_sesion', {
+            method: 'POST',
+            MODE: 'cors',
+            cache: 'no-cache',
+            body: datos
         });
 
-        const data = await res.json();
-
-        if (data.status) {
-          Swal.fire("Éxito", data.msg, "success").then(() => {
-            window.location.href = "../index.php"; // Redirige si deseas
-          });
+        //*----------------
+        let json = await respuesta.json();
+        //validamos que json.status sea = true
+        if (json.status) { // true
+        
+    
+            location.replace(base_url + 'new-user');
         } else {
-          Swal.fire("Error", data.msg, "error");
+            alert(json.msg);
         }
-      } catch (error) {
-        console.error("Error al hacer login:", error);
-        Swal.fire("Error", "No se pudo procesar la solicitud", "error");
-      }
-    });
+
+    } catch (error) {
+        console.log(error);
+
+    }
+}*/

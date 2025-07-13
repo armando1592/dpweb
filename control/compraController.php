@@ -1,5 +1,5 @@
-<?php
-require_once("../model/CompraModel.php");
+ <?php
+/*require_once("../model/CompraModel.php");
 
 $objCompra = new compraModel();
 
@@ -13,7 +13,7 @@ if ($tipo == "registrar") {
     $id_trabajador =  $_POST['id_trabajador'];
 
 
-    /* validar que los campos no esten vacios*/
+    /* validar que los campos no esten vacios
     if ($id_producto == "" || $cantidad == "" || $precio == "" || $id_trabajador == "") {
 
         $arrResponse = array('status' => false, 'msg' => 'Error, campos vacios');
@@ -32,4 +32,4 @@ if ($tipo == "registrar") {
         }
     }
     echo json_encode($arrResponse);
-}
+} */

@@ -1,4 +1,4 @@
-async function registrar_compra(){
+/*async function registrar_compra(){
     let id_producto = document.getElementById('id_producto').value; // solo id
     let cantidad = document.getElementById('cantidad').value;
     let precio = document.getElementById('precio').value;
@@ -27,4 +27,4 @@ try {
 } catch (e) {
     console.log("Oops, ocurrio un error" + e);
 }
-}
+}*/

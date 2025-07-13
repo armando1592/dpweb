@@ -1,5 +1,5 @@
 <?php
-require_once("../library/conexion.php");
+/*require_once("../library/conexion.php");
 
 class UsuarioModel {
     private $conexion;
@@ -14,4 +14,4 @@ class UsuarioModel {
         return $sql && $sql->num_rows > 0 ? $sql->fetch_assoc() : false;
     }
 }
-?>
+*/

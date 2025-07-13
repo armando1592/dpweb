@@ -1,5 +1,5 @@
 <?php
-require_once("../library/conexion.php");
+/*require_once("../library/conexion.php");
 class productsModel{
     private $conexion;
     function __construct(){
@@ -22,4 +22,4 @@ class productsModel{
         $sql = $this->conexion->query($consulta);
         return $sql->num_rows;
     }
-}
+}*/

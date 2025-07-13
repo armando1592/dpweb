@@ -1,4 +1,4 @@
-function validar_form() {
+/*function validar_form() {
     let codigo = document.getElementById("codigo").value;
     let nombre = document.getElementById("nombre").value;
     let detalle = document.getElementById("detalle").value;
@@ -55,4 +55,4 @@ async function registrarProducto() {
     } catch (error) {
         console.log("Error al registrar usuario:" + error);
     }
-}
+}*/

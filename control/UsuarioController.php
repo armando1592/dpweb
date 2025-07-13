@@ -51,6 +51,7 @@ if ($tipo == "registrar")
 }
 
 
+<?php
 // INICIAR SESION
 if ($tipo == "iniciar_sesion") {
     $nro_identidad = $_POST['username'];
@@ -75,4 +76,4 @@ if ($tipo == "iniciar_sesion") {
     }
     echo json_encode($respuesta);
 }
-
+?>

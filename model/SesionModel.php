@@ -1,5 +1,5 @@
 <?php
-require_once("../library/conexion.php");
+/*require_once("../library/conexion.php");
 class SesionModel{
     private $conexion;
     function __construct(){
@@ -22,4 +22,4 @@ class SesionModel{
         $sql = $this->conexion->query($consulta);
         return $sql->num_rows;
     }
-}
+}*/

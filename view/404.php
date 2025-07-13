@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: sans-serif;
-            background-color: rgb(9, 1, 1);
+            background-color: rgba(227, 221, 221, 0.73);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,9 +23,10 @@
 
         .error-container {
             background-color: #fff;
-            padding: 40px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 50%;
         
         }
 
@@ -67,12 +68,9 @@
         }
     </style>
     <div class="error-container">
-        <img src="https://ca-times.brightspotcdn.com/dims4/default/5325426/2147483647/strip/false/crop/1012x569+6+0/resize/1200x675!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F72%2F0d%2Fa2ac92564432a2949fa4970b728e%2Fmeme.jpeg" width="800px" height="500px" alt="">
-    
-        <h1>¡Oops! Página no encontrada especialista</h1>
-        <p>Lo sentimos, la página que estás buscando no existe.</p>
-        <p>Puede que la dirección sea incorrecta o que la página haya sido eliminada.</p>
-        <a href="/" class="button">Volver a la página principal</a>
+        <h3>¡Oops! Página no encontrada especialista</h3    >
+        <p>Error</p>
+        <a href="/view/principal.php" class="button">Volver a la página principal</a>
     </div>
 </body>
 

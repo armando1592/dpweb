@@ -1,5 +1,5 @@
 <?php
-require_once("../model/productsModel.php");
+/*require_once("../model/productsModel.php");
 
 $objProducto = new ProductsModel();
 
@@ -17,7 +17,7 @@ if ($tipo == "registrar") {
     $id_proveedor =  $_POST['id_proveedor'];
 
 
-    /* validar que los campos no esten vacios*/
+    /* validar que los campos no esten vacios
     if ($codigo == "" || $nombre == "" || $detalle == "" || $precio == "" || $stock == "" || $id_categoria == "" || $imagen == "" || $id_proveedor == "") {
 
         $arrResponse = array('status' => false, 'msg' => 'Error, campos vacios');
@@ -36,4 +36,4 @@ if ($tipo == "registrar") {
         }
     }
     echo json_encode($arrResponse);
-}
+}*/
