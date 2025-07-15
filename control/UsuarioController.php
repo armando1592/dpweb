@@ -32,23 +32,26 @@ if ($tipo == "registrar")
     if ($nro_identidad == "" || $razon_social == "" || $telefono == "" || $correo == "" || $departamento == "" || $provincia == "" || $distrito == "" || $cod_postal == "" || $direccion == "" || $rol == "") {
         $arrResponse = array('status' => false, 'msg' => 'Error, campos  vacios');
     } else {
-        //validacion si existe persona con el mismo dni
+        //validacion Si ya existe un usuario con ese DNI, se devuelve un error y se corta el proceso.
         $existePersona = $objPersona->existePersona($nro_identidad);
        if ($existePersona>0) {
         $arrResponse = array('status' => false, 'msg' => 'Error, nro documento ya existe');
-        //Si el DNI no existe, se llama al método registrar() del modelo.
+        //Si el DNI no existe, se llama al método registrar() del modelo. para registrar al usuario
        }else {
         $respuesta = $objPersona->registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password);
         if ($respuesta) {
             $arrResponse = array('status' => true, 'msg' => 'Resgistrado Correctamente');
         } else {
             $arrResponse = array('status' => false, 'msg' => 'Error, fallo en registro');
-        }
+        }//Devuelve un mensaje de éxito si todo sale bien, o error si falla.
         }
     }
     //Devuelve la respuesta al navegador o a la aplicación cliente en formato JSON.
     echo json_encode($arrResponse);
 }
+//se capturan datos, se encripta el número de identidad para el password, los campos no tiene que estar vacios, validamos si existe con el mismo dni, registrar si no existe, muestra exito al registarse y error si hay campos vacios
+
+
 
 
 
@@ -74,4 +77,17 @@ if ($tipo == "iniciar_sesion") { //Verifica si la variable $tipo (probablemente 
             }
         }
     }
-    echo json_encode($respuesta); //Finalmente, devuelve la respuesta como JSON para que el cliente (JavaScript o frontend) pueda mostrar el mensaje.
+    echo json_encode($respuesta); // Finalmente, devuelve la respuesta como JSON para que el cliente (JavaScript o frontend) pueda mostrar el mensaje.
+}
+
+/*Registra nuevos usuarios con validación y encriptación.
+Inicia sesión comparando contraseñas seguras.
+Usa JSON para comunicarse con el frontend (JavaScript).
+Guarda sesión para mantener al usuario autenticado
+ */
+
+
+
+
+
+
