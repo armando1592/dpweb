@@ -2,7 +2,7 @@
     <!-- INICIO CUERPO DE LA PAGINA -->
     <div class="container-fluid mt-5">
         <div class="card mx-auto" style="max-width: 600px;">
-            <h5 class="card-header text-center">REGISTRO DE CATEGORÍA</h5>
+            <h5 class="card-header text-center">Registro de categoría</h5>
             <form id="categoriaForm">
                 <div class="card-body">
                     <div class="mb-3 row">

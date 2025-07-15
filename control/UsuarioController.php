@@ -51,29 +51,27 @@ if ($tipo == "registrar")
 }
 
 
-<?php
+
 // INICIAR SESION
-if ($tipo == "iniciar_sesion") {
-    $nro_identidad = $_POST['username'];
-    $password = $_POST['password'];
+if ($tipo == "iniciar_sesion") { //Verifica si la variable $tipo (probablemente enviada por $_POST o definida antes) es igual a "iniciar_sesion". Si es así, procede a ejecutar el login.
+    $nro_identidad = $_POST['username']; 
+    $password = $_POST['password'];//Recoge el nombre de usuario y la contraseña enviados por el formulario (o petición AJAX).
     if ($nro_identidad== "" || $password== "") {
-        $respuesta = array('status' => false, 'msg' => 'ERROR: campos vacios');
+        $respuesta = array('status' => false, 'msg' => 'ERROR: campos vacios'); //Verifica que ambos campos estén llenos. Si alguno está vacío, devuelve un error.
     }else {
-        $existePersona= $objPersona->existePersona($nro_identidad);
+        $existePersona= $objPersona->existePersona($nro_identidad); //Usa el método existePersona del objeto $objPersona para comprobar si existe una persona con ese número de identidad.
         if (!$existePersona) {
-            $respuesta = array('status' => false, 'msg' => 'ERROR: usuario no registrado');
+            $respuesta = array('status' => false, 'msg' => 'ERROR: usuario no registrado'); //Si no existe, retorna un mensaje de error.
         }else {
-            $persona = $objPersona->buscarPersonaPorNroIdentidad($nro_identidad);
+            $persona = $objPersona->buscarPersonaPorNroIdentidad($nro_identidad); //Si sí existe, busca los datos completos del usuario con ese número de identidad.
             if (password_verify($password, $persona->password)) {
-                session_start();
+                session_start(); //Compara la contraseña ingresada ($password) con la contraseña en la base de datos ($persona->password) que está encriptada con password_hash
                 $_SESION ['ventas_id'] = $persona->id;
-                $_SESION ['ventas_usuario'] = $persona->razon_social;
-                $respuesta = array('status' => true, 'msg' => 'ingresado');
+                $_SESION ['ventas_usuario'] = $persona->razon_social; //  Si la contraseña es correcta, inicia sesión con session_start() y guarda los datos del usuario en $_SESSION.
+                $respuesta = array('status' => true, 'msg' => 'ingresado'); //Retorna una respuesta de éxito.
             }else {
-               $respuesta = array('status' => false, 'msg' => 'Error, contraseña incorrecta');
+               $respuesta = array('status' => false, 'msg' => 'Error, contraseña incorrecta'); //Si la contraseña no coincide, da un error.
             }
         }
     }
-    echo json_encode($respuesta);
-}
-?>
+    echo json_encode($respuesta); //Finalmente, devuelve la respuesta como JSON para que el cliente (JavaScript o frontend) pueda mostrar el mensaje.
