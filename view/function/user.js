@@ -84,8 +84,8 @@ async function iniciar_sesion() { //Declara una función asincrónica (usa async
         let json = await respuesta.json(); //Convierte la respuesta del servidor a formato JSON. El resultado se guarda en la variable json
         //validamos que json.status sea = true
         if (json.status) { // true
-        
-    
+
+
             location.replace(base_url + 'new-user'); //Si el login fue exitoso, redirige al usuario a una nueva ruta Usa location.replace para que no pueda volver atrás con el botón de retroceso.
         } else {
             alert(json.msg);
@@ -117,6 +117,69 @@ Muestra un alert() con el mensaje del servidor.
 Si hay errores de red o ejecución:
 
 Se muestran en la consola. */
+
+
+/*usuarios*/
+async function view_users() {
+    alert("ga")
+    try {
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_usuarios', {
+            method: 'POST',
+            MODE: 'cors',
+            cache: 'no-cache',
+
+        });
+    } catch (error) {
+
+    }
+}
+if (document.getElementById('content_users')) {
+    view_users();
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
