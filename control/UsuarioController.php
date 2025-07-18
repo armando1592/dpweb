@@ -80,6 +80,15 @@ if ($tipo == "iniciar_sesion") { //Verifica si la variable $tipo (probablemente 
     echo json_encode($respuesta); // Finalmente, devuelve la respuesta como JSON para que el cliente (JavaScript o frontend) pueda mostrar el mensaje.
 }
 
+/* para cerrar sesion */
+$tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+if ($tipo == 'cerrar_sesion') {
+    session_start();
+    session_destroy();
+    echo json_encode(['status' => true, 'msg' => 'Sesión cerrada correctamente']);
+    exit;
+
+}
 /*Registra nuevos usuarios con validación y encriptación.
 Inicia sesión comparando contraseñas seguras.
 Usa JSON para comunicarse con el frontend (JavaScript).
