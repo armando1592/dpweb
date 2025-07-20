@@ -42,7 +42,7 @@ class UsuarioModel
     while ($objeto = $sql->fetch_object()) {
        array_push($arr_usuarios, $objeto);
     }
-    return $sql->fetch_object();
+    return $arr_usuarios;
  }
 
 }   
