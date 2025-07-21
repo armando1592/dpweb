@@ -23,7 +23,7 @@ function validar_form() {// Inicia la función que se encargará de verificar qu
 
 if (document.querySelector('#frm_user')) { //Verifica si existe un formulario con el ID
     let frm_user = document.querySelector('#frm_user');//Guarda ese formulario en una variable
-    frm_user.onsubmit = function (e) {//ancela el envío automático del formulario HTML usando e.preventDefault() y en su lugar llama a validar_form() 
+    frm_user.onsubmit = function (e) {//cancela el envío automático del formulario HTML usando e.preventDefault() y en su lugar llama a validar_form() 
         e.preventDefault();
         validar_form();//Esto permite validar primero en JS antes de mandar los datos al servidor.
     }
