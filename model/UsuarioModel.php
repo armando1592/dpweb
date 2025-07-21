@@ -32,7 +32,18 @@ class UsuarioModel
         $consulta = "SELECT id, razon_social, password from persona where nro_identidad = '$nro_identidad' limit 1;"; //Arma una consulta que selecciona solo los campos necesarios
         $sql = $this->conexion->query($consulta);// Ejecuta la consulta.
         return $sql->fetch_object(); //Devuelve el resultado como un objeto PHP con las propiedades
+    } // realizamos la conexion con la base de datos, insertamos registros en la tabla persona para hacer la consulta y validaciones. verificamos si ya existe un dni. buscamos una persona por su dni
+ 
+ 
+    public function verUsuarios(){
+    $arr_usuarios = array();
+    $consulta= "SELECT * FROM persona";
+    $sql = $this->conexion->query($consulta);
+    while ($objeto = $sql->fetch_object()) {
+       array_push($arr_usuarios, $objeto);
     }
+    return $arr_usuarios;
+ }
+
 }   
 
-// realizamos la conexion con la base de datos, insertamos registros en la tabla persona para hacer la consulta y validaciones. verificamos si ya existe un dni. buscamos una persona por su dni
