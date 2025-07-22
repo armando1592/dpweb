@@ -122,7 +122,7 @@ Se muestran en la consola. */
 /*usuarios*/
 async function view_users() {
     try {
-        let respuesta = await fetch(base_url + 'control/usuarioController.php?tipo=mostrar_usuarios', {
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_usuarios', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'

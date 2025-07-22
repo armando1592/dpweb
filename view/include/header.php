@@ -165,7 +165,7 @@
         }
 
         .card-header {
-            background-color: #007bff;
+            background-color: #83a9d1ff;
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
@@ -193,16 +193,16 @@
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #5da2ebff;
         }
 
         .btn-warning {
-            background-color: #ffc107;
+            background-color: #37b696ff;
             border: none;
         }
 
         .btn-warning:hover {
-            background-color: #e0a800;
+            background-color: #24549cff;
         }
 
         .btn-danger {
