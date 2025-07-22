@@ -17,7 +17,8 @@ Crea la conexión Define la codificación Establece la zona horaria Verifica si 
 
     }
 }
-
+  
+ 
  /* crea la conexion BD, evitar errores con tildes, ñ, Establece la zona horaria Verifica si hubo un error de conexión Y devuelve el objeto de conexión*/
 
 
