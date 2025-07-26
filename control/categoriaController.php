@@ -28,5 +28,5 @@ if ($tipo == "registrar") {
     } else {
         echo json_encode(['status' => false, 'msg' => 'Error al registrar categoría']);
     }
+    echo json_encode($arrResponse);
 }
-?>
