@@ -1,12 +1,12 @@
  <?php
-/*require_once("../model/CompraModel.php");
+require_once("../model/CompraModel.php");
 
 $objCompra = new compraModel();
 
 $tipo = $_GET['tipo'];
 
 if ($tipo == "registrar") {
-    //print_r($_POST);
+    
     $id_producto =  $_POST['id_producto'];
     $cantidad =  $_POST['cantidad'];
     $precio =  $_POST['precio'];
@@ -18,7 +18,6 @@ if ($tipo == "registrar") {
 
         $arrResponse = array('status' => false, 'msg' => 'Error, campos vacios');
     } else {
-        // validar si existe compra con el mismo id_producto
         $existeCompra = $objCompra->existeCompra($id_producto);
         if ($existeCompra > 0) {
             $arrResponse = array('status' => false, 'msg' => 'Error: id_producto ya existe');
@@ -32,4 +31,4 @@ if ($tipo == "registrar") {
         }
     }
     echo json_encode($arrResponse);
-} */
+} 
