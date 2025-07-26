@@ -1,6 +1,6 @@
 <?php
-// INICIAR SESION
-/*if ($tipo == "iniciar_sesion") {
+
+ ($tipo == "iniciar_sesion") {
     $nro_identidad = $_POST['username'];
     $password = $_POST['password'];
     if ($nro_identidad== "" || $password== "") {
@@ -23,4 +23,4 @@
     }
     echo json_encode($respuesta);
 }
-?>*/
+?>
