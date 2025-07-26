@@ -1,12 +1,12 @@
 <?php
-/*require_once("../model/productsModel.php");
+require_once("../model/productsModel.php");
 
 $objProducto = new ProductsModel();
 
 $tipo = $_GET['tipo'];
 
 if ($tipo == "registrar") {
-    //print_r($_POST);
+
     $codigo =  $_POST['codigo'];
     $nombre =  $_POST['nombre'];
     $detalle =  $_POST['detalle'];
@@ -36,7 +36,7 @@ if ($tipo == "registrar") {
         }
     }
     echo json_encode($arrResponse);
-}*/
+}
 
 require_once("../model/ProductsModel.php");
 
@@ -55,7 +55,7 @@ if ($tipo == "registrar") {
     if ($codigo == "" || $nombre == "" || $detalle == "" || $precio == "" || $stock == ""  || $fecha_vencimiento == "") {
         $arrResponse = array('status' => false, 'msg' => 'Error, campos vacios');
     } else {
-        //validacion si existe producto con el mismo codigo
+       
         $existeProducto = $objpProducto->existeProducto($codigo);
         if ($existeProducto > 0) {
             $arrResponse = array('status' => false, 'msg' => 'Error, codigo de producto ya existe');
