@@ -1,5 +1,4 @@
 
-
 function validar_form() {// Inicia la función que se encargará de verificar que todos los campos estén llenos antes de enviar el formulario.
     let nro_documento = document.getElementById("nro_identidad").value;
     let razon_social = document.getElementById("razon_social").value;
@@ -119,7 +118,7 @@ Si hay errores de red o ejecución:
 Se muestran en la consola. */
 
 
-/*usuarios*/
+/* ver usuarios registrados*/
 async function view_users() {
     try {
         let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_usuarios', {
@@ -156,6 +155,26 @@ async function view_users() {
 if (document.getElementById('content_users')) {
     view_users();
 }
+
+
+async function cerrar_sesion(){
+    try{
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=cerrar_sesion',{
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+        });
+        let json = await respuesta.json();
+        if(json.status){
+            location.replace(base_url + 'login');
+        }else{
+            alert("No Puede cerrar sesion: " + json.msg);
+        }
+    }catch (error){
+        console.log("Error al cerrar sesion especial:", error);
+    }
+}
+
 
 
 
