@@ -96,10 +96,14 @@ Guarda sesión para mantener al usuario autenticado
  */
 
 
+
+/*Ver usuarios :)*/
 if ($tipo == "ver_usuarios") {
    $usuarios = $objPersona -> verUsuarios();
    echo json_encode($usuarios);
 }
+
+
 
 
 
