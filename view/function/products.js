@@ -1,4 +1,18 @@
-/*function validar_form() {
+async function verProducto(id_p) {
+  const formData = new FormData();
+  formData.append("idProducto", id_p);
+  try {
+    let respuesta = await fetch(
+      `${base_url}controllers/Controller_productos.php?tipo=ver_producto&t=${new Date().getTime()}`,
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        body: formData,
+      }
+    );
+
+function validar_form() {
     let codigo = document.getElementById("codigo").value;
     let nombre = document.getElementById("nombre").value;
     let detalle = document.getElementById("detalle").value;
@@ -55,7 +69,7 @@ async function registrarProducto() {
     } catch (error) {
         console.log("Error al registrar usuario:" + error);
     }
-}*/
+}
 
 
 async function view_users() {
