@@ -104,6 +104,60 @@ if ($tipo == "ver_usuarios") {
 }
 
 
+if ($tipo == 'ver_persona') {
+    $id_persona = $_POST['idPersona'];
+    $arr_Respuesta = $objPersona->verPersona($id_persona);
+    if (empty($arr_Respuesta)){
+        $response = array('status' => false, 'mensaje' => 'Usuario no encontrado');
+    }else{
+        $response = array('status' => true, 'mesaje' => 'Usuario encontrado', 'datos' => $arr_Respuesta);
+    }
+    echo json_encode($response);
+}
 
+
+if ($tipo == "editar") {
+    if ($_POST) {
+     $nro_identidad = $_POST['nro_identidad'];
+    $razon_social = $_POST['razon_social'];
+    $telefono = $_POST['telefono'];
+    $correo = $_POST['correo'];
+    $departamento = $_POST['departamento'];
+    $provincia = $_POST['provincia'];
+    $distrito = $_POST['distrito'];
+    $cod_postal = $_POST['cod_postal'];
+    $direccion = $_POST['direccion'];
+   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $rol = $_POST['rol'];  
+
+        if($nro_identidad == "" || $razon_social == "" || $telefono == "" || $correo == "" || $departamento == "" || $provincia == "" || $distrito == "" || $cod_postal == "" || $direccion == "" || $rol == "" {
+            $arr_Respuesta = array('status' => false, 'mensaje' => 'Error: campos vacíos');
+        } else {
+            $arrPersona = $objPersona->editarPersona($id, $codigo, $nombre, $telefono, $correo, $departamento, $provincia, $distrito, $codigo_postal, $direccion, $rol,$password, $estado);
+            if ($arrPersona->p_id > 0) {
+                $arr_Respuesta = array('status' => true, 'mensaje' => 'Actualización exitosa');
+            } else {
+                $arr_Respuesta = array('status' => false, 'mensaje' => 'Error al actualizar la persona');
+            }
+            echo json_encode($arr_Respuesta);
+        }
+    }
+}
+
+
+if ($tipo == 'eliminar') {
+    $id_persona = $_POST['id'];
+    if($objPersona->hayPersonasAsociadas($id_persona)){
+        $arr_Respuesta = array('status' => false,'mensaje' => 'No se puede eliminar la persona, posee compras o productos asociados.');
+    }else{
+        $resultado = $objPersona->eliminarPersona($id_persona);
+        if ($resultado) {
+            $arr_Respuesta = array('status' => true,'mensaje' => 'Persona eliminada correctamente');
+        } else {
+            $arr_Respuesta = array('status' => false,'mensaje' => 'Error al eliminar la persona');
+        }
+    }
+    echo json_encode($arr_Respuesta);
+}
 
 
