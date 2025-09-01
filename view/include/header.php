@@ -149,9 +149,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Base URL global -->
-    <script>
-        const base_url = '<?php echo BASE_URL; ?>';
-    </script>
+    
 
     <style>
         body {

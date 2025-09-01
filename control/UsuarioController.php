@@ -102,6 +102,57 @@ if ($tipo == "ver_usuarios") {
    $usuarios = $objPersona -> verUsuarios();
    echo json_encode($usuarios);
 }
+if ($tipo == "ver") {
+    // print_r($_POST);
+    $respuesta = array('status'=>false, 'msg'=>'');
+    $id_persona = $_POST['id_persona'];
+    $usuario = $objPersona->ver($id_persona);
+    if ($usuario) {
+        $respuesta['status'] = true;
+        $respuesta['data'] = $usuario;
+    }else {
+        $respuesta['msg'] = 'Error, usuario no existe';
+    }
+    echo json_encode($respuesta); 
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if ($tipo == 'ver_persona') {
@@ -114,6 +165,30 @@ if ($tipo == 'ver_persona') {
     }
     echo json_encode($response);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if ($tipo == "editar") {
@@ -130,7 +205,7 @@ if ($tipo == "editar") {
    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $rol = $_POST['rol'];  
 
-        if($nro_identidad == "" || $razon_social == "" || $telefono == "" || $correo == "" || $departamento == "" || $provincia == "" || $distrito == "" || $cod_postal == "" || $direccion == "" || $rol == "" {
+        if($nro_identidad == "" || $razon_social == "" || $telefono == "" || $correo == "" || $departamento == "" || $provincia == "" || $distrito == "" || $cod_postal == "" || $direccion == "" || $rol == "") {
             $arr_Respuesta = array('status' => false, 'mensaje' => 'Error: campos vacíos');
         } else {
             $arrPersona = $objPersona->editarPersona($id, $codigo, $nombre, $telefono, $correo, $departamento, $provincia, $distrito, $codigo_postal, $direccion, $rol,$password, $estado);
