@@ -1,5 +1,5 @@
 
-function validar_form() {// Inicia la función que se encargará de verificar que todos los campos estén llenos antes de enviar el formulario.
+function validar_form(tipo) {// Inicia la función que se encargará de verificar que todos los campos estén llenos antes de enviar el formulario.
     let nro_documento = document.getElementById("nro_identidad").value;
     let razon_social = document.getElementById("razon_social").value;
     let telefono = document.getElementById("telefono").value;
@@ -15,7 +15,13 @@ function validar_form() {// Inicia la función que se encargará de verificar qu
         alert("Error: Existen campos vacios");//Si al menos uno lo está, muestra un alert() y no deja continuar.
         return;
     }
-    registrarUsuario();//si todo está lleno, llama a la función que enviará los datos
+    if (tipo=="nuevo") {
+        registrarUsuario();//si todo está lleno, llama a la función que enviará los datos
+    }
+     if (tipo=="actualizar") {
+        actualizarUsuario();//si todo está lleno, llama a la función que enviará los datos
+    }
+   
 }
 
 // Evita que se envie el formulario xd
@@ -24,7 +30,7 @@ if (document.querySelector('#frm_user')) { //Verifica si existe un formulario co
     let frm_user = document.querySelector('#frm_user');//Guarda ese formulario en una variable
     frm_user.onsubmit = function (e) {//cancela el envío automático del formulario HTML usando e.preventDefault() y en su lugar llama a validar_form() 
         e.preventDefault();
-        validar_form();//Esto permite validar primero en JS antes de mandar los datos al servidor.
+        validar_form("nuevo");//Esto permite validar primero en JS antes de mandar los datos al servidor.
     }
 
 }
@@ -182,14 +188,24 @@ async function edit_user() {
        document.getElementById('distrito').value=json.data.distrito;
        document.getElementById('cod_postal').value=json.data.cod_postal;
        document.getElementById('direccion').value=json.data.direccion;
-       document.getElementById('rol').value=json.data.rol;
+       document.getElementById('rol').value=json.data.rol; 
 
     } catch (error) {
         console.log('ocurrio un error, especial' + error);
     }
 }
+if (document.querySelector('#frm_edit_user')) {
+    let frm_user = document.querySelector('#frm_edit_user');
+    frm_user.onsubmit= function(e){
+        e.preventDefault();
+        validar_form("actualizar");  
+    }
+    
+}
 
-
+async function actualizarUsuario() {
+    alert('actualizar');
+}
 
 
 
