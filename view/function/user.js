@@ -145,9 +145,13 @@ async function view_users() {
                     <td>${user.estado || ''}</td>
                     <td>
                     <a href="`+ base_url+`edit-user/`+user.id+`">Editar</a>
+                     <button class="btn-eliminar" data-id="${user.id}">Eliminar</button>
                 </td>
                 </tr>`;
             });
+            
+
+
             document.getElementById('content_users').innerHTML = html;
         } else {
             document.getElementById('content_users').innerHTML = '<tr><td colspan="6">No hay usuarios disponibles</td></tr>';
@@ -161,6 +165,10 @@ async function view_users() {
 if (document.getElementById('content_users')) {
     view_users();
 }
+
+
+
+
 
 async function edit_user() {
     try {
@@ -204,46 +212,60 @@ if (document.querySelector('#frm_edit_user')) {
 }
 
 async function actualizarUsuario() {
-    alert('actualizar');
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-async function cerrar_sesion(){
-    try{
-        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=cerrar_sesion',{
-            method: 'GET',
-            mode: 'cors',
+   const datos = new FormData(frm_edit_user);
+   let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=actualizar', { //Usa fetch para hacer una petición POST al controlador PHP UsuarioController.php, con el parámetro tipo=iniciar_sesion.
+            method: 'POST',
+            MODE: 'cors',
             cache: 'no-cache',
+            body: datos
         });
-        let json = await respuesta.json();
-        if(json.status){
-            location.replace(base_url + 'login');
+        json = await respuesta.json();
+        if (!json.status) {
+            alert("Ooops, ocurrio un error al actualizar, intentalo nuevamente");
+            console.log(json.msg);
+            return;
         }else{
-            alert("No Puede cerrar sesion: " + json.msg);
+            alert(json.msg);
         }
-    }catch (error){
-        console.log("Error al cerrar sesion especial:", error);
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async function cerrar_sesion(){
+//     try{
+//         let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=cerrar_sesion',{
+//             method: 'GET',
+//             mode: 'cors',
+//             cache: 'no-cache',
+//         });
+//         let json = await respuesta.json();
+//         if(json.status){
+//             location.replace(base_url + 'login');
+//         }else{
+//             alert("No Puede cerrar sesion: " + json.msg);
+//         }
+//     }catch (error){
+//         console.log("Error al cerrar sesion especial:", error);
+//     }
+// }
 
 
 
