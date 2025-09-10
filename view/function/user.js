@@ -229,7 +229,7 @@ async function actualizarUsuario() {
         }
 }
 
-
+// producto y categoria tarrea
 
 
 
