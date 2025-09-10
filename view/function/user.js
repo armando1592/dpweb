@@ -145,7 +145,7 @@ async function view_users() {
                     <td>${user.estado || ''}</td>
                     <td>
                     <a href="`+ base_url+`edit-user/`+user.id+`">Editar</a>
-                     <button class="btn-eliminar" data-id="${user.id}">Eliminar</button>
+                      <button onclick="eliminar(` + user.id + `)" class="btn btn-danger">Eliminar</button>
                 </td>
                 </tr>`;
             });
