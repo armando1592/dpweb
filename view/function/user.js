@@ -132,37 +132,57 @@ async function view_users() {
             mode: 'cors',
             cache: 'no-cache'
         });
+
         let json = await respuesta.json();
-        if (json && json.length > 0) {
-            let html = '';
-            json.forEach((user, index) => {
-                html += `<tr>
-                    <td>${index + 1}</td>
-                    <td>${user.nro_identidad || ''}</td>
-                    <td>${user.razon_social|| ''}</td>
-                    <td>${user.correo ||''}</td> 
-                    <td>${user.rol ||''}</td> 
-                    <td>${user.estado || ''}</td>
-                    <td>
-                    <a href="`+ base_url+`edit-user/`+user.id+`">Editar</a>
-                      <button onclick="eliminar(` + user.id + `)" class="btn btn-danger">Eliminar</button>
+        let content_users = document.getElementById('content_user');
+        content_users.innerHTML = ''; // limpiamos antes de insertar
+
+        json.forEach((user, index) => {
+            let fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${user.nro_identidad}</td>
+                <td>${user.razon_social}</td>
+                <td>${user.correo}</td>
+                <td>${user.rol}</td>
+                <td>${user.estado}</td>
+                <td>
+                    <a href="`+ base_url + `edit-user/` + user.id + `" class="btn btn-success">Editar</a>
+                    <br>
+                    <button data-id="${user.id}" class="btn btn-eliminar btn-danger">Eliminar</button>
                 </td>
-                </tr>`;
+                
+            `;
+
+            content_users.appendChild(fila);
+        });
+
+        // Agrega el evento click a los botones de eliminar
+        document.querySelectorAll('.btn-eliminar').forEach(btn => {
+            btn.addEventListener('click', async function () {
+                if (confirm('¿Está seguro de eliminar este usuario?')) {
+                    const datos = new FormData();
+                    datos.append('id', this.getAttribute('data-id'));
+                    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=eliminar', {
+                        method: 'POST',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        body: datos
+                    });
+                    let json = await respuesta.json();
+                    alert(json.msg);
+                    if (json.status) {
+                        view_users(); // Recarga la lista
+                    }
+                }
             });
-            
+        });
 
-
-            document.getElementById('content_users').innerHTML = html;
-        } else {
-            document.getElementById('content_users').innerHTML = '<tr><td colspan="6">No hay usuarios disponibles</td></tr>';
-        }
     } catch (error) {
-        console.log(error);
-        document.getElementById('content_users').innerHTML = '<tr><td colspan="6">Error al cargar los usuarios</td></tr>';
+        console.log('Error al obtener usuarios, No hay nada: ' + error);
     }
 }
-
-if (document.getElementById('content_users')) {
+if (document.getElementById('content_user')) {
     view_users();
 }
 
