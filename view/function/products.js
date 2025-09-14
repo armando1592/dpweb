@@ -1,17 +1,3 @@
-async function verProducto(id_p) {
-  const formData = new FormData();
-  formData.append("idProducto", id_p);
-  try {
-    let respuesta = await fetch(
-      `${base_url}controllers/Controller_productos.php?tipo=ver_producto&t=${new Date().getTime()}`,
-      {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        body: formData,
-      }
-    );
-
 function validar_form() {
     let codigo = document.getElementById("codigo").value;
     let nombre = document.getElementById("nombre").value;
@@ -52,7 +38,7 @@ async function registrarProducto() {
         // capturar campos de formulario(HTML)
         const datos = new FormData(frm_products);
         //enviar datos al controlador
-        let respuesta = await fetch(base_url + 'control/productsController.php?tipo=registrar', {
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=registrar', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -67,41 +53,69 @@ async function registrarProducto() {
         }
 
     } catch (error) {
-        console.log("Error al registrar usuario:" + error);
+        console.log("Error al registrar producto:" + error);
     }
 }
 
-
-async function view_users() {
+ // Mostrar productos
+async function view_products() {
     try {
-        let respuesta = await fetch(base_url + 'control/usuarioController.php?tipo=mostrar_usuarios', {
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'
         });
+
         let json = await respuesta.json();
-        if (json && json.length > 0) {
-            let html = '';
-            json.forEach((user, index) => {
-                html += `<tr>
-                    <td>${index + 1}</td>
-                    <td>${user.nro_identidad || ''}</td>
-                    <td>${user.razon_social|| ''}</td>
-                    <td>${user.correo ||''}</td> 
-                    <td>${user.rol ||''}</td> 
-                    <td>${user.estado || ''}</td>
-                </tr>`;
+        let content_users = document.getElementById('content_products');
+        content_users.innerHTML = ''; // limpiamos antes de insertar
+
+        json.forEach((products, index) => {
+            let fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${products.codigo}</td>
+                <td>${products.nombre}</td>
+                <td>${products.detalle}</td>
+                <td>${products.precio}</td>
+                <td>${products.stock}</td>
+                <td>${products.fecha_vencimiento}</td>
+                <td>
+                    <a href="`+ base_url + `edit-product/` + user.id + `" class="btn btn-success">Editar</a>
+                    <br>
+                    <button data-id="${user.id}" class="btn btn-eliminar btn-danger">Eliminar</button>
+                </td>
+                
+            `;
+
+            content_users.appendChild(fila);
+        });
+
+        // Agrega el evento click a los botones de eliminar
+        document.querySelectorAll('.btn-eliminar').forEach(btn => {
+            btn.addEventListener('click', async function () {
+                if (confirm('¿Está seguro de eliminar este producto?')) {
+                    const datos = new FormData();
+                    datos.append('id', this.getAttribute('data-id'));
+                    let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=eliminar', {
+                        method: 'POST',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        body: datos
+                    });
+                    let json = await respuesta.json();
+                    alert(json.msg);
+                    if (json.status) {
+                        view_users(); // Recarga la lista
+                    }
+                }
             });
-            document.getElementById('content_users').innerHTML = html;
-        } else {
-            document.getElementById('content_users').innerHTML = '<tr><td colspan="6">No hay usuarios disponibles</td></tr>';
-        }
+        });
+
     } catch (error) {
-        console.log(error);
-        document.getElementById('content_users').innerHTML = '<tr><td colspan="6">Error al cargar los usuarios</td></tr>';
+        console.log('Error al obtener productos, No hay nada: ' + error);
     }
 }
-
-if (document.getElementById('content_users')) {
-    view_users();
+if (document.getElementById('content_products')) {
+    view_products();
 }
