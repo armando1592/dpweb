@@ -1,9 +1,14 @@
-
 function validar_form(tipo) {
+    let codigo  = document.getElementById("codigo").value;
     let nombre = document.getElementById("nombre").value;
     let detalle = document.getElementById("detalle").value;
+    let precio = document.getElementById("precio").value;
+    let stock = document.getElementById("stock").value;
+    let id_categoria  = document.getElementById("id_categoria").value;
+    let fecha_vencimiento = document.getElementById("fecha_vencimiento").value;
+    
 
-    if (nombre=="" || detalle=="") {
+    if (codigo=="" || nombre=="" || detalle=="" || precio=="" || stock=="" || id_categoria=="" || fecha_vencimiento=="") {
        
          Swal.fire({
             icon: 'warning',
@@ -14,27 +19,27 @@ function validar_form(tipo) {
         return;
     }
     if (tipo == "nuevo") {
-        registrarCategoria();
+        registrarProducto();
     }
     if (tipo == "actualizar") {
-        actualizarCategoria();
+        actualizarProducto();
     }
 }
 
-if(document.querySelector('#frm_categorie')){
+if(document.querySelector('#frm_product')){
     //evita que se envie el formulario
-    let frm_categorie = document.querySelector('#frm_categorie');
-    frm_categorie.onsubmit = function(e){
+    let frm_product = document.querySelector('#frm_product');
+    frm_product.onsubmit = function(e){
         e.preventDefault();
         validar_form("nuevo");
     }
 }
 
-async function registrarCategoria() {
+async function registrarProducto() {
     try {
-        const frm_categorie = document.querySelector("#frm_categorie");
-        const datos = new FormData(frm_categorie);
-        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=registrar', {
+        const frm_product = document.querySelector("#frm_product");
+        const datos = new FormData(frm_product);
+        let respuesta = await fetch(base_url + 'control/productosController.php?tipo=registrar', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -47,7 +52,7 @@ async function registrarCategoria() {
                 title: "Éxito",
                 text: json.msg
             });
-            document.getElementById('frm_categorie').reset();
+            document.getElementById('frm_product').reset();
         } else {
             Swal.fire({
                 icon: "error",
@@ -56,7 +61,7 @@ async function registrarCategoria() {
             });
         }
     } catch (error) {
-        console.log("Error al registrar categoría: " + error);
+        console.log("Error al registrar producto: " + error);
     }
 }
 
@@ -70,14 +75,14 @@ function cancelar() {
         cancelButtonText: "No"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = base_url + "?view=new-categoria";
+            window.location.href = base_url + "?view=new-producto";
         }
     });
 }
 
-async function view_categoria() {
+async function view_producto() {
     try {
-        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=mostrar_categorias', {
+        let respuesta = await fetch(base_url + 'control/productosController.php?tipo=mostrar_productos', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'
@@ -85,38 +90,40 @@ async function view_categoria() {
         let json = await respuesta.json();
         if (json && json.length > 0) {
             let html = '';
-            json.forEach((categoria, index) => {
+            json.forEach((producto, index) => {
                 html += `<tr>
                     <td>${index + 1}</td>
-                    <td>${categoria.nombre || ''}</td>
-                    <td>${categoria.detalle || ''}</td>
+                    <td>${producto.codigo || ''}</td>
+                    <td>${producto.nombre || ''}</td>
+                    <td>${producto.precio || ''}</td>
+                    <td>${producto.fecha_vencimiento || ''}</td>
                     <td>
-                        <a href="`+ base_url + `categorias-edit/` + categoria.id + `" class="btn btn-primary">Editar</a>
-                        <button onclick="eliminar(` + categoria.id + `)" class="btn btn-danger">Eliminar</button>
+                        <a href="`+ base_url + `productos-edit/` + producto.id + `" class="btn btn-primary">Editar</a>
+                        <button onclick="eliminar(` + producto.id + `)" class="btn btn-danger">Eliminar</button>
                     </td>
                 </tr>`;
             });
-            document.getElementById('content_categorias').innerHTML = html;
+            document.getElementById('content_productos').innerHTML = html;
         } else {
-            document.getElementById('content_categorias').innerHTML = '<tr><td colspan="6">No hay categorias disponibles</td></tr>';
+            document.getElementById('content_productos').innerHTML = '<tr><td colspan="6">No hay productos disponibles</td></tr>';
         }
     } catch (error) {
         console.log(error);
-        document.getElementById('content_categorias').innerHTML = '<tr><td colspan="6">Error al cargar las categorias</td></tr>';
+        document.getElementById('content_productos').innerHTML = '<tr><td colspan="6">Error al cargar los productos</td></tr>';
     }
 }
 
-if (document.getElementById('content_categorias')) {
-    view_categoria();
+if (document.getElementById('content_productos')) {
+    view_producto();
 }
 
-async function edit_categoria() {
+async function edit_producto() {
     try {
-        let id_categoria = document.getElementById('id_categoria').value;
+        let id_producto = document.getElementById('id_producto').value;
         const datos = new FormData();
-        datos.append('id_categoria', id_categoria);
+        datos.append('id_producto', id_producto);
 
-        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=ver', {
+        let respuesta = await fetch(base_url + 'control/productosController.php?tipo=ver', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -131,27 +138,31 @@ async function edit_categoria() {
             });
             return;
         }
+        document.getElementById('codigo').value = json.data.codigo;
         document.getElementById('nombre').value = json.data.nombre;
         document.getElementById('detalle').value = json.data.detalle;
+        document.getElementById('precio').value = json.data.precio;
+        document.getElementById('stock').value = json.data.stock;
+        document.getElementById('id_categoria').value = json.data.id_categoria ;
+        document.getElementById('fecha_vencimiento').value = json.data.fecha_vencimiento;
 
-        
     } catch (error) {
         console.log('oops, ocurrio un error' + error);  
     } 
 }
 
-if (document.querySelector("#frm_edit_categorie")) {
-    let frm_edit_categorie = document.querySelector("#frm_edit_categorie");
-    frm_edit_categorie.onsubmit = function (e){
+if (document.querySelector("#frm_edit_producto")) {
+    let frm_edit_producto = document.querySelector("#frm_edit_producto");
+    frm_edit_producto.onsubmit = function (e){
         e.preventDefault();
         validar_form("actualizar");
     }
 }
 
-async function actualizarCategoria() {
-    const frm_edit_categorie = document.querySelector("#frm_edit_categorie")
-    const datos = new FormData(frm_edit_categorie);
-    let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=actualizar', {
+async function actualizarProducto() {
+    const frm_edit_producto = document.querySelector("#frm_edit_producto")
+    const datos = new FormData(frm_edit_producto);
+    let respuesta = await fetch(base_url + 'control/productosController.php?tipo=actualizar', {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -189,8 +200,8 @@ async function eliminar(id) {
         if (result.isConfirmed) {
             try {
                 const datos = new FormData();
-                datos.append('id_categoria', id)
-                let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=eliminar', {
+                datos.append('id_producto', id)
+                let respuesta = await fetch(base_url + 'control/productosController.php?tipo=eliminar', {
                     method: 'POST',
                     mode: 'cors',
                     cache: 'no-cache',
@@ -203,7 +214,7 @@ async function eliminar(id) {
                         title: "Eliminado",
                         text: json.msg
                     }).then (() =>{ 
-                        view_categoria();
+                        view_producto();
                     });
 
                 } else {

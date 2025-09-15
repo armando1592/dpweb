@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuevo Usuario</title>
+    <title>Bennito</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?php echo BASE_URL ?>view/bootstrap/css/bootstrap.min.css">
@@ -134,84 +134,4 @@
 
 <!-- Estructura de categoria-->
 
-    <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Categoría</title>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>view/bootstrap/css/bootstrap.min.css">
-
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Base URL global -->
-    
-
-    <style>
-        body {
-            background-color: #f0f8ff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-        }
-
-        .card-header {
-            background-color: #83a9d1ff;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-        }
-
-        label {
-            font-weight: 600;
-        }
-
-        .form-control {
-            border-radius: 6px;
-            border: 1px solid #ced4da;
-        }
-
-        .btn {
-            min-width: 100px;
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #5da2ebff;
-        }
-
-        .btn-warning {
-            background-color: #37b696ff;
-            border: none;
-        }
-
-        .btn-warning:hover {
-            background-color: #24549cff;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-        }
-
-        .btn-danger:hover {
-            background-color: #b52a37;
-        }
-    </style>
-</head>
-
-<body>
+   
