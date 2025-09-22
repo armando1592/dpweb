@@ -231,3 +231,13 @@ async function eliminar(id) {
         }
     });
 }
+async function cargar_categorias() {
+    let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=mostrar_categorias', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache'
+    });
+    let json = await respuesta.json();
+    json.data.forEach((element) => {
+});
+}

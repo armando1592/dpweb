@@ -12,5 +12,4 @@
 </body>
 <!-- Scripts -->
     <script src="<?php echo BASE_URL; ?>view/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>view/function/categoria.js"></script>
 </html>

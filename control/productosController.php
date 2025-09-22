@@ -1,6 +1,7 @@
 <?php
 require_once("../model/ProductsModel.php");
 
+
 $objProducto = new ProductsModel();
 
 $tipo = $_GET['tipo'];
