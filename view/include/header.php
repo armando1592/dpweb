@@ -84,7 +84,8 @@
         .btn-danger {
             background-color: #dc3545;
             border: none;
-        }
+        } 
+
 
         .btn:hover {
             opacity: 0.9;
@@ -107,9 +108,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>users">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-producto">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-categoria">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Clients</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Shops</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Sales</a></li>
