@@ -232,16 +232,40 @@ async function eliminar(id) {
     });
 }
 async function cargar_categorias() {
-    let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=mostrar_categorias', {
+    try {
+        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=ver_categorias', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+        let json = await respuesta.json();
+        let contenido = '';
+        if (json.data && Array.isArray(json.data) && json.data.length > 0) {
+            json.data.forEach(categoria => {
+                contenido += `<option value="${categoria.id_categoria}">${categoria.nombre}</option>`;
+            });
+        } else {
+            contenido = '<option value="'+categoria.id +'">No hay categorías</option>';
+        }
+        document.getElementById("id_categoria").innerHTML = contenido;
+    } catch (error) {
+        console.error('Error al cargar categorías:', error);
+        document.getElementById("id_categoria").innerHTML = '<option value="">Error al cargar categorías</option>';
+    }
+}  
+
+
+async function cargar_proveedores() {
+    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_proveedores', {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache'
     });
     let json = await respuesta.json();
-    let contenido ='';
-    json.data.forEach(categoria => {
-        contenido += '<option value="">'+categoria.nombre+'</option>';
+    let contenido = '<option>Seleccione Proveedor</option>';
+    json.data.forEach(persona => {
+        contenido += '<option value="">'+persona.razon_social+' -> '+persona.rol+'</option>';
     });
     //console.log(contenido);
-    document.getElementById("id_categoria").innerHTML = contenido;
+    document.getElementById("id_proveedor").innerHTML = contenido;
 }

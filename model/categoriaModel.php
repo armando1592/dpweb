@@ -44,7 +44,16 @@ class CategoriaModel{
         }
         return $arr_categorias;
     }
-    
+    public function verCategorias()
+    {
+        $arr_categorias = array();
+        $consulta = "SELECT* from categoria";
+        $sql = $this->conexion->query($consulta);
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arr_categorias, $objeto);
+        }
+        return $arr_categorias;
+    }
 
     public function ver($id){
         $consulta = "SELECT * FROM categoria WHERE id = '$id'";

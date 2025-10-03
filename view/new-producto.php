@@ -60,9 +60,11 @@
               <input type="file" class="form-control shadow-sm" id="Imagen" name="Imagen" required>
             </div>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control shadow-sm" id="Id_Proveedor" name="Id_Proveedor" placeholder="Id Proveedor" required>
-              <label for="Id_Proveedor"><i class="fas fa-truck me-2 text-secondary"></i>Proveedor</label>
+            <div class="mb-3">
+              <label for="id_proveedor" class="form-label fw-bold">
+                <i class="fas fa-truck me-2 text-secondary"></i>Proveedor
+              </label>
+              <select name="id_proveedor" id="id_proveedor" class="form-select shadow-sm" required></select>
             </div>
           </div>
         </div>
@@ -94,6 +96,7 @@
 <script src="<?php echo BASE_URL; ?>view/function/producto.js"></script>
 <script>
    cargar_categorias();
+   cargar_proveedores();
 </script>
 
 <style>

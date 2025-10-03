@@ -35,15 +35,11 @@ if ($tipo == "mostrar_categorias") {
     echo json_encode($categorias);
 }
 
-if ($tipo == "ver") {
-    $respuesta = array('status' => false, 'msg' => '');
-    $id_categoria = $_POST['id_categoria'];
-    $categoria = $objCategoria->ver($id_categoria);
-    if($categoria){
-        $respuesta ['status'] = true;
-        $respuesta ['data'] = $categoria;
-    }else {
-        $respuesta['msg'] = "Error, categoria no existe";
+if ($tipo == "ver_categorias") {
+    $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
+    $categorias = $objCategoria->verCategorias();
+    if (count($categorias)) {
+        $respuesta = array('status' => true, 'msg' => '', 'data' => $categorias);
     }
     echo json_encode($respuesta);
 }
