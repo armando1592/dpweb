@@ -269,3 +269,6 @@ async function cargar_proveedores() {
     //console.log(contenido);
     document.getElementById("id_proveedor").innerHTML = contenido;
 }
+
+
+/// vista cliente y proveedor
