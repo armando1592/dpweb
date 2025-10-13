@@ -169,8 +169,6 @@ if ($tipo == "actualizar") {
     }
 }
 
-
-
 if ($tipo == "ver_proveedores") {
     $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
     $usuarios = $objPersona->verProveedores();
@@ -180,8 +178,15 @@ if ($tipo == "ver_proveedores") {
     echo json_encode($respuesta);
 }
 
+if ($tipo == "ver_clients") {
+    $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
+    $usuarios = $objPersona->verClientes();
+    if (count($usuarios)) {
+        $respuesta = array('status' => true, 'msg' => '', 'data' => $usuarios);
+    }
+    echo json_encode($respuesta);
 
-
+}
 
 
 

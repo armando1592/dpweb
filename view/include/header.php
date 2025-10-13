@@ -111,7 +111,8 @@
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>users">Users</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-producto">Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-categoria">Categories</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Clients</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-client">Clients</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-proveedor">Proveedor</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Shops</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Sales</a></li>
                     </ul>
