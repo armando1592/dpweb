@@ -165,6 +165,7 @@ async function fn_eliminar(id) {
         eliminar(id);
     }
 }
+
 async function eliminar(id) {
     let datos = new FormData();
     datos.append('id_persona', id);
@@ -181,6 +182,6 @@ async function eliminar(id) {
         return;
     }else{
         alert(json.msg);
-        location.replace(base_url + 'users');
+        location.replace(base_url + 'clients');
     }
 }

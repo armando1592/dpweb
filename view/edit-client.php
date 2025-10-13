@@ -2,6 +2,14 @@
 <div class="container-fluid">
     <div class="card">
         <h5 class="card-header">Editar Datos de Cliente</h5>
+        <?php
+               if (isset($_GET['views'])){
+                $ruta = explode ("/", $_GET["views"]);
+               }
+                // echo $ruta[1];
+               
+                ?>
+        
         
         <form id="frm_edit_user" action="" method="">
             <input type="hidden" id="id_persona" name="id_persona" value="<?= $ruta[1]; ?>">
@@ -69,7 +77,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>
-                <a href="<?= BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
+                <a href="<?= BASE_URL ?>clients" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
