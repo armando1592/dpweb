@@ -45,8 +45,33 @@ async function registrarProducto() {
             cache: 'no-cache',
             body: datos
         });
-        let json = await respuesta.json();
-        if (json.status) {
+        // Defensive handling: check status and parse body as text first for diagnostics
+        if (!respuesta.ok) {
+            const bodyText = await respuesta.text();
+            console.error('registrarProducto: fetch failed', respuesta.status, respuesta.statusText, bodyText);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la petición',
+                text: 'La petición al servidor falló. Ver consola para más detalles.'
+            });
+            return;
+        }
+
+        const text = await respuesta.text();
+        let json = null;
+        try {
+            json = JSON.parse(text);
+        } catch (err) {
+            console.error('registrarProducto: respuesta no es JSON', text, err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Respuesta inválida',
+                text: 'El servidor devolvió una respuesta no válida. Revisa la consola (Network -> Response).'
+            });
+            return;
+        }
+
+        if (json && json.status) {
             Swal.fire({
                 icon: "success",
                 title: "Éxito",
@@ -57,11 +82,17 @@ async function registrarProducto() {
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: json.msg
+                text: json ? (json.msg || 'Error al registrar producto') : 'Error desconocido'
             });
         }
     } catch (error) {
         console.log("Error al registrar producto: " + error);
+        console.error(error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al enviar',
+            text: 'Ocurrió un error al enviar los datos. Revisa la consola para más información.'
+        });
     }
 }
 
@@ -264,7 +295,7 @@ async function cargar_proveedores() {
     let json = await respuesta.json();
     let contenido = '<option>Seleccione Proveedor</option>';
     json.data.forEach(persona => {
-        contenido += '<option value="">'+persona.razon_social+' -> '+persona.rol+'</option>';
+        contenido += '<option value="">'+persona.id+'">'+razon_social+' -> '+persona.rol+'</option>';
     });
     //console.log(contenido);
     document.getElementById("id_proveedor").innerHTML = contenido;

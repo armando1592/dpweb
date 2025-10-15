@@ -1,14 +1,18 @@
 function validar_form(tipo) {
-    let nro_documento = document.getElementById("nro_identidad").value;
-    let razon_social = document.getElementById("razon_social").value;
-    let telefono = document.getElementById("telefono").value;
-    let correo = document.getElementById("correo").value;
-    let departamento = document.getElementById("departamento").value;
-    let provincia = document.getElementById("provincia").value;
-    let distrito = document.getElementById("distrito").value;
-    let cod_postal = document.getElementById("cod_postal").value;
-    let direccion = document.getElementById("direccion").value;
-    let rol = document.getElementById("rol").value;
+    const getVal = id => {
+        const el = document.getElementById(id);
+        return el ? (typeof el.value === 'string' ? el.value.trim() : el.value) : '';
+    };
+    let nro_documento = getVal("nro_identidad");
+    let razon_social = getVal("razon_social");
+    let telefono = getVal("telefono");
+    let correo = getVal("correo");
+    let departamento = getVal("departamento");
+    let provincia = getVal("provincia");
+    let distrito = getVal("distrito");
+    let cod_postal = getVal("cod_postal");
+    let direccion = getVal("direccion");
+    let rol = getVal("rol");
 
     if (
         nro_documento == "" ||
@@ -119,9 +123,20 @@ if (document.getElementById('content_proveedores')) {
 
 async function edit_proveedor() {
     try {
-        let id_proveedor = document.getElementById('id_proveedor').value;
+        // The edit page uses a hidden input named id_persona
+        const id_persona_el = document.getElementById('id_persona');
+        if (!id_persona_el) {
+            console.warn('id_persona element not found on page');
+            return;
+        }
+        let id_persona = (id_persona_el.value || '').toString().trim();
+        if (!id_persona) {
+            console.warn('edit_proveedor: id_persona is empty');
+            alert('ID de proveedor no especificado. Vuelva a la lista de proveedores e inténtelo de nuevo.');
+            return;
+        }
         const datos = new FormData();
-        datos.append('id_proveedor', id_proveedor);
+        datos.append('id_persona', id_persona);
 
         let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver', {
             method: 'POST',
@@ -132,20 +147,36 @@ async function edit_proveedor() {
         json = await respuesta.json();
 
         if (!json.status) {
-            alert(json.msg);
+            console.error('edit_proveedor: controller returned failure', json);
+            alert(json.msg || 'Error al obtener datos del proveedor');
             return;
         }
 
-        document.getElementById('nro_identidad').value = json.data.nro_identidad;
-        document.getElementById('razon_social').value = json.data.razon_social;
-        document.getElementById('telefono').value = json.data.telefono;
-        document.getElementById('correo').value = json.data.correo;
-        document.getElementById('departamento').value = json.data.departamento;
-        document.getElementById('provincia').value = json.data.provincia;
-        document.getElementById('distrito').value = json.data.distrito;
-        document.getElementById('cod_postal').value = json.data.cod_postal;
-        document.getElementById('direccion').value = json.data.direccion;
-        document.getElementById('rol').value = json.data.rol;
+        // Mirror clients.js behavior but set fields defensively so we don't read/set .value on null
+        const data = json.data || {};
+        const setField = (id, val) => {
+            const el = document.getElementById(id);
+            if (!el) {
+                console.warn('edit_proveedor: missing element', id);
+                return;
+            }
+            try {
+                el.value = val || '';
+            } catch (e) {
+                console.warn('Could not set value for', id, e);
+            }
+        };
+
+        setField('nro_identidad', data.nro_identidad);
+        setField('razon_social', data.razon_social);
+        setField('telefono', data.telefono);
+        setField('correo', data.correo);
+        setField('departamento', data.departamento);
+        setField('provincia', data.provincia);
+        setField('distrito', data.distrito);
+        setField('cod_postal', data.cod_postal);
+        setField('direccion', data.direccion);
+        setField('rol', data.rol);
 
     } catch (error) {
         console.log('Oops, ocurrió un error: ' + error);
@@ -161,8 +192,14 @@ if (document.querySelector('#frm_edit_proveedor')) {
 }
 
 async function actualizarProveedor() {
-    const datos = new FormData(frm_edit_proveedor);
-    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=actualizar', {
+    try {
+        const frm = document.querySelector('#frm_edit_proveedor');
+        if (!frm) {
+            alert('Formulario de edición no encontrado');
+            return;
+        }
+        const datos = new FormData(frm);
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=actualizar', {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -170,11 +207,14 @@ async function actualizarProveedor() {
     });
     json = await respuesta.json();
     if (!json.status) {
-        alert("Ocurrió un error al actualizar el proveedor. Inténtelo nuevamente.");
-        console.log(json.msg);
+        console.error('actualizarProveedor: server responded with failure', json);
+        alert(json.msg || "Ocurrió un error al actualizar el proveedor. Inténtelo nuevamente.");
         return;
     } else {
         alert(json.msg);
+    }
+    } catch (err) {
+        console.error('Error al actualizar proveedor:', err);
     }
 }
 
@@ -185,8 +225,10 @@ async function fn_eliminar(id) {
 }
 
 async function eliminar(id) {
-    let datos = new FormData();
-    datos.append('id_proveedor', id);
+    try {
+        let datos = new FormData();
+        // The controller expects 'id' as the POST key for deletion
+        datos.append('id', id);
     let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=eliminar', {
         method: 'POST',
         mode: 'cors',
@@ -201,5 +243,8 @@ async function eliminar(id) {
     } else {
         alert(json.msg);
         location.replace(base_url + 'proveedores');
+    }
+    } catch (err) {
+        console.error('Error al eliminar proveedor:', err);
     }
 }

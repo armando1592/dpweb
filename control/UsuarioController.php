@@ -138,8 +138,9 @@ if ($tipo == "actualizar") {
             $actualizar = $objPersona->actualizar($id_persona, $nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol);
             if ($actualizar) {
                 $arrResponse = array('status' => true, 'msg' => "Actualizado correctamente");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => 'Error al actualizar');
             }
-            $arrResponse = array('status' => false, 'msg' => $actualizar);
             echo json_encode($arrResponse);
             exit;
         }

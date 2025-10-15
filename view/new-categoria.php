@@ -34,6 +34,9 @@
                     <a href="<?php echo BASE_URL; ?>categorias-lista" class="btn btn-secondary btn-lg px-4">
                         <i class="fas fa-arrow-left me-2"></i>Cancelar
                     </a>
+                     <a href="<?php echo BASE_URL; ?>categorias-lista" class="btn btn-secondary btn-lg px-4">
+                        <i class="fas fa-arrow-left me-2"></i>Ver lista
+                    </a>
                 </div>
             </form>
         </div>

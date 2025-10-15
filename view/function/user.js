@@ -132,12 +132,50 @@ async function view_users() {
             mode: 'cors',
             cache: 'no-cache'
         });
+        if (!respuesta.ok) {
+            console.error('view_users: fetch failed', respuesta.status, respuesta.statusText);
+            return;
+        }
 
-        let json = await respuesta.json();
-        let content_users = document.getElementById('content_user');
+        const text = await respuesta.text();
+        let parsed;
+        try {
+            parsed = JSON.parse(text);
+        } catch (err) {
+            console.error('view_users: response not JSON', text);
+            return;
+        }
+
+        console.debug('view_users: parsed response', parsed);
+
+        // Normalize response: controller may return an array or an object {status,data}
+        let list = [];
+        if (Array.isArray(parsed)) {
+            list = parsed;
+        } else if (parsed && Array.isArray(parsed.data)) {
+            list = parsed.data;
+        } else if (parsed && typeof parsed === 'object') {
+            // attempt to map numeric-keyed objects to array
+            try {
+                list = Object.values(parsed).filter(v => v && typeof v === 'object');
+            } catch (e) {
+                list = [];
+            }
+        }
+
+        let content_users = document.getElementById('content_users');
+        if (!content_users) {
+            console.warn('view_users: container #content_users not found');
+            return;
+        }
         content_users.innerHTML = ''; // limpiamos antes de insertar
 
-        json.forEach((user, index) => {
+        if (!list.length) {
+            content_users.innerHTML = '<tr><td colspan="7">No hay usuarios</td></tr>';
+            return;
+        }
+
+        list.forEach((user, index) => {
             let fila = document.createElement('tr');
             fila.innerHTML = `
                 <td>${index + 1}</td>
@@ -182,7 +220,7 @@ async function view_users() {
         console.log('Error al obtener usuarios, No hay nada: ' + error);
     }
 }
-if (document.getElementById('content_user')) {
+if (document.getElementById('content_users')) {
     view_users();
 }
 

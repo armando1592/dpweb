@@ -3,8 +3,13 @@
     <div class="card">
         <h5 class="card-header">Editar Datos del proveedor</h5>
         
-        <form id="frm_edit_user" action="" method="">
-            <input type="hidden" id="id_persona" name="id_persona" value="<?= $ruta[1]; ?>">
+        <?php
+               if (isset($_GET['views'])){
+                $ruta = explode ("/", $_GET["views"]);
+               }
+        ?>
+        <form id="frm_edit_proveedor" action="" method="">
+            <input type="hidden" id="id_persona" name="id_persona" value="<?= isset($ruta[1]) ? $ruta[1] : ''; ?>">
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="nro_identidad" class="col-sm-4 col-form-label">Nro de Documento :</label>
@@ -62,19 +67,18 @@
                 </div>
                 <div class="mb-3 row">
                     <label for="rol" class="col-sm-4 col-form-label">Rol :</label>
+                     
                     <div class="col-sm-8">
                         <select class="form-control" name="rol" id="rol" required readonly>
-                            <option value="Cliente">Cliente</option>
+                            <option value="proveedor">Proveedor</option>
                         </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>
-                <a href="<?= BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
+                <a href="<?= BASE_URL ?>proveedor" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
     <!-- FIN DE CUERPO DE PÁGINA -->
-    <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
-    <script>
-        edit_user();
-    </script>
+    <script src="<?php echo BASE_URL; ?>view/function/proveedor.js"></script>
+  
