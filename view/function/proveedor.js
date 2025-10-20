@@ -242,7 +242,7 @@ async function eliminar(id) {
         return;
     } else {
         alert(json.msg);
-        location.replace(base_url + 'proveedores');
+        location.replace(base_url + 'proveedor');
     }
     } catch (err) {
         console.error('Error al eliminar proveedor:', err);

@@ -1,111 +1,104 @@
-<div class="container my-5">
-  <div class="card shadow-lg border-0 rounded-4">
-    <!-- ENCABEZADO -->
-    <div class="card-header bg-gradient bg-primary text-white text-center py-4 rounded-top-4">
-      <h4 class="mb-0 fw-bold">
-        <i class="fas fa-box me-2"></i>Registrar Producto
-      </h4>
-    </div>
-
-    <!-- CUERPO -->
-    <div class="card-body p-4">
-      <form id="frm_product" action="" method="POST" enctype="multipart/form-data">
-        <div class="row g-4">
-          <!-- LADO IZQUIERDO -->
-          <div class="col-md-6">
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control shadow-sm" id="codigo" name="codigo" placeholder="Código" required>
-              <label for="codigo"><i class="fas fa-barcode me-2 text-primary"></i>Código</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control shadow-sm" id="nombre" name="nombre" placeholder="Nombre" required>
-              <label for="nombre"><i class="fas fa-tag me-2 text-primary"></i>Nombre</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control shadow-sm" id="detalle" name="detalle" placeholder="Detalle" required>
-              <label for="detalle"><i class="fas fa-info-circle me-2 text-primary"></i>Detalle</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="number" step="0.01" class="form-control shadow-sm" id="precio" name="precio" placeholder="Precio" required>
-              <label for="precio"><i class="fas fa-dollar-sign me-2 text-success"></i>Precio</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="number" class="form-control shadow-sm" id="stock" name="stock" placeholder="Stock" required>
-              <label for="stock"><i class="fas fa-cubes me-2 text-warning"></i>Stock</label>
-            </div>
-          </div>
-
-          <!-- LADO DERECHO -->
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="id_categoria" class="form-label fw-bold">
-                <i class="fas fa-list-alt me-2 text-primary"></i>Categoría
-              </label>
-              <select name="id_categoria" id="id_categoria" class="form-select shadow-sm" required></select>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="date" class="form-control shadow-sm" id="fecha_vencimiento" name="fecha_vencimiento" required>
-              <label for="fecha_vencimiento"><i class="fas fa-calendar-alt me-2 text-danger"></i>Fecha de Vencimiento</label>
-            </div>
-
-            <div class="mb-3">
-              <label for="Imagen" class="form-label fw-bold">
-                <i class="fas fa-image me-2 text-success"></i>Imagen
-              </label>
-              <input type="file" class="form-control shadow-sm" id="Imagen" name="Imagen" required>
-            </div>
-
-            <div class="mb-3">
-              <label for="id_proveedor" class="form-label fw-bold">
-                <i class="fas fa-truck me-2 text-secondary"></i>Proveedor
-              </label>
-              <select name="id_proveedor" id="id_proveedor" class="form-select shadow-sm" required></select>
-            </div>
-          </div>
+<!-- inicio de cuerpo de pagina -->
+<div class="container" style="margin-top: 100px;">
+    <div class="card">
+        <div class="card-header" style="text-align:center;">
+            Registrar Producto
         </div>
+        <form id="frm_product" action="" method="" enctype="multipart/form-data">
+            <div class="card-body">
 
-        <!-- BOTONES -->
-        <hr class="my-4">
+                <div class="mb-3 row">
+                    <label for="codigo" class="col-sm-2 col-form-label">codigo</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="codigo" name="codigo" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="nombre" class="col-sm-2 col-form-label">nombre</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="detalle" class="col-sm-2 col-form-label">detalle</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="detalle" name="detalle" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="precio" class="col-sm-2 col-form-label">precio</label>
+                    <div class="col-sm-10">
+                        <input type="decimal" class="form-control" id="precio" name="precio" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="stock" class="col-sm-2 col-form-label">stock</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="stock" name="stock" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="id_categoria" class="col-sm-2 col-form-label">Categoría</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="id_categoria" name="id_categoria" required>
+                            <option value="">Seleccione una categoría</option>
+                            <!-- Las opciones se cargarán dinámicamente con JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="fecha_vencimiento" class="col-sm-2 col-form-label">fecha_vencimiento</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento" required>
+                    </div>
+                </div>
 
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-          <button type="submit" class="btn btn-success btn-lg shadow-sm">
-            <i class="fas fa-save me-2"></i>Registrar
-          </button>
-          <button type="reset" class="btn btn-warning btn-lg shadow-sm text-white">
-            <i class="fas fa-eraser me-2"></i>Limpiar
-          </button>
-          <a href="<?php echo BASE_URL; ?>productos-lista" class="btn btn-info btn-lg shadow-sm text-white">
-            <i class="fas fa-list me-2"></i>Ver Lista
-          </a>
-          <a href="<?php echo BASE_URL; ?>" class="btn btn-danger btn-lg shadow-sm">
-            <i class="fas fa-times me-2"></i>Cancelar
-          </a>
-        </div>
-      </form>
+                <div class="mb-3 row">
+                    <label for="imagen" class="col-sm-2 col-form-label">Imagen</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="imagen" name="imagen"  accept="">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="id_proveedor" class="col-sm-2 col-form-label">Proveedor</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="id_proveedor" name="id_proveedor" required>
+                            <option value="">Seleccione un proveedor</option>
+                            <!-- Las opciones se cargarán dinámicamente con JavaScript -->
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content:center; gap:20px">
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="reset" class="btn btn-info">Limpiar</button>
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                    <a href="<?php echo BASE_URL; ?>productos-lista" class="btn btn-success">ver</a>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
 </div>
-
-<!-- FontAwesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<!-- fin de cuerpo de pagina -->
 <script src="<?php echo BASE_URL; ?>view/function/producto.js"></script>
-<script>
-   cargar_categorias();
-   cargar_proveedores();
-</script>
 
-<style>
-  .form-control:focus, .form-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
-  }
-  .btn:hover {
-    transform: scale(1.05);
-    transition: 0.2s ease-in-out;
-  }
-</style>
+<script> 
+    document.addEventListener('DOMContentLoaded', function() {
+        cargar_categorias();
+        cargar_proveedores();
+    });
+</script>
+<!--
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let partes = window.location.pathname.split('/');
+        let id = partes[partes.length - 1];
+
+        cargarCategorias(); // Cargar categorías primero
+
+        if (!isNaN(id)) {
+            obtenerProductoPorId(id); // Luego cargar el producto para seleccionar la categoría
+        }
+    });
+</script>-->

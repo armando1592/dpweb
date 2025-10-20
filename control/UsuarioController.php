@@ -6,6 +6,8 @@
  */
 require_once("../model/UsuarioModel.php");
 $objPersona = new UsuarioModel();
+// Always respond as JSON for AJAX endpoints
+header('Content-Type: application/json; charset=utf-8');
 
 
 
@@ -145,29 +147,30 @@ if ($tipo == "actualizar") {
             exit;
         }
     }
+}
 
-    // eliminar
-    if ($tipo == "eliminar") {
-        $id_persona = isset($_POST['id']) ? $_POST['id'] : '';
+// eliminar (handler moved to top-level so it runs independently)
+if ($tipo == "eliminar") {
+    // accept either 'id' or 'id_persona' from different front-end callers
+    $id_persona = isset($_POST['id']) ? $_POST['id'] : (isset($_POST['id_persona']) ? $_POST['id_persona'] : '');
 
-        if ($id_persona == "") {
-            $arrResponse = array('status' => false, 'msg' => 'Error, ID vacío');
+    if ($id_persona == "") {
+        $arrResponse = array('status' => false, 'msg' => 'Error, ID vacío');
+    } else {
+        $existeId = $objPersona->ver($id_persona);
+        if (!$existeId) {
+            $arrResponse = array('status' => false, 'msg' => 'Error, usuario no existe en Base de Datos!!');
         } else {
-            $existeId = $objPersona->ver($id_persona);
-            if (!$existeId) {
-                $arrResponse = array('status' => false, 'msg' => 'Error, usuario no existe en Base de Datos!!');
+            $eliminar = $objPersona->eliminar($id_persona);
+            if ($eliminar) {
+                $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente");
             } else {
-                $eliminar = $objPersona->eliminar($id_persona);
-                if ($eliminar) {
-                    $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente");
-                } else {
-                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
-                }
+                $arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
             }
         }
-        echo json_encode($arrResponse);
-        exit;
     }
+    echo json_encode($arrResponse);
+    exit;
 }
 
 if ($tipo == "ver_proveedores") {
