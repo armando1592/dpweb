@@ -81,4 +81,11 @@
     </div>
     <!-- FIN DE CUERPO DE PÁGINA -->
     <script src="<?php echo BASE_URL; ?>view/function/proveedor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof edit_proveedor === 'function') {
+                edit_proveedor();
+            }
+        });
+    </script>
   
