@@ -4,7 +4,9 @@
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="fas fa-boxes me-2"></i>Lista de Productos</h5>
       <button class="btn btn-light btn-sm text-primary fw-bold">
-        <i class="fas fa-plus-circle me-1"></i>Nuevo Producto
+      <a href="<?php echo BASE_URL; ?>new-producto" class="btn btn-success d-flex align-items-center">
+            <i class="fas fa-plus me-2"></i>Nuevo producto
+        </a>
       </button>
     </div>
 
@@ -20,7 +22,7 @@
               <th scope="col"><i class="fas fa-cubes me-1"></i>Stock</th>
               <th scope="col"><i class="fas fa-layer-group me-1"></i>Categoría</th>
               <th scope="col"><i class="fas fa-truck me-1"></i>Proveedor</th>
-              <th scope="col"><i class="fas fa-calendar-alt me-1"></i>Vencimiento</th>
+              <th scope="col"><i class="fas fa-calendar-alt me-1"></i>Fecha de Vencimiento</th>
               <th scope="col"><i class="fas fa-cogs me-1"></i>Acciones</th>
             </tr>
           </thead>
