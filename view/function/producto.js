@@ -289,27 +289,45 @@ async function eliminar(id) {
 }
 
 async function cargar_categorias() {
-    let respuesta = await fetch(base_url + 'control/CategoriaController.php?tipo=mostrar_categorias', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache'
-    });
-    json = await respuesta.json();
-    let contenido = '';
-    if (json.status && json.data) {
-        contenido += '<option value="">Seleccione una categoria</option>';
-        json.data.forEach(categoria => {
-            contenido += '<option value="' + categoria.id + '">' + categoria.nombre + '</option>';
+    try {
+        console.log('Cargando categorías...');
+        let respuesta = await fetch(base_url + 'control/CategoriaController.php?tipo=mostrar_categorias', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
         });
-    } else {
-        contenido = '<option value = ""> No hay categorias disponibles</option>';
-    }
-    //console.log(contenido);
-    const catEl = document.getElementById("id_categoria");
-    if (catEl) {
-        catEl.innerHTML = contenido;
-    } else {
-        console.warn('cargar_categorias: #id_categoria not found');
+        
+        if (!respuesta.ok) {
+            throw new Error(`HTTP error! status: ${respuesta.status}`);
+        }
+        
+        const json = await respuesta.json();
+        console.log('Respuesta de categorías:', json);
+        
+        let contenido = '';
+        if (json.status && Array.isArray(json.data) && json.data.length > 0) {
+            contenido += '<option value="">Seleccione una categoría</option>';
+            json.data.forEach(categoria => {
+                if (categoria && categoria.id && categoria.nombre) {
+                    contenido += `<option value="${categoria.id}">${categoria.nombre}</option>`;
+                }
+            });
+        } else {
+            contenido = '<option value="">No hay categorías disponibles</option>';
+        }
+
+        const catEl = document.getElementById("id_categoria");
+        if (catEl) {
+            catEl.innerHTML = contenido;
+        } else {
+            console.warn('cargar_categorias: #id_categoria not found');
+        }
+    } catch (error) {
+        console.error('Error al cargar categorías:', error);
+        const catEl = document.getElementById("id_categoria");
+        if (catEl) {
+            catEl.innerHTML = '<option value="">Error al cargar categorías</option>';
+        }
     }
 
 }
