@@ -216,28 +216,51 @@ if (document.querySelector("#frm_edit_producto")) {
 }
 
 async function actualizarProducto() {
-    const frm_edit_producto = document.querySelector("#frm_edit_producto")
-    const datos = new FormData(frm_edit_producto);
-    let respuesta = await fetch(base_url + 'control/productosController.php?tipo=actualizar', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        body: datos
-    });
-    json = await respuesta.json();
-    if (!json.status) {
-        Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Ops, ocurrio un error al actualizar, contacte con el administrador",
+    try {
+        const frm_edit_producto = document.querySelector("#frm_edit_producto");
+        if (!frm_edit_producto) {
+            throw new Error('Formulario no encontrado');
+        }
+
+        const datos = new FormData(frm_edit_producto);
+        const respuesta = await fetch(base_url + 'control/productosController.php?tipo=actualizar', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
         });
-        console.log(json.msg);
-        return;
-    } else {
-        Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: json.msg
+
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+
+        const text = await respuesta.text();
+        let json;
+        
+        try {
+            json = JSON.parse(text);
+        } catch (e) {
+            console.error('Error al parsear respuesta:', text);
+            throw new Error('Error al procesar la respuesta del servidor');
+        }
+
+        if (json.status) {
+            await Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: json.msg
+            });
+            // Redirigir a la lista de productos después de actualizar
+            window.location.href = base_url + 'productos-lista';
+        } else {
+            throw new Error(json.msg || 'Error al actualizar el producto');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        await Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.message || 'Error al actualizar el producto'
         });
     }
 }
