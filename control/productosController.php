@@ -168,15 +168,13 @@ if ($tipo == "actualizar") {
             exit;
         }
     }
-    //subir imagen en la carpeta en la carpeta upload, obtener la ruta de ese archivo y esa ruta almacenar en una variable imagen y enviar a la base de datos
-   if (isset($rutaFisica) && file_exists($producto->imagen)) {
-        @unlink("../" . $producto->imagen); // Eliminar imagen antigua
-    }
-    //eliminar la imagen antigua si existe y se subio una nueva imagen
-    if (isset($rutaFisica) && file_exists($producto->imagen)) {
-        @unlink("../" . $producto->imagen); // Eliminar imagen antigua
-    }
     
+    // Eliminar la imagen antigua si existe y se subió una nueva
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        if (!empty($producto->imagen) && file_exists("../" . $producto->imagen)) {
+            @unlink("../" . $producto->imagen);
+        }
+    }
 
     $actualizar = $objProducto->actualizar($id_producto, $codigo, $nombre, $detalle, $precio, $stock, $id_categoria, $fecha_vencimiento, $id_proveedor, $imagen);
     
