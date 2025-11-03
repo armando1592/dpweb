@@ -6,7 +6,7 @@ const BD_PASSWORD = '';
 const BD_CHARSET= 'utf8';
 
 
-const BASE_URL ='http://localhost/dpweb/';
+const BASE_URL ='';
 
 
 ?>
