@@ -71,6 +71,7 @@ if ($tipo == 'registrar') {
 }
 
 if ($tipo == "mostrar_productos") {
+    header('Content-Type: application/json');
     $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
     $productos = $objProducto->mostrarProductos();
     $arrProduct = array();

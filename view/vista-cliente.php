@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>view/css/cliente.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script>
-        const base_url = '<?php echo BASE_URL; ?>';
+        // base_url provided globally in the site header; avoid redeclaring here to prevent JS errors
     </script>
     <?php
     if (isset($_GET["views"])) {
