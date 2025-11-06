@@ -4,6 +4,12 @@
         <div class="card-header" style="text-align:center;">
             Registrar Producto
         </div>
+        <?php
+        // Server-side populate categorias as a fallback for hosting where JS may fail
+        require_once __DIR__ . '/../model/CategoriaModel.php';
+        $catModel = new CategoriaModel();
+        $categorias_fallback = $catModel->mostrarCategorias();
+        ?>
         <form id="frm_product" action="" method="" enctype="multipart/form-data">
             <div class="card-body">
 
@@ -42,7 +48,16 @@
                     <div class="col-sm-10">
                         <select class="form-control" id="id_categoria" name="id_categoria" required>
                             <option value="">Seleccione una categoría</option>
-                            <!-- Las opciones se cargarán dinámicamente con JavaScript -->
+                            <?php
+                            // Render server-side options as fallback
+                            if (!empty($categorias_fallback)) {
+                                foreach ($categorias_fallback as $cat) {
+                                    $cid = htmlspecialchars($cat->id);
+                                    $cn = htmlspecialchars($cat->nombre);
+                                    echo "<option value=\"{$cid}\">{$cn}</option>\n";
+                                }
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
