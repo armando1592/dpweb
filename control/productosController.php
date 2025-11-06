@@ -204,6 +204,7 @@ if ($tipo == "eliminar") {
 }
 
 if (isset($_GET['tipo']) && $_GET['tipo'] == 'listarCliente') {
+    header('Content-Type: application/json');
     $productos = $objProducto->obtenerProductosCliente();
     
     if (count($productos) > 0) {

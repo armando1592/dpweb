@@ -54,6 +54,11 @@ class productsModel
         $arr_productos = array();
         $consulta = "SELECT * FROM producto";
         $sql = $this->conexion->query($consulta);
+        if (!$sql) {
+            // Query failed (table may not exist or DB error). Return empty array to avoid fatal errors.
+            error_log("mostrarProductos query error: " . $this->conexion->error);
+            return $arr_productos;
+        }
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_productos, $objeto);
         }
@@ -95,6 +100,10 @@ public function obtenerProductosCliente() {
                  WHERE stock > 0 
                  ORDER BY id DESC";
     $sql = $this->conexion->query($consulta);
+    if (!$sql) {
+        error_log("obtenerProductosCliente query error: " . $this->conexion->error);
+        return $productos;
+    }
     while ($fila = $sql->fetch_object()) {
         $productos[] = $fila;
     }
