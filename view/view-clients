@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilder</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>view/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>view/css/cliente.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script>
+        const base_url = '<?php echo BASE_URL; ?>';
+    </script>
+    <?php
+    if (isset($_GET["views"])) {
+        $ruta = explode("/", $_GET["views"]);
+        //echo $ruta[1];
+    }
+    ?>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <h1 class="logo mb-0">Kr Gozme</h1>
+            <!-- BOTÓN MENÚ MÓVIL -->
+            <button class="menu-btn" id="menu-toggle">
+                <i class="bi bi-list"></i>
+            </button>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Productos</a>
+                <a href="#">Ofertas</a>
+                <a href="#">Contacto</a>
+            </nav>
+            <div class="header-icons">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar...">
+                    <button><i class="bi bi-search"></i></button>
+                </div>
+                <button class="icon-btn"><i class="bi bi-person"></i></button>
+                <button class="icon-btn"><i class="bi bi-heart"></i></button>
+                <button class="icon-btn" id="cart-btn">
+                    <i class="bi bi-cart3"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        <!-- MENÚ MÓVIL -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#">Inicio</a>
+            <a href="#">Productos</a>
+            <a href="#">Ofertas</a>
+            <a href="#">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Carrusel -->
+    <section class="carousel">
+        <div class="carousel-slide active">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=500&fit=crop" alt="">
+            <div class="carousel-text">
+                <h2>Nueva Colección 2025</h2>
+                <p>Descubre las últimas tendencias</p>
+                <button class="btn">Ver Colección</button>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=500&fit=crop" alt="">
+            <div class="carousel-text">
+                <h2>Ofertas Especiales</h2>
+                <p>Hasta 50% de descuento</p>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=500&fit=crop" alt="">
+            <div class="carousel-text">
+                <h2>Envío Gratis</h2>
+                <p>En compras mayores a S/100</p>
+                <button class="btn">Explorar</button>
+            </div>
+        </div>
+
+        <button id="prevSlide" class="carousel-control prev">❮</button>
+        <button id="nextSlide" class="carousel-control next">❯</button>
+    </section>
+
+    <!-- Categorías -->
+    <section class="categorias container">
+        <button>Electrónica</button>
+        <button>Moda</button>
+        <button>Deportes</button>
+        <button>Hogar</button>
+    </section>
+
+
+
+    <!-- Productos -->
+    <div class="container">
+      <div class="row" id="productos-container"></div>
+    </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Mi Tienda</h3>
+        <p>Tu tienda online de confianza</p>
+      </div>
+      <div>
+        <h4>Compañía</h4>
+        <a href="#">Sobre Nosotros</a>
+        <a href="#">Contacto</a>
+        <a href="#">Trabaja con Nosotros</a>
+      </div>
+      <div>
+        <h4>Ayuda</h4>
+        <a href="#">Envíos</a>
+        <a href="#">Devoluciones</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+    <p class="copy">© 2025 Mi Tienda. Todos los derechos reservados.</p>
+  </footer>
+
+    <script>
+        // MENU RESPONSIVO
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav').classList.toggle('active');
+        });
+
+        // CARRUSEL
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        document.getElementById('nextSlide').onclick = () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        };
+
+        document.getElementById('prevSlide').onclick = () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        };
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        // CARRITO
+        document.addEventListener('click', e => {
+            if (e.target.classList.contains('btn-cart')) {
+                cartCount++;
+                const count = document.getElementById('cart-count');
+                count.textContent = cartCount;
+                count.classList.remove('hidden');
+            }
+        });
+    </script>
+    <script>
+        // ==== MENÚ MÓVIL ====
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+        });
+    </script>
+    <script src="<?php echo BASE_URL; ?>view/function/vistaC.js"></script>
+    <script src="<?php echo BASE_URL; ?>view/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
