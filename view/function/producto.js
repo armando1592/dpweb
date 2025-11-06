@@ -314,7 +314,7 @@ async function eliminar(id) {
 async function cargar_categorias() {
     try {
         console.log('Cargando categorías...');
-        let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=mostrar_categorias', {
+        let respuesta = await fetch(base_url + 'control/CategoriaController.php?tipo=mostrar_categorias', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'

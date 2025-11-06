@@ -1,5 +1,6 @@
 <?php
-require_once "../config/config.php";  //Importa el archivo de  que contiene las constantes necesarias para la conexión
+// Use absolute include based on this file so includes work when called from views/controllers
+require_once __DIR__ . '/../config/config.php';  //Importa el archivo que contiene las constantes necesarias para la conexión
 
 class Conexion{ //grupa métodos relacionados a la conexión de base de datos
 

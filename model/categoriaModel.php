@@ -1,5 +1,6 @@
 <?php
-require_once("../library/conexion.php");
+// Use absolute path based on this file to reliably include the DB connection
+require_once __DIR__ . '/../library/conexion.php';
 class CategoriaModel{
     private $conexion;
     function __construct(){
