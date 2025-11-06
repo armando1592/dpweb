@@ -88,17 +88,17 @@ class productsModel
     }
 }
 
-public function obtenerProductosCliente() {
-    $productos = [];
-    $consulta = "SELECT id, nombre, detalle, precio, imagen 
-                 FROM producto 
-                 WHERE stock > 0 
-                 ORDER BY id DESC";
-    $sql = $this->conexion->query($consulta);
-    while ($fila = $sql->fetch_object()) {
-        $productos[] = $fila;
-    }
-    return $productos;
-}
+// public function obtenerProductosCliente() {
+//     $productos = [];
+//     $consulta = "SELECT id, nombre, detalle, precio, imagen 
+//                  FROM producto 
+//                  WHERE stock > 0 
+//                  ORDER BY id DESC";
+//     $sql = $this->conexion->query($consulta);
+//     while ($fila = $sql->fetch_object()) {
+//         $productos[] = $fila;
+//     }
+//     return $productos;
+// }
 
-}
+// }

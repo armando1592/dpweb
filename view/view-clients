@@ -175,9 +175,9 @@
             mobileMenu.classList.toggle('show');
         });
     </script>
-    <script src="<?php echo BASE_URL; ?>view/function/vistaC.js"></script>
+    <script src="<?php echo BASE_URL; ?>view/function/vistaCliente.js"></script>
     <script src="<?php echo BASE_URL; ?>view/Bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
-</html>
+</html> 
