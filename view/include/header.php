@@ -110,7 +110,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>users">Users</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-producto">Products</a></li>
-                          <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>view-productos">ver productos</a></li>
+                          <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>vista-cliente">ver productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-categoria">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-client">Clients</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>new-proveedor">Proveedor</a></li>

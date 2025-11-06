@@ -1,0 +1,404 @@
+    /* ==== GENERAL ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+/* ==== HEADER ==== */
+/* ==== HEADER ==== */
+header {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* LOGO */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* NAV LINKS */
+nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #2563eb;
+}
+
+/* ICONOS */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.icon-btn:hover {
+  color: #2563eb;
+}
+
+/* CONTADOR CARRITO */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BUSCADOR */
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding: 0.4rem 0.8rem;
+}
+
+.search-box button {
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+/* BOTÓN MENÚ */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #2563eb;
+}
+
+/* MENÚ MÓVIL */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+  padding: 0.8rem 1.5rem;
+}
+
+.mobile-menu a {
+  padding: 0.5rem 0;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  transition: color 0.3s;
+}
+
+.mobile-menu a:hover {
+  color: #2563eb;
+}
+
+.mobile-menu.show {
+  display: flex;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  nav {
+    display: none;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .search-box {
+    display: none;
+  }
+}
+
+
+/* ==== CARRUSEL ==== */
+.carousel {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  text-align: center;
+}
+
+.carousel-text h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-text p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.btn {
+  background: #2563eb;
+  color: #fff;
+  padding: 0.7rem 1.8rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.5);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0.3rem 0.8rem;
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* ==== CATEGORÍAS ==== */
+.categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.categorias button {
+  background: #fff;
+  border: none;
+  padding: 1.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.categorias button:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* ==== PRODUCTOS ==== */
+.productos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.productos-header h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-body h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.precio {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.precio-desc {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+  margin-left: 8px;
+}
+
+.card-body button {
+  width: 100%;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.card-body button:hover {
+  background: #1d4ed8;
+}
+
+/* ==== FOOTER ==== */
+.footer {
+  background: #1f2937;
+  color: #fff;
+  margin-top: 3rem;
+  padding-top: 2rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.footer-grid h4 {
+  margin-bottom: 0.8rem;
+}
+
+.footer-grid a {
+  display: block;
+  color: #d1d5db;
+  text-decoration: none;
+  margin-bottom: 0.4rem;
+  transition: color 0.3s;
+}
+
+.footer-grid a:hover {
+  color: #fff;
+}
+
+.copy {
+  text-align: center;
+  border-top: 1px solid #374151;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  color: #9ca3af;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+  .nav.active {
+    display: flex;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .search-box {
+    display: none;
+  }
+}

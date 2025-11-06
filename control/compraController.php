@@ -5,7 +5,7 @@ $objCompra = new compraModel();
 
 $tipo = $_GET['tipo'];
 
-if ($tipo == "registrar") {
+if ($tipo == "registrar") 
     
     $id_producto =  $_POST['id_producto'];
     $cantidad =  $_POST['cantidad'];
