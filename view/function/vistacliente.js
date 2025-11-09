@@ -1,4 +1,4 @@
-fetch(base_url + 'control/productosController.php?tipo=listarCliente')
+fetch('control/ProductoController.php?tipo=listarCliente')
   .then(res => res.json())
   .then(data => {
     if (data.status) {

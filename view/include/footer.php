@@ -1,15 +1,6 @@
-
-<!-- Estructura de new-user-->
 </body>
 
-    <!-- JS -->
-    <script src="<?php echo BASE_URL; ?>view/bootstrap/js/bootstrap.bundle.min.js"></script>
-   
-</html>
+<script src="<?php echo BASE_URL; ?>view/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-<!-- Estructura de new-user-->
-</body>
-<!-- Scripts -->
-    <script src="<?php echo BASE_URL; ?>view/bootstrap/js/bootstrap.bundle.min.js"></script>
 </html>

@@ -1,44 +1,42 @@
 <?php
-require_once("../library/conexion.php"); //Importa la clase Conexion para poder conectarse a la base de datos MySQL.
-
+require_once("../library/conexion.php");
 class UsuarioModel
 {
-    private $conexion; //Variable que almacenará la conexión activa a la base de datos. Es privada, por lo tanto, solo puede usarse dentro de esta clase.
+    private $conexion;
     function __construct()
     {
-        $this->conexion = new Conexion(); // Crea un objeto de la clase Conexion.
-        $this->conexion = $this->conexion->connect(); //Llama al método connect() de esa clase para obtener una conexión MySQL activa y lo guarda en $this->conexion.
+        $this->conexion = new Conexion();
+        $this->conexion = $this->conexion->connect();
     }
-    public function registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password) //Inserta un nuevo registro en la tabla persona.  Usa los parámetros recibidos (DNI, nombre, dirección, etc.).
+    public function registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password)
     {
-        $consulta = "INSERT INTO persona (nro_identidad, razon_social, telefono, correo, departamento, provincia, distrito, cod_postal, direccion, rol, password) VALUES ('$nro_identidad', '$razon_social', '$telefono', '$correo', '$departamento', '$provincia', '$distrito', '$cod_postal', '$direccion', '$rol', '$password')";
-        $sql = $this->conexion->query($consulta); //Ejecuta la consulta en la base de datos mediante la conexión activa.El resultado se guarda en $sql.
-        if ($sql) {  //Devuelve el ID del nuevo registro insertado (usando insert_id).Si falló, devuelve 0.
+        $consulta = "INSERT INTO persona (nro_identidad,razon_social, telefono, correo, departamento, provincia, distrito, cod_postal, direccion, rol, password) VALUES ('$nro_identidad', '$razon_social', '$telefono', '$correo', '$departamento', '$provincia', '$distrito', '$cod_postal', '$direccion', '$rol', '$password')";
+        $sql = $this->conexion->query($consulta);
+        if ($sql) {
             $sql = $this->conexion->insert_id;
         } else {
             $sql = 0;
         }
-        return $sql; //Devuelve el resultado del registro: el ID si tuvo éxito, o 0 si falló.
+        return $sql;
     }
-    public function existePersona($nro_identidad) //Verifica si un número de identidad ya existe en la tabla persona.
+    public function existePersona($nro_identidad)
     {
-        $consulta = "SELECT* FROM persona Where nro_identidad = '$nro_identidad'"; //hace una consulta que el dni sea igual al recibido
-        $sql = $this->conexion->query($consulta); // Ejecuta la consulta.
-        return $sql->num_rows; //Si existe, devuelve 1 (o más). Si no existe, devuelve 0.
+        $consulta = "SELECT * FROM persona WHERE nro_identidad='$nro_identidad'";
+        $sql = $this->conexion->query($consulta);
+        return $sql->num_rows;
     }
-
-    public function buscarPersonaPorNroIdentidad($nro_identidad) //Busca a una persona por su número de identidad. //Devuelve solo los campos id, razon_social y password.
+    public function buscarPersonaPorNroIdentidad($nro_identidad)
     {
-        $consulta = "SELECT id, razon_social, password from persona where nro_identidad = '$nro_identidad' limit 1;"; //Arma una consulta que selecciona solo los campos necesarios
-        $sql = $this->conexion->query($consulta); // Ejecuta la consulta.
-        return $sql->fetch_object(); //Devuelve el resultado como un objeto PHP con las propiedades
-    } // realizamos la conexion con la base de datos, insertamos registros en la tabla persona para hacer la consulta y validaciones. verificamos si ya existe un dni. buscamos una persona por su dni
-
-
+        $consulta = "SELECT id, razon_social, password FROM persona WHERE nro_identidad = '$nro_identidad' LIMIT 1";
+        $sql = $this->conexion->query($consulta);
+        return $sql->fetch_object();
+    }
     public function verUsuarios()
     {
+        /* aca es añadir al condicion por ejemplo WHERE rol = 'cliente'
+         */
         $arr_usuarios = array();
-        $consulta = "SELECT * FROM persona";
+        $consulta = "SELECT * FROM persona  WHERE NOT rol IN ('cliente','proveedor')";
         $sql = $this->conexion->query($consulta);
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_usuarios, $objeto);
@@ -47,52 +45,55 @@ class UsuarioModel
     }
     public function ver($id)
     {
-        $consulta = "SELECT*FROM persona WHERE id='$id'";
+        $consulta = "SELECT * FROM persona WHERE id='$id'";
         $sql = $this->conexion->query($consulta);
         return $sql->fetch_object();
     }
     public function actualizar($id_persona, $nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol)
     {
-        $consulta = "UPDATE persona SET nro_identidad ='$nro_identidad', razon_social='$razon_social', telefono='$telefono', correo='$correo', departamento='$departamento', provincia='$provincia', distrito='$distrito', cod_postal='$cod_postal', direccion='$direccion', rol='$rol' WHERE id='$id_persona'";
+        $consulta = "UPDATE persona SET nro_identidad='$nro_identidad', razon_social='$razon_social', telefono='$telefono', correo='$correo', departamento='$departamento', provincia='$provincia', distrito='$distrito', cod_postal='$cod_postal', direccion='$direccion', rol='$rol' WHERE id='$id_persona'";
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
 
-
-    // Metodo para Elimar datos de Usuario
-
-    public function eliminar($id_persona)
+    
+ public function eliminar($id)
     {
-        $consulta = "DELETE FROM persona WHERE id='$id_persona'";
+        $consulta = "DELETE FROM persona WHERE id='$id'";
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
 
 
+    // Obtener lista de proveedores
+    public function verProveedores()
+    {
+        $arr_proveedores = array();
+        $consulta = "SELECT * 
+                 FROM persona 
+                 WHERE rol='proveedor'";
+        $sql = $this->conexion->query($consulta);
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arr_proveedores, $objeto);
+        }
+        return $arr_proveedores;
+    }
 
-   public function verProveedores(){
+
+
+        public function verClientes(){
         $arr_usuarios = array();
-        $consulta = "SELECT id, nro_identidad, razon_social, correo, rol, estado FROM persona WHERE LOWER(rol) = 'proveedor'";
+        $consulta = "SELECT * FROM persona WHERE rol = 'cliente'";
         $sql = $this->conexion->query($consulta);
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_usuarios, $objeto);
         }
         return $arr_usuarios;
     }
-    public function verClientes()
-    {
-        $arr_usuarios = array();
-        $consulta = "SELECT id, nro_identidad, razon_social, correo, rol, estado FROM persona WHERE LOWER(rol) = 'cliente'";
-        $sql = $this->conexion->query($consulta);
-        while ($objeto = $sql->fetch_object()) {
-            array_push($arr_usuarios, $objeto);
-        }
-        return $arr_usuarios;
-    }
-
-   
 
 
-}
+    
+  }
+
 
 

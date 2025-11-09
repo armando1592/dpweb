@@ -1,15 +1,10 @@
 <!-- INICIO DE CUERPO DE PÁGINA -->
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header">Editar Datos del proveedor</h5>
-        
-        <?php
-               if (isset($_GET['views'])){
-                $ruta = explode ("/", $_GET["views"]);
-               }
-        ?>
+        <h5 class="card-header">Editar Datos del Proveedor</h5>
+
         <form id="frm_edit_proveedor" action="" method="">
-            <input type="hidden" id="id_persona" name="id_persona" value="<?= isset($ruta[1]) ? $ruta[1] : ''; ?>">
+            <input type="hidden" id="id_persona" name="id_persona" value="<?= $ruta[1]; ?>">
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="nro_identidad" class="col-sm-4 col-form-label">Nro de Documento :</label>
@@ -67,11 +62,8 @@
                 </div>
                 <div class="mb-3 row">
                     <label for="rol" class="col-sm-4 col-form-label">Rol :</label>
-                     
                     <div class="col-sm-8">
-                        <select class="form-control" name="rol" id="rol" required readonly>
-                            <option value="proveedor">Proveedor</option>
-                        </select>
+                        <input type="text" value="proveedor" class="form-control" id="rol" name="rol" readonly>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>
@@ -79,13 +71,9 @@
             </div>
         </form>
     </div>
-    <!-- FIN DE CUERPO DE PÁGINA -->
-    <script src="<?php echo BASE_URL; ?>view/function/proveedor.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof edit_proveedor === 'function') {
-                edit_proveedor();
-            }
-        });
-    </script>
-  
+</div>
+<!-- FIN DE CUERPO DE PÁGINA -->
+<script src="<?php echo BASE_URL; ?>view/function/proveedor.js"></script>
+<script>
+    edit_proveedor();
+</script>

@@ -2,15 +2,7 @@
 <div class="container-fluid">
     <div class="card">
         <h5 class="card-header">Editar Datos de Cliente</h5>
-        <?php
-               if (isset($_GET['views'])){
-                $ruta = explode ("/", $_GET["views"]);
-               }
-                // echo $ruta[1];
-               
-                ?>
-        
-        
+
         <form id="frm_edit_user" action="" method="">
             <input type="hidden" id="id_persona" name="id_persona" value="<?= $ruta[1]; ?>">
             <div class="card-body">
@@ -69,20 +61,19 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="rol" class="col-sm-4 col-form-label">Rol :</label>
-                    <div class="col-sm-8">
-                        <select class="form-control" name="rol" id="rol" required readonly>
-                            <option value="Cliente">Cliente</option>
-                        </select>
+                        <label for="rol" class="col-sm-4 col-form-label">Rol :</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="cliente" class="form-control" id="rol" name="rol" readonly>
+                        </div>
                     </div>
-                </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>
                 <a href="<?= BASE_URL ?>clients" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
     <!-- FIN DE CUERPO DE PÁGINA -->
-    <script src="<?php echo BASE_URL; ?>view/function/clients.js"></script>
+    <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
     <script>
-        edit_client();
-    </script>
+        edit_user();
+    </script>.
+</div>

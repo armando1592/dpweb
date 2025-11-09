@@ -1,10 +1,9 @@
-
 <!-- INICIO DE CUERPO DE PÁGINA -->
     <div class="container-fluid">
         <div class="card">
             <h5 class="card-header">Registro de Cliente</h5>
             
-            <form id="frm_client" action="" method="">
+            <form id="frm_cliente" action="" method="">
                 <div class="card-body">
                     <div class="mb-3 row">
                         <label for="nro_identidad" class="col-sm-4 col-form-label">Nro de Documento :</label>
@@ -63,17 +62,12 @@
                     <div class="mb-3 row">
                         <label for="rol" class="col-sm-4 col-form-label">Rol :</label>
                         <div class="col-sm-8">
-                            <select class="form-control" name="rol" id="rol" required readonly>
-                                <option value="Cliente" selected>Cliente</option>
-                            </select>
+                            <input type="text" value="cliente" class="form-control" id="rol" name="rol" readonly>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Registrar</button>
                     <button type="reset" class="btn btn-info">Limpiar</button>
-                    <button type="button" class="btn btn-danger">Cancelar</button>
-                    <a href="<?php echo BASE_URL; ?>clients" class="btn btn-info btn-lg shadow-sm text-white">
-            <i class="fas fa-list me-2"></i>Ver Lista
-          </a>
+                    <a href="<?= BASE_URL ?>clients" class="btn btn-danger">Cancelar</a>
                 </div>
             </form>
         </div>
