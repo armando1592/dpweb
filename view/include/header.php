@@ -36,7 +36,7 @@
 
         /* Navbar elegante */
         .navbar {
-            background: linear-gradient(90deg, #9c9769ff, #6299cdff);
+            background: linear-gradient(90deg, #45a195ff, #c57915ff);
             box-shadow: 0 4px 12px rgba(11, 10, 15, 0.3);
             border-radius: 10px;
         }
