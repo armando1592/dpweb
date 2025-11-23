@@ -75,5 +75,5 @@
     <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
     <script>
         edit_user();
-    </script>.
+    </script>
 </div>

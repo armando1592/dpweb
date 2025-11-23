@@ -12,7 +12,7 @@ class ProductoModel
     public function verProductos()
     {
         $arr_productos = array();
-        $consulta = "SELECT p.id, p.codigo, p.nombre, p.detalle, p.precio, p.stock, c.nombre AS categoria, p.fecha_vencimiento, pr.razon_social AS proveedor
+        $consulta = "SELECT p.id, p.codigo, p.nombre, p.detalle, p.precio, p.stock, c.nombre AS categoria, p.fecha_vencimiento, p.imagen, pr.razon_social AS proveedor
                  FROM producto p
                  INNER JOIN categoria c ON p.id_categoria = c.id
                  INNER JOIN persona pr ON p.id_proveedor = pr.id
@@ -93,24 +93,13 @@ class ProductoModel
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
-
-
-
-
-// obtener los datos de la vista cliente
-
-    public function obtenerProductosCliente() {
-    $productos = [];
-    $consulta = "SELECT id, nombre, detalle, precio, imagen 
-                 FROM producto 
-                 WHERE stock > 0 
-                 ORDER BY id DESC";
-    $sql = $this->conexion->query($consulta);
-    while ($fila = $sql->fetch_object()) {
-        $productos[] = $fila;
+public function buscarProductoByNameOrCodigo($dato){
+        $arr_productos = array();
+        $consulta = "SELECT * FROM producto WHERE codigo LIKE '$dato%' OR nombre LIKE '%$dato%' OR detalle LIKE '%$dato%'";
+        $sql = $this->conexion->query($consulta);
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arr_productos, $objeto);
+        }
+        return $arr_productos;
     }
-    return $productos;
-}
-
-
 }

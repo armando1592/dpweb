@@ -173,8 +173,8 @@ if ($tipo == "actualizar") {
             exit;
         }
     }
-}
 
+}
 
 
 //eliminar producto
@@ -189,24 +189,16 @@ if ($tipo == "eliminar") {
         $respuesta = array('status' => false, 'msg' => $resultado);
     }
     echo json_encode($respuesta);
+
 }
 
-
-
-
-// mostrar las targetas de productos (la vista del cliente)
-
-if (isset($_GET['tipo']) && $_GET['tipo'] == 'listarCliente') {
-    $productos = $objProducto->obtenerProductosCliente();
-    
-    if (count($productos) > 0) {
-        echo json_encode(['status' => true, 'data' => $productos]);
-    } else {
-        echo json_encode(['status' => false, 'msg' => 'No hay productos disponibles']);
+// Buscar Producto por nombre o código
+if ($tipo == "buscar_producto_venta") {
+    $dato = $_POST['dato'];
+    $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
+    $productos = $objProducto->buscarProductoByNameOrCodigo($dato);
+    if (count($productos)) {
+        $respuesta = array('status' => true, 'msg' => '', 'data' => $productos);
     }
-    exit;
+    echo json_encode($respuesta);
 }
-
-
-
-
