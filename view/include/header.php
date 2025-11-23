@@ -15,7 +15,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  
             min-height: 100vh;
             position: relative;
         }
@@ -28,7 +28,7 @@
             right: 0;
             bottom: 0;
             background-image: url(https://thumbs.dreamstime.com/b/textura-de-un-fondo-melanc%C3%B3lico-del-fondo-negro-de-la-pared-de-ladrillo-para-d-89541019.jpg);
-            opacity: 0.15;
+           
             z-index: -1;
         }
 
