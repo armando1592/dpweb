@@ -308,6 +308,10 @@
                                     Búsqueda de Productos
                                 </h5>
                                 <input type="text" id="busqueda_venta" class="form-control search-input" placeholder="Buscar producto por nombre, código..." onkeyup="viewProductosClients();">
+                                <input type="hidden" id="id_producto_venta">
+                                <input type="hidden" id="producto_precio_venta">
+                                <input type="hidden" id="producto_cantidad_venta" value="1">
+
                             </div>
                         </div>
                         
@@ -372,4 +376,12 @@
 
 <script src="<?= BASE_URL ?>view/function/products.js"></script>
 <script src="<?= BASE_URL ?>view/function/venta.js"></script>
+<script>
+     let input = document.getElementById("busqueda_venta");
+    input.addEventListener('keydown', (event)=>{
+        if (event.key == 'Enter') {
+            agregar_producto_temporal();
+        }
+    })
+</script>
 

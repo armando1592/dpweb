@@ -282,6 +282,12 @@ async function view_products() {
                 `;
                 cont++;
                 contenidot.appendChild(nueva_fila);
+                let id = document.getElementById('id_producto_venta');
+                let precio = document.getElementById('producto_precio_venta');
+                let cantidad = document.getElementById('producto_cantidad_venta');
+                id.value = producto.id;
+                precio.value = producto.precio;
+                cantidad.value = 1;
                 JsBarcode("#barcode" + producto.id, "" + producto.codigo, {
                     format: "code128",
                     lineColor: "#1a1a1a",

@@ -1,21 +1,46 @@
-
-let producto_venta = {};
+let productos_venta = {};
 let id = 2;
 let id2 = 4;
 let producto = {};
-producto.nombre = "producto A";
+producto.nombre = "Producto A";
 producto.precio = 100;
 producto.cantidad = 2;
 
 let producto2 = {};
-producto.nombre = "producto B";
-producto.precio = 400;
-producto.cantidad = 3;
-//producto_venta.push(producto);
+producto2.nombre = "Producto B";
+producto2.precio = 200;
+producto2.cantidad = 1;
+//productos_venta.push(producto);
 
-producto_venta[id] = producto;
-producto_venta[id2] = producto2;
-console.log(producto_venta);
+productos_venta[id] = producto;
+productos_venta[id2] = producto2;
+console.log(productos_venta);
 
+async function agregar_producto_temporal() {
+    let id = document.getElementById('id_producto_venta').value;
+    let precio = document.getElementById('producto_precio_venta').value;
+    let cantidad = document.getElementById('producto_cantidad_venta').value;
+    const datos = new FormData();
+    datos.append('id_producto', id);
+    datos.append('precio', precio);
+    datos.append('cantidad', cantidad);
+    try {
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=registrarTemporal', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        json = await respuesta.json();
+        if (json.status) {
+            if (json.msg == "registrado") {
+                alert("el producto fue registrado");
+            } else {
+                alert("el producto fue actualizado");
+            }
+        }
 
-console.log(producto_venta);
+    } catch (error) {
+        console.log("error en agregar producto temporal " + error);
+    }
+}
