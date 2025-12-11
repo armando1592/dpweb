@@ -9,7 +9,7 @@ class CategoriaModel
         $this->conexion = $this->conexion->connect();
     }
     
-    // obtener todas las categorias
+    // obtener todas las categorias de la base de datos
     public function verCategorias()
     {
         $arr_categorias = array();
