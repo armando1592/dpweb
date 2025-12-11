@@ -26,7 +26,7 @@ class VentaModel
     public function buscarTemporales()
     {
         $arr_temporal = array();
-        $consulta = "SELECT * FROM temporal_venta";
+        $consulta = "SELECT tv.*, p.nombre AS nombre_producto FROM temporal_venta tv INNER JOIN producto p ON tv.id_producto = p.id";
         $sql = $this->conexion->query($consulta);
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_temporal, $objeto);

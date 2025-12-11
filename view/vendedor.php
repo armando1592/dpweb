@@ -342,7 +342,7 @@
                                     <th>Cant.</th>
                                     <th>Precio</th>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th>Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody id="lista_compra">
@@ -383,5 +383,9 @@
             agregar_producto_temporal();
         }
     })
+
+    document.addEventListener('DOMContentLoaded', function() {
+        cargarCarrito();
+    });
 </script>
 
