@@ -212,7 +212,7 @@ async function viewProductosClients() {
                               <p class="text-primary fw-bold fs-5">S/ ${prod.precio}</p>
                               <div class="d-flex justify-content-between">
                                 <a href="#" class="btn btn-outline-primary btn-sm px-3 custom-btn"><i class="bi bi-eye me-1"></i>Detalle</a>
-                                <a href="#" class="btn btn-primary btn-sm px-3 custom-btn"><i class="bi bi-cart-plus me-1"></i>Agregar</a>
+                                <button type="button" class="btn btn-primary btn-sm px-3 custom-btn" onclick="agregar_producto_temporal(${prod.id}, ${prod.precio}, 1)"><i class="bi bi-cart-plus me-1"></i>Agregar</button>
                               </div>
                             </div>
                         </div>`;

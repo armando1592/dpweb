@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunatic - Iniciar Sesión</title>
+    <title>Antojitos Dulce y Deleite - Iniciar Sesión</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -13,109 +13,143 @@
         }
 
         body {
-            font-family: 'Montserrat', 'Segoe UI', sans-serif;
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #4c0340ff 0%, #5a7fceff 50%, #772253ff 100%);
             position: relative;
         }
 
-        /* Fondo con imagen de moda */
-        .background-wrapper {
-            position: absolute;
+        /* Elementos flotantes de pastelería */
+        .floating-bakery {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .background-pattern {
+        .bakery-item {
             position: absolute;
+            font-size: 40px;
+            opacity: 0.15;
+            animation: float-bakery 20s infinite ease-in-out;
+        }
+
+        .bakery-item:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .bakery-item:nth-child(2) { right: 15%; top: 30%; animation-delay: 3s; }
+        .bakery-item:nth-child(3) { left: 20%; bottom: 25%; animation-delay: 6s; }
+        .bakery-item:nth-child(4) { right: 10%; bottom: 35%; animation-delay: 9s; }
+        .bakery-item:nth-child(5) { left: 50%; top: 15%; animation-delay: 12s; }
+        .bakery-item:nth-child(6) { right: 40%; bottom: 20%; animation-delay: 15s; }
+
+        @keyframes float-bakery {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+            75% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+        }
+
+        /* Partículas brillantes */
+        .particles {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px),
-                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px);
-            animation: patternMove 20s linear infinite;
-        }
-
-        @keyframes patternMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(70px, 70px); }
-        }
-
-        /* Elementos decorativos flotantes */
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
             overflow: hidden;
+            z-index: 2;
+            pointer-events: none;
         }
 
-        .fashion-icon {
+        .particle {
             position: absolute;
-            color: rgba(255, 255, 255, 0.05);
-            font-size: 80px;
-            animation: float 15s ease-in-out infinite;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: sparkle 3s infinite ease-in-out;
         }
 
-        .fashion-icon:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
-        .fashion-icon:nth-child(2) { top: 65%; right: 15%; animation-delay: 3s; }
-        .fashion-icon:nth-child(3) { top: 40%; left: 5%; animation-delay: 6s; }
-        .fashion-icon:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 9s; }
-        .fashion-icon:nth-child(5) { top: 25%; right: 25%; animation-delay: 12s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-            25% { transform: translateY(-30px) rotate(5deg); opacity: 0.5; }
-            50% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-            75% { transform: translateY(20px) rotate(-5deg); opacity: 0.4; }
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        /* Efecto de luz radial */
-        .radial-light {
+        /* Ondas decorativas */
+        .waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 2;
+            opacity: 0.3;
+        }
+
+        .wave {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(232, 93, 117, 0.15) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            animation: pulse-light 8s ease-in-out infinite;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="white"/></svg>') repeat-x;
+            animation: wave-animation 15s linear infinite;
         }
 
-        @keyframes pulse-light {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+        .wave:nth-child(2) {
+            animation-duration: 20s;
+            opacity: 0.5;
         }
 
-        /* Contenedor principal */
-        .login-wrapper {
+        @keyframes wave-animation {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Container principal */
+        .login-container {
             position: relative;
             z-index: 10;
-            width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
-        .login-container {
-            display: flex;
-            max-width: 1100px;
-            width: 100%;
+        .login-card {
             background: rgba(255, 255, 255, 0.98);
-            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border-radius: 35px;
+            box-shadow: 0 30px 70px rgba(255, 105, 135, 0.3);
+            width: 100%;
+            max-width: 480px;
+            padding: 50px 45px;
+            animation: slideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-            animation: slideUp 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 3px solid rgba(255, 255, 255, 0.8);
         }
 
-        @keyframes slideUp {
+        @keyframes slideIn {
             from {
                 opacity: 0;
                 transform: translateY(50px) scale(0.9);
@@ -126,454 +160,521 @@
             }
         }
 
-        /* Panel izquierdo - Imagen decorativa */
-        .login-visual {
-            flex: 1;
-            background: linear-gradient(135deg, #e85d75 0%, #d63864 100%);
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-visual::before {
+        /* Efecto de brillo en la tarjeta */
+        .login-card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.05) 10px,
-                rgba(255, 255, 255, 0.05) 20px
-            );
-            animation: stripesMove 20s linear infinite;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 4s infinite;
         }
 
-        @keyframes stripesMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        .brand-section {
-            position: relative;
-            z-index: 2;
+        /* Logo animado */
+        .logo-container {
             text-align: center;
-            color: white;
-        }
-
-        .brand-icon {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 60px;
-            animation: iconFloat 3s ease-in-out infinite;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .brand-section h1 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            letter-spacing: 2px;
-        }
-
-        .brand-section p {
-            font-size: 16px;
-            opacity: 0.95;
-            line-height: 1.6;
-            max-width: 350px;
-            margin: 0 auto;
-        }
-
-        .features-list {
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            color: white;
-            animation: fadeInLeft 1s ease-out;
-        }
-
-        .feature-item i {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Panel derecho - Formulario */
-        .login-form-section {
-            flex: 1;
-            padding: 60px 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: white;
-        }
-
-        .form-header {
             margin-bottom: 40px;
-        }
-
-        .form-header h2 {
-            font-size: 32px;
-            color: #1a1a2e;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .form-header p {
-            color: #7f8c8d;
-            font-size: 15px;
-        }
-
-        .input-group {
             position: relative;
-            margin-bottom: 25px;
-            animation: fadeInRight 0.8s ease-out;
         }
 
-        .input-group:nth-child(2) {
-            animation-delay: 0.2s;
+        .logo-icon {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc3a0 100%);
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+            animation: iconPulse 2.5s ease-in-out infinite;
+            position: relative;
         }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
             }
-            to {
+            50% {
+                transform: scale(1.08) rotate(3deg);
+                box-shadow: 0 20px 50px rgba(255, 107, 157, 0.6);
+            }
+        }
+
+        .logo-icon i {
+            font-size: 55px;
+            color: white;
+            animation: iconRotate 3s ease-in-out infinite;
+        }
+
+        @keyframes iconRotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-10deg); }
+        }
+
+        /* Círculos decorativos */
+        .logo-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 130px;
+            height: 130px;
+            border: 3px solid rgba(255, 107, 157, 0.3);
+            border-radius: 50%;
+            animation: ringExpand 2.5s ease-in-out infinite;
+        }
+
+        .logo-ring:nth-child(2) {
+            animation-delay: 0.6s;
+            border-color: rgba(255, 195, 160, 0.4);
+        }
+
+        @keyframes ringExpand {
+            0% {
+                width: 130px;
+                height: 130px;
                 opacity: 1;
-                transform: translateX(0);
+            }
+            100% {
+                width: 180px;
+                height: 180px;
+                opacity: 0;
             }
         }
 
-        .input-group label {
-            display: block;
-            color: #2c3e50;
-            font-weight: 600;
-            font-size: 14px;
+        .brand-title {
+            font-size: 30px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc3a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 8px;
+            animation: titleFloat 3s ease-in-out infinite;
+            letter-spacing: -0.5px;
         }
 
-        .input-wrapper {
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .brand-subtitle {
+            color: #ff6b9d;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Formulario */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            color: #ff6b9d;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .input-container {
             position: relative;
         }
 
         .input-icon {
             position: absolute;
-            left: 18px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #e85d75;
+            color: #ff8fab;
             font-size: 18px;
+            transition: all 0.3s;
             z-index: 2;
         }
 
-        .input-group input {
+        .form-input {
             width: 100%;
-            padding: 16px 20px 16px 55px;
-            border: 2px solid #e8e8e8;
-            border-radius: 15px;
+            padding: 17px 20px 17px 55px;
+            border: 2px solid #ffe0e9;
+            border-radius: 18px;
             font-size: 15px;
-            color: #2c3e50;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            color: #333;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: #fff8fa;
             outline: none;
         }
 
-        .input-group input::placeholder {
-            color: #bdc3c7;
+        .form-input:focus {
+            border-color: #ff8fab;
+            background: white;
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.25);
+            transform: translateY(-3px);
         }
 
-        .input-group input:focus {
-            border-color: #e85d75;
-            background: white;
-            box-shadow: 0 5px 20px rgba(232, 93, 117, 0.15);
-            transform: translateY(-2px);
+        .form-input:focus ~ .input-icon {
+            color: #ff6b9d;
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .input-focus-effect {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #ff6b9d, #ffc3a0);
+            transition: width 0.4s ease;
+            border-radius: 0 0 18px 18px;
+        }
+
+        .form-input:focus + .input-focus-effect {
+            width: 100%;
         }
 
         .password-toggle {
             position: absolute;
-            right: 18px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #95a5a6;
+            color: #ffaec5;
             cursor: pointer;
             font-size: 18px;
             z-index: 2;
-            transition: color 0.3s ease;
+            transition: all 0.3s;
         }
 
         .password-toggle:hover {
-            color: #e85d75;
+            color: #ff6b9d;
+            transform: translateY(-50%) scale(1.2);
         }
 
+        /* Opciones del formulario */
         .form-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
             font-size: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .remember-me {
+        .remember-checkbox {
             display: flex;
             align-items: center;
-            color: #7f8c8d;
             cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
         }
 
-        .remember-me input {
+        .remember-checkbox:hover {
+            color: #ff6b9d;
+        }
+
+        .remember-checkbox input {
             margin-right: 8px;
             width: 18px;
             height: 18px;
             cursor: pointer;
-            accent-color: #e85d75;
+            accent-color: #ff8fab;
         }
 
-        .forgot-password {
-            color: #e85d75;
+        .forgot-link {
+            color: #ff6b9d;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        .forgot-password:hover {
-            color: #d63864;
-            text-decoration: underline;
+        .forgot-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff8fab;
+            transition: width 0.3s;
         }
 
+        .forgot-link:hover::after {
+            width: 100%;
+        }
+
+        /* Botón de inicio de sesión */
         .login-button {
             width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #e85d75 0%, #d63864 100%);
+            padding: 19px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc3a0 100%);
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 18px;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(232, 93, 117, 0.3);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 35px rgba(255, 107, 157, 0.4);
         }
 
         .login-button::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
         .login-button:hover::before {
-            left: 100%;
+            width: 350px;
+            height: 350px;
         }
 
         .login-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(232, 93, 117, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(255, 107, 157, 0.5);
         }
 
         .login-button:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
+        .button-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Estado de carga */
+        .btn-loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn-loading .button-text {
+            opacity: 0;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            top: 50%;
+            left: 50%;
+            margin-left: -13px;
+            margin-top: -13px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spinner 0.8s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Divisor */
         .divider {
             text-align: center;
             margin: 30px 0;
             position: relative;
         }
 
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 45%;
-            height: 1px;
-            background: #e8e8e8;
-        }
-
+        .divider::before,
         .divider::after {
             content: '';
             position: absolute;
             top: 50%;
-            right: 0;
-            width: 45%;
-            height: 1px;
-            background: #e8e8e8;
+            width: 42%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ffe0e9, transparent);
         }
 
-        .divider span {
-            color: #95a5a6;
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .divider-text {
+            color: #ff8fab;
             background: white;
             padding: 0 15px;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
 
-        .social-login {
+        /* Botones sociales */
+        .social-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 30px;
         }
 
         .social-btn {
             flex: 1;
-            padding: 14px;
-            border: 2px solid #e8e8e8;
-            border-radius: 12px;
+            padding: 15px;
+            border: 2px solid #ffe0e9;
+            border-radius: 15px;
             background: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
-            color: #2c3e50;
+            color: #333;
         }
 
         .social-btn:hover {
-            border-color: #e85d75;
-            background: #fff5f7;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn.google:hover {
+            border-color: #db4437;
+            background: #fff5f5;
+        }
+
+        .social-btn.facebook:hover {
+            border-color: #4267B2;
+            background: #f5f7ff;
         }
 
         .social-btn i {
-            font-size: 20px;
+            font-size: 22px;
         }
 
-        .google { color: #db4437; }
-        .facebook { color: #4267B2; }
+        .google-icon { color: #db4437; }
+        .facebook-icon { color: #4267B2; }
+
+        /* Link de registro */
+        .register-text {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
         .register-link {
-            text-align: center;
-            margin-top: 25px;
-            color: #7f8c8d;
-            font-size: 14px;
-        }
-
-        .register-link a {
-            color: #e85d75;
-            font-weight: 700;
+            color: #ff6b9d;
+            font-weight: 800;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .register-link a:hover {
-            color: #d63864;
+        .register-link:hover {
+            color: #ff8fab;
             text-decoration: underline;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .login-container {
+        /* Responsive móvil */
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 45px 35px;
+                border-radius: 30px;
+            }
+
+            .logo-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .logo-icon i {
+                font-size: 45px;
+            }
+
+            .brand-title {
+                font-size: 26px;
+            }
+
+            .brand-subtitle {
+                font-size: 15px;
+            }
+
+            .social-buttons {
                 flex-direction: column;
-                max-width: 500px;
             }
 
-            .login-visual {
-                padding: 40px 30px;
-            }
-
-            .brand-section h1 {
-                font-size: 32px;
-            }
-
-            .features-list {
-                display: none;
-            }
-
-            .login-form-section {
-                padding: 40px 30px;
+            .bakery-item {
+                font-size: 30px;
             }
         }
 
         @media (max-width: 480px) {
-            .login-form-section {
-                padding: 30px 25px;
+            .login-container {
+                padding: 15px;
             }
 
-            .form-header h2 {
-                font-size: 26px;
+            .login-card {
+                padding: 40px 30px;
             }
 
-            .social-login {
-                flex-direction: column;
+            .brand-title {
+                font-size: 24px;
+            }
+
+            .form-input {
+                padding: 15px 18px 15px 52px;
+            }
+
+            .login-button {
+                padding: 17px;
+                font-size: 15px;
+            }
+
+            .bakery-item {
+                font-size: 25px;
             }
         }
 
-        /* Loading animation */
-        .btn-loading {
-            pointer-events: none;
-            opacity: 0.7;
+        /* Animaciones de entrada */
+        .form-group {
+            animation: fadeInUp 0.6s ease-out backwards;
         }
 
-        .btn-loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spinner 0.8s linear infinite;
-        }
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-options { animation: fadeInUp 0.6s ease-out 0.3s backwards; }
+        .login-button { animation: fadeInUp 0.6s ease-out 0.4s backwards; }
+        .divider { animation: fadeInUp 0.6s ease-out 0.5s backwards; }
+        .social-buttons { animation: fadeInUp 0.6s ease-out 0.6s backwards; }
+        .register-text { animation: fadeInUp 0.6s ease-out 0.7s backwards; }
 
-        @keyframes spinner {
-            to { transform: rotate(360deg); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
     <script>
@@ -581,128 +682,140 @@
     </script>
 </head>
 <body>
-    <!-- Fondo animado -->
-    <div class="background-wrapper">
-        <div class="background-pattern"></div>
-        <div class="radial-light"></div>
-        <div class="floating-elements">
-            <i class="fas fa-tshirt fashion-icon"></i>
-            <i class="fas fa-shopping-bag fashion-icon"></i>
-            <i class="fas fa-crown fashion-icon"></i>
-            <i class="fas fa-gem fashion-icon"></i>
-            <i class="fas fa-star fashion-icon"></i>
-        </div>
+    <!-- Elementos flotantes de pastelería -->
+    <div class="floating-bakery">
+        <div class="bakery-item">🧁</div>
+        <div class="bakery-item">🍰</div>
+        <div class="bakery-item">🎂</div>
+        <div class="bakery-item">🍪</div>
+        <div class="bakery-item">🍩</div>
+        <div class="bakery-item">🥐</div>
     </div>
 
-    <!-- Contenedor de login -->
-    <div class="login-wrapper">
-        <div class="login-container">
-            <!-- Panel visual izquierdo -->
-            <div class="login-visual">
-                <div class="brand-section">
-                    <div class="brand-icon">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <h1>FASHION LUNATIC</h1>
-                    <p>Tu tienda con estilo y eficiencia.</p>
-                    
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Control de ventas en tiempo real</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-box"></i>
-                            <span>Inventario actualizado</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-users"></i>
-                            <span>Gestión de clientes</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Seguridad garantizada</span>
-                        </div>
+    <!-- Partículas brillantes -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Ondas decorativas -->
+    <div class="waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Container principal -->
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo y marca -->
+            <div class="logo-container">
+                <div style="position: relative; display: inline-block;">
+                    <div class="logo-ring"></div>
+                    <div class="logo-ring"></div>
+                    <div class="logo-icon">
+                        <i class="fas fa-birthday-cake"></i>
                     </div>
                 </div>
+                <h1 class="brand-title">Antojitos Dulce Deleite</h1>
+                <p class="brand-subtitle">Sabores Únicos</p>
             </div>
 
-            <!-- Panel del formulario derecho -->
-            <div class="login-form-section">
-                <div class="form-header">
-                    <h2>Bienvenido a Lunatic</h2>
-                    <p>Ingresa tus credenciales para acceder al sistema</p>
-                </div>
-
-                <form id="frm_login">
-                    <div class="input-group">
-                        <label for="username">Usuario</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-user input-icon"></i>
-                            <input 
-                                type="text" 
-                                id="username" 
-                                name="username" 
-                                placeholder="Ingresa tu usuario"
-                                required
-                                autocomplete="username"
-                            >
-                        </div>
+            <!-- Formulario de login -->
+            <form id="frm_login">
+                <div class="form-group">
+                    <label class="form-label" for="username">Usuario</label>
+                    <div class="input-container">
+                        <i class="fas fa-user input-icon"></i>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            class="form-input"
+                            placeholder="Ingresa tu usuario"
+                            required
+                            autocomplete="username"
+                        >
+                        <div class="input-focus-effect"></div>
                     </div>
+                </div>
 
-                    <div class="input-group">
-                        <label for="password">Contraseña</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-lock input-icon"></i>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                placeholder="Ingresa tu contraseña"
-                                required
-                                autocomplete="current-password"
-                            >
-                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
-                        </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input"
+                            placeholder="Ingresa tu contraseña"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        <div class="input-focus-effect"></div>
                     </div>
-
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" id="remember">
-                            <span>Recordarme</span>
-                        </label>
-                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-                    </div>
-
-                    <button type="button" class="login-button" onclick="iniciar_sesion();">
-                        Iniciar Sesión
-                    </button>
-                </form>
-
-                <div class="divider">
-                    <span>O continúa con</span>
                 </div>
 
-                <div class="social-login">
-                    <button class="social-btn" onclick="loginWithGoogle()">
-                        <i class="fab fa-google google"></i>
-                        <span>Google</span>
-                    </button>
-                    <button class="social-btn" onclick="loginWithFacebook()">
-                        <i class="fab fa-facebook facebook"></i>
-                        <span>Facebook</span>
-                    </button>
+                <div class="form-options">
+                    <label class="remember-checkbox">
+                        <input type="checkbox" id="remember">
+                        <span>Recordarme</span>
+                    </label>
+                    <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
                 </div>
 
-                <div class="register-link">
-                    ¿No tienes una cuenta? <a href="#">Regístrate aquí</a>
-                </div>
+                <button type="button" class="login-button" onclick="iniciar_sesion();">
+                    <span class="button-text">Iniciar Sesión</span>
+                </button>
+            </form>
+
+            <!-- Divisor -->
+            <div class="divider">
+                <span class="divider-text">O continúa con</span>
+            </div>
+
+            <!-- Botones sociales -->
+            <div class="social-buttons">
+                <button class="social-btn google" onclick="loginWithGoogle()">
+                    <i class="fab fa-google google-icon"></i>
+                    <span>Google</span>
+                </button>
+                <button class="social-btn facebook" onclick="loginWithFacebook()">
+                    <i class="fab fa-facebook facebook-icon"></i>
+                    <span>Facebook</span>
+                </button>
+            </div>
+
+            <!-- Link de registro -->
+            <div class="register-text">
+                ¿No tienes una cuenta? <a href="#" class="register-link">Regístrate aquí</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Toggle password visibility
+        // Generar partículas brillantes
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 25 : 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.animationDuration = (2 + Math.random() * 2) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Toggle de contraseña
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
 
@@ -714,7 +827,7 @@
             this.classList.toggle('fa-eye-slash');
         });
 
-        // Función de inicio de sesión (adaptable a tu sistema)
+        // Función de inicio de sesión
         function iniciar_sesion() {
             const button = document.querySelector('.login-button');
             const username = document.getElementById('username').value;
@@ -725,36 +838,47 @@
                 return;
             }
 
-            // Agregar estado de carga
             button.classList.add('btn-loading');
-            button.textContent = '';
 
-            // Aquí va tu lógica de login
-            // Simulación de llamada a función externa
+            // Simulación - reemplazar con tu lógica real
             setTimeout(() => {
                 button.classList.remove('btn-loading');
-                button.textContent = 'Iniciar Sesión';
-                // Tu función original de login
+                // Aquí va tu función original de login
                 // window.iniciar_sesion(); 
             }, 2000);
         }
 
-        // Login social (placeholder)
+        // Login con Google
         function loginWithGoogle() {
             console.log('Login con Google');
-            // Implementar lógica OAuth de Google
+            // Implementar OAuth de Google
         }
 
+        // Login con Facebook
         function loginWithFacebook() {
             console.log('Login con Facebook');
-            // Implementar lógica OAuth de Facebook
+            // Implementar OAuth de Facebook
         }
 
-        // Enter key to submit
+        // Enviar con Enter
         document.getElementById('password').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 iniciar_sesion();
             }
+        });
+
+        // Animación al hacer focus en los inputs
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
         });
     </script>
 
