@@ -232,18 +232,12 @@ if (document.getElementById('productos-container')) {
 
 async function view_products() {
     try {
-        let response = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'
         });
-        let text = await response.text();
-        try {
-            json = JSON.parse(text);
-        } catch (e) {
-            console.error('Respuesta no JSON al obtener productos:', text);
-            throw new Error('Error en servidor al obtener productos');
-        }
+        json = await respuesta.json();
         let contenidot = document.getElementById('content_products');
         if (json.status) {
             let cont = 1;

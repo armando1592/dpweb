@@ -18,10 +18,6 @@ class ProductoModel
                  INNER JOIN persona pr ON p.id_proveedor = pr.id
                  WHERE pr.rol = 'proveedor'";
         $sql = $this->conexion->query($consulta);
-        if (!$sql) {
-            // throw an exception so controller can return error details
-            throw new Exception('Error en consulta verProductos: ' . $this->conexion->error);
-        }
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_productos, $objeto);
         }
