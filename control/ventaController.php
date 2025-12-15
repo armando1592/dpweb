@@ -1,9 +1,13 @@
 <?php
 require_once("../model/VentaModel.php");
 require_once("../model/ProductoModel.php");
+require_once("../model/UsuarioModel.php");
+
+header('Content-Type: application/json; charset=utf-8');
 
 $objProducto = new ProductoModel();
 $objVenta = new VentaModel();
+$objUsuario = new UsuarioModel();
 
 $tipo = $_GET['tipo'];
 
@@ -73,9 +77,14 @@ if($tipo=="finalizar_venta"){
 }
 
 if ($tipo=="registrar_venta") {
-    $id_cliente = $_POST['id_cliente'];
-    $fecha_venta = $_POST['fecha_venta'];
-    $id_vendedor = $_SESSION['ventas_id'];
+    session_start();
+    $id_cliente = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : 0;
+    $fecha_venta = isset($_POST['fecha_venta']) ? $_POST['fecha_venta'] : date('Y-m-d H:i:s');
+    $id_vendedor = isset($_SESSION['ventas_id']) ? $_SESSION['ventas_id'] : 0;
+    // Validar existencia de vendedor y cliente en tabla persona
+    // Si no existen, usar NULL para evitar fallo FK
+    $id_vendedor = ($id_vendedor && $objUsuario->ver($id_vendedor)) ? $id_vendedor : null;
+    $id_cliente = ($id_cliente && $objUsuario->ver($id_cliente)) ? $id_cliente : null;
     $ultima_venta = $objVenta->buscar_ultima_venta();
     //logica para registar venta
     $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
@@ -84,18 +93,43 @@ if ($tipo=="registrar_venta") {
     } else {
         $correlativo = 1;
     }
-    //registrar la venta oficial
-    $venta = $objVenta->registrar_venta($correlativo, $fecha_venta, $id_cliente, $id_vendedor);
+    //registrar la venta oficial (puede tener cliente/vendedor NULL)
+    try {
+        $venta = $objVenta->registrar_venta($correlativo, $fecha_venta, $id_cliente, $id_vendedor);
+    } catch (Exception $e) {
+        $respuesta = array('status' => false, 'msg' => 'Error en BD: ' . $e->getMessage());
+        echo json_encode($respuesta);
+        exit;
+    }
     if ($venta) {
         $temporales = $objVenta->buscarTemporales();
-        foreach ($temporales as $temporal) {
-            //registrar detalle de venta
-            $objVenta->registrar_detalle_venta($venta, $temporal->id_producto, $temporal->precio, $temporal->cantidad);}
-            //eliminar los temporales
-            $objVenta->eliminarTemporal($temporal->id);
-            $respuesta = array('status' => true, 'msg' => 'venta registrada con exito');
+        if (count($temporales) > 0) {
+            $all_ok = true;
+            foreach ($temporales as $temporal) {
+                $ok = $objVenta->registrar_detalle_venta($venta, $temporal->id_producto, $temporal->precio, $temporal->cantidad);
+                if (!$ok) {
+                    $all_ok = false;
+                    break;
+                }
+            }
+            if ($all_ok) {
+                //eliminar todos los temporales
+                $objVenta->eliminarTemporales();
+                $respuesta = array('status' => true, 'msg' => 'venta registrada con exito');
+            } else {
+                // rollback: eliminar venta y detalles creados
+                $objVenta->eliminarVenta($venta);
+                $respuesta = array('status' => false, 'msg' => 'error al registrar detalle de venta');
+            }
         } else {
+            //si no hay productos temporales
+            // eliminar venta creada sin detalles
+            $objVenta->eliminarVenta($venta);
             $respuesta = array('status' => false, 'msg' => 'no hay productos para registrar la venta');
         }
+    } else {
+        $respuesta = array('status' => false, 'msg' => 'error al registrar venta');
     }
+    echo json_encode($respuesta);
+}
 

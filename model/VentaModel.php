@@ -68,7 +68,9 @@ class VentaModel
     }
 
     public function registrar_venta($correlativo, $fecha_hora, $id_cliente, $id_vendedor){
-        $consulta = "INSERT INTO venta (codigo, fecha_hora, id_cliente, id_vendedor) VALUES ('$correlativo', '$fecha_hora', '$id_cliente', '$id_vendedor')";
+        $id_cliente_sql = is_null($id_cliente) ? "NULL" : "'$id_cliente'";
+        $id_vendedor_sql = is_null($id_vendedor) ? "NULL" : "'$id_vendedor'";
+        $consulta = "INSERT INTO venta (codigo, fecha_hora, id_cliente, id_vendedor) VALUES ('$correlativo', '$fecha_hora', $id_cliente_sql, $id_vendedor_sql)";
         $sql = $this->conexion->query($consulta);
         if ($sql) {
             return $this->conexion->insert_id;
@@ -80,6 +82,14 @@ class VentaModel
         $consulta = "INSERT INTO detalle_venta (id_venta, id_producto, precio, cantidad) VALUES ('$id_venta', '$id_producto', '$precio', '$cantidad')";
         $sql = $this->conexion->query($consulta);
         return $sql;
+    }
+
+    public function eliminarVenta($id_venta) {
+        $consulta = "DELETE FROM detalle_venta WHERE id_venta='$id_venta'";
+        $this->conexion->query($consulta);
+        $consulta2 = "DELETE FROM venta WHERE id='$id_venta'";
+        $this->conexion->query($consulta2);
+        return true;
     }
 
 

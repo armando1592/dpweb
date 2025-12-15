@@ -244,33 +244,45 @@ async function abrirModalVenta() {
         }
     });
 
-    //registar venta al abrir modal
-    async function registarVenta() {
-        let id_cliente = document.getElementById('id_cliente_venta').value;
-        let fecha_venta = document.getElementById('fecha_venta').value;
+    // Registrar venta al confirmar desde el modal
+    async function realizarVenta() {
+        const idClienteElem = document.getElementById('cliente_id');
+        const id_cliente = idClienteElem ? idClienteElem.value : 0;
+        const fecha_venta = new Date().toISOString().slice(0, 19).replace('T', ' ');
         try {
-        const datos = new FormData();
-        datos.append('id_cliente', id_cliente);
-        datos.append('fecha_venta', fecha_venta);
-        
-        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=registrar_venta', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            body: datos
-        });
-        let json = await respuesta.json();
-        if (json.status) {
-            alert('Venta registrada con éxito');
-            window.location.reload();
-        } else {
-            alert(json.msg);
-        }
+            const datos = new FormData();
+            datos.append('id_cliente', id_cliente || 0);
+            datos.append('fecha_venta', fecha_venta);
+            let response = await fetch(base_url + 'control/VentaController.php?tipo=registrar_venta', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                body: datos
+            });
+            let text = await response.text();
+            try {
+                let json = JSON.parse(text);
+                if (json.status) {
+                    alert('Venta registrada con éxito');
+                    // Cerrar modal
+                    const modalEl = document.getElementById('staticBackdrop');
+                    if (modalEl) {
+                        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                        if (modalInstance) modalInstance.hide();
+                    }
+                    listar_temporales();
+                    act_subt_general();
+                } else {
+                    alert(json.msg);
+                }
+            } catch (e) {
+                console.error('Respuesta no JSON al registrar venta:', text);
+                alert('Error en servidor al registrar venta. Revisa la consola para más detalles.');
+            }
         } catch (error) {
             console.log('error al registrar venta: ' + error);
         }
     }
-
 
 
     //     // Cuando se abra el modal, enfocar el DNI y si ya tiene valor, buscar automáticamente
