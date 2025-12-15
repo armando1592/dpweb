@@ -341,8 +341,8 @@
                                     <th>Producto</th>
                                     <th>Cant.</th>
                                     <th>Precio</th>
-                                    <th>Total</th>
                                     <th>Subtotal</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody id="lista_compra">
@@ -364,14 +364,51 @@
                             <span>Total:</span>
                             <strong id="total">S/ 0.00</strong>
                         </div>
-                        <button class="btn-checkout" onclick="realizarVenta();">
-                            💳 Realizar Venta
+                        <button type="button" class="btn-checkout" data-bs-toggle="modal" data-bs-target="#staticBackdrop">💳 Realizar Venta
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" modal-sm id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Realizar venta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form_venta">
+            <div class="mb-3">
+                <label for="cliente_dni" class="col-form-label">DNI del Cliente:</label>
+                <input type="text" class="form-control" id="cliente_dni" name="cliente_dni" onkeypress="return event.charCode >=48 && event.charCode <= 57" required>
+                <input type="hidden" id="cliente_id" name="cliente_id">
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary mb-3" onclick="buscar_cliente_venta();">Buscar Cliente</button>
+            </div>
+            <div class=" col-md-12">
+                <label for="cliente_nombre" class="col-form-label">Nombre del Cliente:</label>
+                <input type="text" class="form-control" id="cliente_nombre" name="cliente_nombre" required>
+            </div>
+            
+            <div class="col-md-3">
+                <label for ="fecha_venta" class="col-form-label">Fecha de Venta:</label>
+                <input type="date" class="form-control" id="fecha_venta" name="fecha_venta" value="<?php echo date('Y-m-d'); ?>" required>
+            </div>
+      </div>
+      <div class="modal-body" id="venta_resumen">
+        <!-- Resumen de la venta se carga aquí -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="realizarVenta();">Registrar Venta</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <script src="<?= BASE_URL ?>view/function/products.js"></script>
@@ -387,5 +424,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         cargarCarrito();
     });
+    listar_temporales();
+    act_subt_general();
 </script>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventas-Antojitos</title>
+    <title>Ventas-Lunatic</title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>view/bootstrap/css/bootstrap.min.css">
     <style>
         :root {
@@ -288,7 +288,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <span class="nav-icon">🛒</span>
-                <span class="d-none d-md-inline">Antojitos dulce deleite</span>
+                <span class="d-none d-md-inline">Lunatic</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

@@ -16,18 +16,10 @@ productos_venta[id] = producto;
 productos_venta[id2] = producto2;
 console.log(productos_venta);
 
-async function agregar_producto_temporal(id = null, precio = null, cantidad = null) {
-    // Si no se pasan parámetros, usar los valores de los inputs ocultos
-    if (id === null) {
-        id = document.getElementById('id_producto_venta').value;
-    }
-    if (precio === null) {
-        precio = document.getElementById('producto_precio_venta').value;
-    }
-    if (cantidad === null) {
-        cantidad = document.getElementById('producto_cantidad_venta').value;
-    }
-
+async function agregar_producto_temporal(idArg, precioArg, cantidadArg) {
+    let id = (typeof idArg !== 'undefined') ? idArg : document.getElementById('id_producto_venta').value;
+    let precio = (typeof precioArg !== 'undefined') ? precioArg : document.getElementById('producto_precio_venta').value;
+    let cantidad = (typeof cantidadArg !== 'undefined') ? cantidadArg : document.getElementById('producto_cantidad_venta').value;
     const datos = new FormData();
     datos.append('id_producto', id);
     datos.append('precio', precio);
@@ -39,67 +31,55 @@ async function agregar_producto_temporal(id = null, precio = null, cantidad = nu
             cache: 'no-cache',
             body: datos
         });
-        json = await respuesta.json();
+        let json = await respuesta.json();
         if (json.status) {
             if (json.msg == "registrado") {
-                alert("el producto fue registrado");
+                alert("El producto fue agregado al carrito");
             } else {
-                alert("el producto fue actualizado");
+                alert("Cantidad actualizada en el carrito");
             }
-            // Recargar el carrito después de agregar
-            cargarCarrito();
+            listar_temporales();
+            act_subt_general();
         }
 
     } catch (error) {
         console.log("error en agregar producto temporal " + error);
     }
 }
-
-async function cargarCarrito() {
+async function listar_temporales() {
     try {
-        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=listarTemporales', {
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=listar_venta_temporal', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'
         });
-        let json = await respuesta.json();
-        let tbody = document.getElementById('lista_compra');
-        tbody.innerHTML = '';
-        let subtotal = 0;
-        if (json.status && json.data.length > 0) {
+        json = await respuesta.json();
+        if (json.status) {
+            let lista_temporal = '';
             json.data.forEach(t_venta => {
-                let total = t_venta.precio * t_venta.cantidad;
-                subtotal += total;
-                let fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${t_venta.nombre_producto}</td>
-                    <td><input type="number" class="quantity-input" value="${t_venta.cantidad}" onchange="actualizarCantidad(${t_venta.id}, this.value)" onkeyup="actualizarCantidadTemporal(${t_venta.id})"></td>
-                    <td>S/ ${t_venta.precio}</td>
-                    <td>S/ ${total.toFixed(2)}</td>
-                    <td><button class="btn-remove" onclick="eliminarDelCarrito(${t_venta.id})">×</button></td>
-                `;
-                tbody.appendChild(fila);
+                const subItem = (t_venta.cantidad * t_venta.precio).toFixed(2);
+                lista_temporal += `<tr>
+                                    <td>${t_venta.nombre}</td>
+                                    <td><input type="number" min="1" id="cant_${t_venta.id}" value="${t_venta.cantidad}" style="width: 60px;" onkeyup="actualizar_subtotal(${t_venta.id}, ${t_venta.precio});" onchange="actualizar_subtotal(${t_venta.id}, ${t_venta.precio});"></td>
+                                    <td>S/. ${Number(t_venta.precio).toFixed(2)}</td>
+                                    <td id="subtotal_${t_venta.id}">S/. ${subItem}</td>
+                                    <td><button class="btn btn-danger btn-sm" onclick="eliminar_temporal(${t_venta.id});">Eliminar</button></td>
+                                </tr>`
             });
-        } else {
-            tbody.innerHTML = '<tr><td colspan="5" class="empty-cart">El carrito está vacío</td></tr>';
+            document.getElementById('lista_compra').innerHTML = lista_temporal;
+            act_subt_general();
         }
-        // Actualizar totales
-        document.getElementById('subtotal').textContent = 'S/ ' + subtotal.toFixed(2);
-        let igv = subtotal * 0.18;
-        document.getElementById('igv').textContent = 'S/ ' + igv.toFixed(2);
-        let total = subtotal + igv;
-        document.getElementById('total').textContent = 'S/ ' + total.toFixed(2);
     } catch (error) {
-        console.log('Error al cargar carrito: ' + error);
+        console.log("error al cargar productos temporales " + error);
     }
 }
 
-async function actualizarCantidad(id, cantidad) {
-    const datos = new FormData();
-    datos.append('id', id);
-    datos.append('cantidad', cantidad);
+async function eliminar_temporal(id) {
+    if (!confirm('¿Confirmar eliminar este item del carrito?')) return;
     try {
-        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=actualizarCantidadTemporal', {
+        const datos = new FormData();
+        datos.append('id', id);
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=eliminar_temporal', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -107,21 +87,129 @@ async function actualizarCantidad(id, cantidad) {
         });
         let json = await respuesta.json();
         if (json.status) {
-            cargarCarrito(); // Recargar carrito
+            listar_temporales();
+            act_subt_general();
         } else {
-            alert('Error al actualizar cantidad');
+            alert('Error al eliminar item');
         }
     } catch (error) {
-        console.log('Error al actualizar cantidad: ' + error);
+        console.log('error al eliminar temporal: ' + error);
+    }
+}
+async function actualizar_subtotal(id, precio) {
+    let cantidad = document.getElementById('cant_' + id).value;
+    try {
+        const datos = new FormData();
+        datos.append('id', id);
+        datos.append('cantidad', cantidad);
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=actualizar_cantidad', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        let json = await respuesta.json();
+        if (json.status) {
+            let subtotal = (Number(cantidad) * Number(precio));
+            document.getElementById('subtotal_' + id).innerHTML = 'S/. ' + subtotal.toFixed(2);
+            act_subt_general();
+        }
+    } catch (error) {
+        console.log("error al actualizar cantidad : " + error);
     }
 }
 
-async function eliminarDelCarrito(id) {
-    if (confirm('¿Estás seguro de eliminar este producto del carrito?')) {
-        const datos = new FormData();
-        datos.append('id', id);
+async function act_subt_general() {
+    try {
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=listar_venta_temporal', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+        json = await respuesta.json();
+        if (json.status) {
+                let subtotal_general = 0;
+                json.data.forEach(t_venta => {
+                    subtotal_general += (t_venta.precio * t_venta.cantidad);
+                });
+                let igv = subtotal_general * 0.18;
+                let total = subtotal_general + igv;
+                document.getElementById('subtotal').innerHTML = 'S/. ' + subtotal_general.toFixed(2);
+                document.getElementById('igv').innerHTML = 'S/. ' + igv.toFixed(2);
+                document.getElementById('total').innerHTML = 'S/. ' + total.toFixed(2);
+            }
+    } catch (error) {
+        console.log("error al cargar productos temporales " + error);
+    }
+}
+
+function cargarCarrito() {
+    // Compatibilidad con llamadas desde la vista
+    listar_temporales();
+    act_subt_general();
+}
+
+// Abre modal y carga resumen de la venta
+async function abrirModalVenta() {
+    try {
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=listar_venta_temporal', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+        let json = await respuesta.json();
+        let body = '';
+        if (json.status && json.data.length > 0) {
+            body += `<table class="table">
+                        <thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr></thead><tbody>`;
+            let subtotal_general = 0;
+            json.data.forEach(item => {
+                let sub = Number(item.precio) * Number(item.cantidad);
+                subtotal_general += sub;
+                body += `<tr>
+                            <td>${item.nombre}</td>
+                            <td>${item.cantidad}</td>
+                            <td>S/. ${Number(item.precio).toFixed(2)}</td>
+                            <td>S/. ${sub.toFixed(2)}</td>
+                         </tr>`;
+            });
+            let igv = subtotal_general * 0.18;
+            let total = subtotal_general + igv;
+            body += `</tbody></table>
+                     <div class="d-flex justify-content-end">
+                        <div style="min-width:220px;">
+                           <div class="d-flex justify-content-between"><strong>Subtotal:</strong><span>S/. ${subtotal_general.toFixed(2)}</span></div>
+                           <div class="d-flex justify-content-between"><strong>IGV (18%):</strong><span>S/. ${igv.toFixed(2)}</span></div>
+                           <div class="d-flex justify-content-between"><strong>Total:</strong><span>S/. ${total.toFixed(2)}</span></div>
+                        </div>
+                     </div>
+                     <div class="mt-3 text-end">
+                       <button class="btn btn-success" onclick="realizarVenta();">Confirmar Venta</button>
+                     </div>`;
+        } else {
+            body = '<p>El carrito está vacío.</p>';
+        }
+        const modalBody = document.getElementById('venta_resumen');
+        if (modalBody) modalBody.innerHTML = body;
+    } catch (error) {
+        console.log('error al cargar modal de venta: ' + error);
+    }
+}
+
+    // Buscar cliente por DNI desde modal de venta
+    async function buscar_cliente_venta() {
+        const dniElem = document.getElementById('cliente_dni');
+        const nombreElem = document.getElementById('cliente_nombre');
+        if (!dniElem) return;
+        const dni = dniElem.value.trim();
+        if (dni === '') {
+            alert('Ingrese un DNI');
+            return;
+        }
         try {
-            let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=eliminarTemporal', {
+            const datos = new FormData();
+            datos.append('dni', dni);
+            let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=buscar_por_dni', {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',
@@ -129,14 +217,109 @@ async function eliminarDelCarrito(id) {
             });
             let json = await respuesta.json();
             if (json.status) {
-                cargarCarrito(); // Recargar carrito
+                if (nombreElem) nombreElem.value = json.data.razon_social || '';
+                const idElem = document.getElementById('cliente_id');
+                if (idElem) idElem.value = json.data.id || '';
             } else {
-                alert('Error al eliminar producto');
+                if (nombreElem) nombreElem.value = '';
+                const idElem = document.getElementById('cliente_id');
+                if (idElem) idElem.value = '';
+                alert('Cliente no encontrado');
             }
         } catch (error) {
-            console.log('Error al eliminar producto: ' + error);
+            console.log('Error al buscar cliente: ' + error);
         }
     }
-}
- 
-//
+
+    // Ejecutar búsqueda con Enter en el campo DNI dentro del modal
+    document.addEventListener('DOMContentLoaded', function() {
+        const dniElem = document.getElementById('cliente_dni');
+        if (dniElem) {
+            dniElem.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    buscar_cliente_venta();
+                }
+            });
+        }
+    });
+
+    //registar venta al abrir modal
+    async function registarVenta() {
+        let id_cliente = document.getElementById('id_cliente_venta').value;
+        let fecha_venta = document.getElementById('fecha_venta').value;
+        try {
+        const datos = new FormData();
+        datos.append('id_cliente', id_cliente);
+        datos.append('fecha_venta', fecha_venta);
+        
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=registrar_venta', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        let json = await respuesta.json();
+        if (json.status) {
+            alert('Venta registrada con éxito');
+            window.location.reload();
+        } else {
+            alert(json.msg);
+        }
+        } catch (error) {
+            console.log('error al registrar venta: ' + error);
+        }
+    }
+
+
+
+    //     // Cuando se abra el modal, enfocar el DNI y si ya tiene valor, buscar automáticamente
+    //     const modalEl = document.getElementById('staticBackdrop');
+    //     if (modalEl) {
+    //         modalEl.addEventListener('show.bs.modal', function() {
+    //             const d = document.getElementById('cliente_dni');
+    //             if (d) {
+    //                 d.focus();
+    //                 if (d.value && d.value.trim().length >= 6) buscar_cliente_venta();
+    //             }
+    //             // Cargar resumen de la venta al abrir el modal
+    //             abrirModalVenta();
+    //         });
+    //     }
+    // });
+
+// // Simula finalizar venta y limpia el carrito temporal
+// async function realizarVenta() {
+//     if (!confirm('¿Confirmar y finalizar la venta?')) return;
+//     try {
+//         let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=finalizar_venta', {
+//             method: 'POST',
+//             mode: 'cors',
+//             cache: 'no-cache'
+//         });
+//         let json = await respuesta.json();
+//         if (json.status) {
+//             alert('Venta registrada (simulada). Carrito limpiado.');
+//             // Cerrar modal
+//             const modalEl = document.getElementById('staticBackdrop');
+//             if (modalEl) {
+//                 const modalInstance = bootstrap.Modal.getInstance(modalEl);
+//                 if (modalInstance) modalInstance.hide();
+//             }
+//             listar_temporales();
+//             act_subt_general();
+//         } else {
+//             alert('Error al finalizar venta');
+//         }
+//     } catch (error) {
+//         console.log('error en realizarVenta: ' + error);
+//     }
+// }
+
+// // Vincular evento al mostrar modal si existe Bootstrap
+// document.addEventListener('DOMContentLoaded', function() {
+//     const modalEl = document.getElementById('staticBackdrop');
+//     if (modalEl) {
+//         modalEl.addEventListener('show.bs.modal', abrirModalVenta);
+//     }
+// });

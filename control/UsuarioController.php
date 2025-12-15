@@ -158,5 +158,19 @@ if ($tipo == "ver_proveedores") {
     exit;
 }
 
+// Buscar cliente por DNI (para ventas)
+if ($tipo == "buscar_por_dni") {
+    $dni = $_POST['dni'];
+    $respuesta = array('status' => false, 'msg' => 'No encontrado');
+    if (!empty($dni)) {
+        $persona = $objPersona->buscarPersonaPorNroIdentidad($dni);
+        if ($persona) {
+            $respuesta = array('status' => true, 'data' => $persona);
+        }
+    }
+    echo json_encode($respuesta);
+    exit;
+}
+
 
 

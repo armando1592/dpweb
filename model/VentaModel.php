@@ -23,10 +23,16 @@ class VentaModel
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
+    public function actualizarCantidadTemporalByid($id, $cantidad)
+    {
+        $consulta = "UPDATE temporal_venta SET cantidad='$cantidad' WHERE id='$id'";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
     public function buscarTemporales()
     {
         $arr_temporal = array();
-        $consulta = "SELECT tv.*, p.nombre AS nombre_producto FROM temporal_venta tv INNER JOIN producto p ON tv.id_producto = p.id";
+        $consulta = "SELECT tv.*, p.nombre FROM temporal_venta tv INNER JOIN producto p ON tv.id_producto = p.id";
         $sql = $this->conexion->query($consulta);
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_temporal, $objeto);
@@ -51,6 +57,31 @@ class VentaModel
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
+    public function listarVentas_Temporal(){
 
-    //---------------------- VENTAS REGISTRADAS (OFICIALES)----------------
+    }
+
+    public function buscar_ultima_venta (){
+        $consulta = "SELECT codigo FROM venta ORDER BY id DESC LIMIT 1";
+        $sql = $this->conexion->query($consulta);
+        return $sql->fetch_object();
+    }
+
+    public function registrar_venta($correlativo, $fecha_hora, $id_cliente, $id_vendedor){
+        $consulta = "INSERT INTO venta (codigo, fecha_hora, id_cliente, id_vendedor) VALUES ('$correlativo', '$fecha_hora', '$id_cliente', '$id_vendedor')";
+        $sql = $this->conexion->query($consulta);
+        if ($sql) {
+            return $this->conexion->insert_id;
+        }
+        return 0;
+    }
+
+    public function registrar_detalle_venta($id_venta, $id_producto, $precio, $cantidad){
+        $consulta = "INSERT INTO detalle_venta (id_venta, id_producto, precio, cantidad) VALUES ('$id_venta', '$id_producto', '$precio', '$cantidad')";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+
+
 }
+
