@@ -283,8 +283,8 @@ async function abrirModalVenta() {
             console.log('error al registrar venta: ' + error);
         }
     }
-
-
+//ir ala venta y buscar por id delc liente y vendedor
+// comprobante de pago de buscar todo losdatos y 
     //     // Cuando se abra el modal, enfocar el DNI y si ya tiene valor, buscar automáticamente
     //     const modalEl = document.getElementById('staticBackdrop');
     //     if (modalEl) {

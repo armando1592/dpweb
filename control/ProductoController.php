@@ -9,6 +9,8 @@ $objUsuario = new UsuarioModel();
 
 $tipo = $_GET['tipo'];
 
+header('Content-Type: application/json; charset=utf-8');
+
 // Registrar nuevo producto
 if ($tipo == "registrar") {
     $codigo = $_POST['codigo'];
@@ -78,10 +80,12 @@ if ($tipo == "registrar") {
 
 // ver productos
 if ($tipo == "ver_productos") {
-    $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
-    $productos = $objProducto->verProductos();
-    if (count($productos)) {
+    try {
+        $productos = $objProducto->verProductos();
         $respuesta = array('status' => true, 'msg' => '', 'data' => $productos);
+    } catch (Exception $e) {
+        http_response_code(500);
+        $respuesta = array('status' => false, 'msg' => 'Error al obtener productos: ' . $e->getMessage());
     }
     echo json_encode($respuesta);
 }
