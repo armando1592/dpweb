@@ -1,12 +1,13 @@
 <style>
     .sales-container {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        /* background: linear-gradient(135deg, #4042acff 0%, #3c4a8aff 100%); */
         min-height: 100vh;
         padding: 20px 0;
+        
     }
     
     .sales-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #3746a0ff 0%, #803db8ff 100%);
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
@@ -39,7 +40,7 @@
     }
     
     .search-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #00020aff 0%, #968aa7ff 100%);
         padding: 20px;
         border-radius: 12px;
         margin-bottom: 20px;
@@ -176,7 +177,7 @@
     }
     
     .cart-header {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: linear-gradient(135deg, #312f31ff 0%, #867c7eff 100%);
         color: white;
         padding: 15px 20px;
         border-radius: 12px 12px 0 0;
@@ -198,8 +199,8 @@
     }
     
     .cart-table thead th {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: linear-gradient(135deg, #141414ff 0%, #8f78a7ff 100%);
+        color: seagreen;
         border: none;
         padding: 12px 8px;
         font-weight: 600;
@@ -258,7 +259,7 @@
     }
     
     .btn-checkout {
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        background: linear-gradient(135deg, #1c2423ff 0%, #38ef7d 100%);
         border: none;
         color: white;
         font-weight: 800;
