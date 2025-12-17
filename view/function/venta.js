@@ -152,7 +152,7 @@ function cargarCarrito() {
 // Abre modal y carga resumen de la venta
 async function abrirModalVenta() {
     try {
-        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=listar_venta_temporal', {
+        let respuesta = await fetch(base_url + 'control/ventaController.php?tipo=listar_venta_temporal', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'
