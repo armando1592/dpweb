@@ -43,7 +43,7 @@ body {
 }
 
 .arriba {
-    background: linear-gradient(90deg, #ff8c00, #ff4500);
+    background: linear-gradient(90deg, #4acec3ff, #3e6db4ff);
     border-radius: 12px;
 }
 

@@ -5,7 +5,7 @@
 <div class="container mt-4">
     <!-- Encabezado -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center p-4 mb-4 rounded-4 shadow-sm"
-        style="background: linear-gradient(90deg, #d1c67dff, #6f42c1);">
+        style="background: linear-gradient(90deg, #1994b3ff, #041627ff);">
         <h1 class="text-white fw-bold mb-3 mb-md-0" style="font-family: 'Poppins', sans-serif; font-size: 1.8rem;">
             <i class="bi bi-folder2-open me-2"></i>Categorías Registradas
         </h1>

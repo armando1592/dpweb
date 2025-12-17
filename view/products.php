@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center p-3 mb-3 rounded shadow" style="background: linear-gradient(90deg, #572a63ff, #060506ff);">
+    <div class="d-flex justify-content-between align-items-center p-3 mb-3 rounded shadow" style="background: linear-gradient(90deg, #3dafb8ff, #06060aff);">
         <h1 class="text-white fw-bold m-0" style="font-family: 'Verdana'; font-size: 1.8rem;">Lista de Productos</h1>
         <a href="<?= BASE_URL ?>new-product" class="btn btn-success">Nuevo +</a>
     </div>

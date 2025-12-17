@@ -7,7 +7,7 @@
     }
     
     .sales-header {
-        background: linear-gradient(135deg, #3746a0ff 0%, #803db8ff 100%);
+        background: linear-gradient(135deg, #37a0a0ff 0%, #220a36ff 100%);
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);

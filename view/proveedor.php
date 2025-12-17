@@ -18,7 +18,7 @@
     <div class="table-responsive bg-white p-3 rounded shadow">
         <table class="table table-bordered table-hover align-middle mb-0">
             <thead class="text-center text-white">
-                <tr style="background: linear-gradient(90deg, #007bff, #6610f2);">
+                <tr style="background: linear-gradient(90deg, #0f5299ff, #6610f2);">
                     <th>#</th>
                     <th>DNI</th>
                     <th>Nombres y Apellidos</th>
@@ -43,7 +43,7 @@ body {
 }
 
 .arriba {
-    background: linear-gradient(90deg, #007bff, #6610f2);
+    background: linear-gradient(90deg, #5692d3ff, #180636ff);
     border-radius: 12px;
 }
 
