@@ -79,10 +79,13 @@ if ($tipo == "registrar") {
 // ver productos
 if ($tipo == "ver_productos") {
     $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
-    $productos = $objProducto->verProductos();
-    if (count($productos)) {
-        $respuesta = array('status' => true, 'msg' => '', 'data' => $productos);
-    }
+   $productos = $objProducto->verProductos();
+
+if (is_array($productos) && count($productos) > 0) {
+    $respuesta = array('status' => true, 'msg' => '', 'data' => $productos);
+} else {
+    $respuesta = array('status' => false, 'msg' => 'No hay productos', 'data' => []);
+}
     echo json_encode($respuesta);
 }
 
