@@ -62,7 +62,7 @@ async function registrarProducto() {
 }
 // Cargar Categorias
 async function cargar_categorias() {
-    let respuesta = await fetch(base_url + 'control/CategoriaController.php?tipo=ver_categorias', {
+    let respuesta = await fetch(base_url + 'control/categoriaController.php?tipo=ver_categorias', {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache'

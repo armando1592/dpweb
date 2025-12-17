@@ -1,5 +1,5 @@
 <?php
-require_once("../model/CategoriaModel.php");
+require_once("../model/categoriaModel.php");
 
 $objCategoria = new CategoriaModel();
 

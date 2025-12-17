@@ -1,6 +1,6 @@
 <?php
 require_once("../model/ProductoModel.php");
-require_once("../model/CategoriaModel.php");
+require_once("../model/categoriaModel.php");
 require_once("../model/UsuarioModel.php");
 
 $objProducto = new ProductoModel();
@@ -79,13 +79,10 @@ if ($tipo == "registrar") {
 // ver productos
 if ($tipo == "ver_productos") {
     $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
-   $productos = $objProducto->verProductos();
-
-if (is_array($productos) && count($productos) > 0) {
-    $respuesta = array('status' => true, 'msg' => '', 'data' => $productos);
-} else {
-    $respuesta = array('status' => false, 'msg' => 'No hay productos', 'data' => []);
-}
+    $productos = $objProducto->verProductos();
+    if (count($productos)) {
+        $respuesta = array('status' => true, 'msg' => '', 'data' => $productos);
+    }
     echo json_encode($respuesta);
 }
 
