@@ -264,11 +264,22 @@ async function abrirModalVenta() {
                 let json = JSON.parse(text);
                 if (json.status) {
                     alert('Venta registrada con éxito');
-                    // Cerrar modal
+                    // Limpiar carrito inmediatamente
+                    document.getElementById('lista_compra').innerHTML = '';
+                    document.getElementById('subtotal').innerHTML = 'S/ 0.00';
+                    document.getElementById('igv').innerHTML = 'S/ 0.00';
+                    document.getElementById('total').innerHTML = 'S/ 0.00';
+                    // Cerrar modal y remover backdrop
                     const modalEl = document.getElementById('staticBackdrop');
                     if (modalEl) {
                         const modalInstance = bootstrap.Modal.getInstance(modalEl);
                         if (modalInstance) modalInstance.hide();
+                        // Forzar remoción del backdrop si persiste
+                        setTimeout(() => {
+                            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+                            modalEl.style.display = 'none';
+                            document.body.classList.remove('modal-open');
+                        }, 300);
                     }
                     listar_temporales();
                     act_subt_general();
