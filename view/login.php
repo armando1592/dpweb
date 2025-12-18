@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luantic - Iniciar Sesión</title>
+    <title>Lunatic Minimarket - Iniciar Sesión</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -13,115 +13,148 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #4c0340ff 0%, #5a7fceff 50%, #772253ff 100%);
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             position: relative;
         }
 
-        /* Elementos flotantes de pastelería */
-        .floating-bakery {
+        /* Grid animado de fondo */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Orbes flotantes */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            top: 40%;
+            right: -10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+            66% {
+                transform: translate(-50px, 100px) scale(0.9);
+            }
+        }
+
+        /* Productos flotantes */
+        .floating-products {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: 1;
             pointer-events: none;
         }
 
-        .bakery-item {
+        .product-item {
             position: absolute;
-            font-size: 40px;
-            opacity: 0.15;
-            animation: float-bakery 20s infinite ease-in-out;
+            font-size: 35px;
+            opacity: 0.08;
+            animation: productFloat 25s infinite ease-in-out;
         }
 
-        .bakery-item:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .bakery-item:nth-child(2) { right: 15%; top: 30%; animation-delay: 3s; }
-        .bakery-item:nth-child(3) { left: 20%; bottom: 25%; animation-delay: 6s; }
-        .bakery-item:nth-child(4) { right: 10%; bottom: 35%; animation-delay: 9s; }
-        .bakery-item:nth-child(5) { left: 50%; top: 15%; animation-delay: 12s; }
-        .bakery-item:nth-child(6) { right: 40%; bottom: 20%; animation-delay: 15s; }
+        .product-item:nth-child(1) { left: 5%; top: 15%; animation-delay: 0s; }
+        .product-item:nth-child(2) { right: 10%; top: 25%; animation-delay: 3s; }
+        .product-item:nth-child(3) { left: 15%; bottom: 20%; animation-delay: 6s; }
+        .product-item:nth-child(4) { right: 5%; bottom: 30%; animation-delay: 9s; }
+        .product-item:nth-child(5) { left: 45%; top: 10%; animation-delay: 12s; }
+        .product-item:nth-child(6) { right: 35%; bottom: 15%; animation-delay: 15s; }
+        .product-item:nth-child(7) { left: 30%; top: 50%; animation-delay: 18s; }
+        .product-item:nth-child(8) { right: 25%; top: 40%; animation-delay: 21s; }
 
-        @keyframes float-bakery {
+        @keyframes productFloat {
             0%, 100% {
                 transform: translateY(0) rotate(0deg);
             }
             25% {
-                transform: translateY(-30px) rotate(5deg);
+                transform: translateY(-40px) rotate(10deg);
             }
             50% {
                 transform: translateY(0) rotate(0deg);
             }
             75% {
-                transform: translateY(20px) rotate(-5deg);
+                transform: translateY(30px) rotate(-10deg);
             }
         }
 
-        /* Partículas brillantes */
+        /* Partículas */
         .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: 2;
             pointer-events: none;
         }
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-            animation: sparkle 3s infinite ease-in-out;
-        }
-
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Ondas decorativas */
-        .waves {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            z-index: 2;
-            opacity: 0.3;
-        }
-
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="white"/></svg>') repeat-x;
-            animation: wave-animation 15s linear infinite;
-        }
-
-        .wave:nth-child(2) {
-            animation-duration: 20s;
-            opacity: 0.5;
-        }
-
-        @keyframes wave-animation {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         /* Container principal */
@@ -130,29 +163,29 @@
             z-index: 10;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 40px 20px;
         }
 
-        .login-card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 35px;
-            box-shadow: 0 30px 70px rgba(255, 105, 135, 0.3);
+        .login-wrapper {
+            display: flex;
+            max-width: 1100px;
             width: 100%;
-            max-width: 480px;
-            padding: 50px 45px;
-            animation: slideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 30px;
             overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(60px) scale(0.95);
             }
             to {
                 opacity: 1;
@@ -160,241 +193,300 @@
             }
         }
 
-        /* Efecto de brillo en la tarjeta */
-        .login-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.2), transparent);
-            transform: rotate(45deg);
-            animation: shine 4s infinite;
+        /* Panel izquierdo - Branding */
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes shine {
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: patternMove 30s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            animation: logoPulse 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.05) rotate(2deg);
+            }
+        }
+
+        .brand-logo i {
+            font-size: 70px;
+            color: white;
+            animation: iconSpin 4s ease-in-out infinite;
+        }
+
+        @keyframes iconSpin {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-8deg); }
+        }
+
+        .brand-logo::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), transparent);
+            border-radius: 35px;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        /* Logo animado */
-        .logo-container {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .logo-icon {
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc3a0 100%);
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
-            animation: iconPulse 2.5s ease-in-out infinite;
-            position: relative;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% {
-                transform: scale(1) rotate(0deg);
-                box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
-            }
-            50% {
-                transform: scale(1.08) rotate(3deg);
-                box-shadow: 0 20px 50px rgba(255, 107, 157, 0.6);
-            }
-        }
-
-        .logo-icon i {
-            font-size: 55px;
-            color: white;
-            animation: iconRotate 3s ease-in-out infinite;
-        }
-
-        @keyframes iconRotate {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-10deg); }
-        }
-
-        /* Círculos decorativos */
-        .logo-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 130px;
-            height: 130px;
-            border: 3px solid rgba(255, 107, 157, 0.3);
-            border-radius: 50%;
-            animation: ringExpand 2.5s ease-in-out infinite;
-        }
-
-        .logo-ring:nth-child(2) {
-            animation-delay: 0.6s;
-            border-color: rgba(255, 195, 160, 0.4);
-        }
-
-        @keyframes ringExpand {
-            0% {
-                width: 130px;
-                height: 130px;
-                opacity: 1;
-            }
-            100% {
-                width: 180px;
-                height: 180px;
-                opacity: 0;
-            }
-        }
-
         .brand-title {
-            font-size: 30px;
+            font-size: 42px;
             font-weight: 900;
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc3a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            animation: titleFloat 3s ease-in-out infinite;
-            letter-spacing: -0.5px;
-        }
-
-        @keyframes titleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            color: white;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .brand-subtitle {
-            color: #ff6b9d;
-            font-size: 16px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
-            letter-spacing: 1px;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
         }
 
-        /* Formulario */
+        .brand-features {
+            list-style: none;
+            text-align: left;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            font-size: 15px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInLeft 0.6s ease-out forwards;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.3s; }
+        .feature-item:nth-child(2) { animation-delay: 0.5s; }
+        .feature-item:nth-child(3) { animation-delay: 0.7s; }
+        .feature-item:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Panel derecho - Formulario */
+        .form-panel {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+        }
+
+        .form-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .form-description {
+            color: #718096;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
         .form-group {
             margin-bottom: 25px;
-            position: relative;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .form-label {
             display: block;
-            color: #ff6b9d;
+            color: #2d3748;
             font-weight: 700;
             font-size: 14px;
             margin-bottom: 10px;
             transition: color 0.3s;
         }
 
-        .input-container {
+        .input-wrapper {
             position: relative;
         }
 
         .input-icon {
             position: absolute;
-            left: 20px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #ff8fab;
+            color: #a0aec0;
             font-size: 18px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             z-index: 2;
         }
 
         .form-input {
             width: 100%;
-            padding: 17px 20px 17px 55px;
-            border: 2px solid #ffe0e9;
-            border-radius: 18px;
+            padding: 16px 18px 16px 52px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
             font-size: 15px;
-            color: #333;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            background: #fff8fa;
+            color: #2d3748;
+            background: #f7fafc;
+            transition: all 0.3s ease;
             outline: none;
+            font-weight: 500;
         }
 
         .form-input:focus {
-            border-color: #ff8fab;
+            border-color: #667eea;
             background: white;
-            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.25);
-            transform: translateY(-3px);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
         }
 
-        .form-input:focus ~ .input-icon {
-            color: #ff6b9d;
-            transform: translateY(-50%) scale(1.15);
-        }
-
-        .input-focus-effect {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            width: 0;
-            background: linear-gradient(90deg, #ff6b9d, #ffc3a0);
-            transition: width 0.4s ease;
-            border-radius: 0 0 18px 18px;
-        }
-
-        .form-input:focus + .input-focus-effect {
-            width: 100%;
+        .form-input:focus + .input-icon {
+            color: #667eea;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .password-toggle {
             position: absolute;
-            right: 20px;
+            right: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #ffaec5;
+            color: #a0aec0;
             cursor: pointer;
             font-size: 18px;
             z-index: 2;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .password-toggle:hover {
-            color: #ff6b9d;
-            transform: translateY(-50%) scale(1.2);
+            color: #667eea;
+            transform: translateY(-50%) scale(1.15);
         }
 
-        /* Opciones del formulario */
         .form-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
             font-size: 14px;
-            flex-wrap: wrap;
-            gap: 10px;
+            animation: fadeInUp 0.6s ease-out 0.3s backwards;
         }
 
         .remember-checkbox {
             display: flex;
             align-items: center;
             cursor: pointer;
-            color: #666;
+            color: #4a5568;
+            font-weight: 600;
             transition: color 0.3s;
         }
 
         .remember-checkbox:hover {
-            color: #ff6b9d;
+            color: #667eea;
         }
 
         .remember-checkbox input {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
-            accent-color: #ff8fab;
+            accent-color: #667eea;
         }
 
         .forgot-link {
-            color: #ff6b9d;
+            color: #667eea;
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s;
@@ -408,58 +500,55 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #ff8fab;
-            transition: width 0.3s;
+            background: #667eea;
+            transition: width 0.3s ease;
         }
 
         .forgot-link:hover::after {
             width: 100%;
         }
 
-        /* Botón de inicio de sesión */
         .login-button {
             width: 100%;
-            padding: 19px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc3a0 100%);
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 18px;
+            border-radius: 14px;
             font-size: 16px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 10px 35px rgba(255, 107, 157, 0.4);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
         }
 
         .login-button::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
         }
 
         .login-button:hover::before {
-            width: 350px;
-            height: 350px;
+            left: 100%;
         }
 
         .login-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 45px rgba(255, 107, 157, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
         }
 
         .login-button:active {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .button-text {
@@ -467,7 +556,6 @@
             z-index: 1;
         }
 
-        /* Estado de carga */
         .btn-loading {
             pointer-events: none;
             opacity: 0.7;
@@ -480,12 +568,12 @@
         .btn-loading::after {
             content: '';
             position: absolute;
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             top: 50%;
             left: 50%;
-            margin-left: -13px;
-            margin-top: -13px;
+            margin-left: -12px;
+            margin-top: -12px;
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: white;
@@ -497,11 +585,11 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Divisor */
         .divider {
             text-align: center;
-            margin: 30px 0;
+            margin: 35px 0;
             position: relative;
+            animation: fadeInUp 0.6s ease-out 0.5s backwards;
         }
 
         .divider::before,
@@ -509,56 +597,56 @@
             content: '';
             position: absolute;
             top: 50%;
-            width: 42%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #ffe0e9, transparent);
+            width: 43%;
+            height: 1px;
+            background: #e2e8f0;
         }
 
         .divider::before { left: 0; }
         .divider::after { right: 0; }
 
         .divider-text {
-            color: #ff8fab;
+            color: #a0aec0;
             background: white;
-            padding: 0 15px;
+            padding: 0 20px;
             font-size: 13px;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Botones sociales */
         .social-buttons {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease-out 0.6s backwards;
         }
 
         .social-btn {
             flex: 1;
-            padding: 15px;
-            border: 2px solid #ffe0e9;
-            border-radius: 15px;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             background: white;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             font-weight: 700;
             font-size: 14px;
-            color: #333;
+            color: #4a5568;
         }
 
         .social-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .social-btn.google:hover {
             border-color: #db4437;
-            background: #fff5f5;
+            background: #fef5f5;
         }
 
         .social-btn.facebook:hover {
@@ -567,53 +655,109 @@
         }
 
         .social-btn i {
-            font-size: 22px;
+            font-size: 20px;
         }
 
         .google-icon { color: #db4437; }
         .facebook-icon { color: #4267B2; }
 
-        /* Link de registro */
         .register-text {
             text-align: center;
-            color: #666;
+            color: #718096;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
+            animation: fadeInUp 0.6s ease-out 0.7s backwards;
         }
 
         .register-link {
-            color: #ff6b9d;
+            color: #667eea;
             font-weight: 800;
             text-decoration: none;
             transition: all 0.3s;
         }
 
         .register-link:hover {
-            color: #ff8fab;
-            text-decoration: underline;
+            color: #764ba2;
         }
 
-        /* Responsive móvil */
+        /* Responsive */
+        @media (max-width: 991px) {
+            .login-wrapper {
+                flex-direction: column;
+            }
+
+            .brand-panel {
+                padding: 50px 40px;
+            }
+
+            .brand-features {
+                margin-top: 30px;
+            }
+
+            .form-panel {
+                padding: 50px 40px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .login-card {
-                padding: 45px 35px;
-                border-radius: 30px;
+            .login-container {
+                padding: 20px;
             }
 
-            .logo-icon {
-                width: 90px;
-                height: 90px;
+            .brand-panel {
+                padding: 40px 30px;
             }
 
-            .logo-icon i {
-                font-size: 45px;
+            .brand-logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            .brand-logo i {
+                font-size: 55px;
             }
 
             .brand-title {
+                font-size: 32px;
+            }
+
+            .form-panel {
+                padding: 40px 30px;
+            }
+
+            .form-title {
                 font-size: 26px;
             }
 
+            .product-item {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-panel,
+            .form-panel {
+                padding: 35px 25px;
+            }
+
+            .brand-title {
+                font-size: 28px;
+            }
+
             .brand-subtitle {
+                font-size: 14px;
+            }
+
+            .form-title {
+                font-size: 24px;
+            }
+
+            .form-input {
+                padding: 14px 16px 14px 48px;
+            }
+
+            .login-button {
+                padding: 16px;
                 font-size: 15px;
             }
 
@@ -621,59 +765,18 @@
                 flex-direction: column;
             }
 
-            .bakery-item {
-                font-size: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 15px;
+            .product-item {
+                font-size: 20px;
             }
 
-            .login-card {
-                padding: 40px 30px;
+            .feature-item {
+                font-size: 14px;
             }
 
-            .brand-title {
-                font-size: 24px;
-            }
-
-            .form-input {
-                padding: 15px 18px 15px 52px;
-            }
-
-            .login-button {
-                padding: 17px;
-                font-size: 15px;
-            }
-
-            .bakery-item {
-                font-size: 25px;
-            }
-        }
-
-        /* Animaciones de entrada */
-        .form-group {
-            animation: fadeInUp 0.6s ease-out backwards;
-        }
-
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-options { animation: fadeInUp 0.6s ease-out 0.3s backwards; }
-        .login-button { animation: fadeInUp 0.6s ease-out 0.4s backwards; }
-        .divider { animation: fadeInUp 0.6s ease-out 0.5s backwards; }
-        .social-buttons { animation: fadeInUp 0.6s ease-out 0.6s backwards; }
-        .register-text { animation: fadeInUp 0.6s ease-out 0.7s backwards; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .form-options {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
             }
         }
     </style>
@@ -682,207 +785,174 @@
     </script>
 </head>
 <body>
-    <!-- Elementos flotantes de pastelería -->
-    <div class="floating-bakery">
-        <div class="bakery-item">🧁</div>
-        <div class="bakery-item">🍰</div>
-        <div class="bakery-item">🎂</div>
-        <div class="bakery-item">🍪</div>
-        <div class="bakery-item">🍩</div>
-        <div class="bakery-item">🥐</div>
+    <!-- Fondo animado -->
+    <div class="animated-bg">
+        <div class="bg-grid"></div>
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
     </div>
 
-    <!-- Partículas brillantes -->
+    <!-- Productos flotantes -->
+    <div class="floating-products">
+        <div class="product-item">🛒</div>
+        <div class="product-item">🥤</div>
+        <div class="product-item">🍫</div>
+        <div class="product-item">🍞</div>
+        <div class="product-item">🥛</div>
+        <div class="product-item">🧃</div>
+        <div class="product-item">🍪</div>
+        <div class="product-item">🥫</div>
+    </div>
+
+    <!-- Partículas -->
     <div class="particles" id="particles"></div>
-
-    <!-- Ondas decorativas -->
-    <div class="waves">
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
 
     <!-- Container principal -->
     <div class="login-container">
-        <div class="login-card">
-            <!-- Logo y marca -->
-            <div class="logo-container">
-                <div style="position: relative; display: inline-block;">
-                    <div class="logo-ring"></div>
-                    <div class="logo-ring"></div>
-                    <div class="logo-icon">
-                        <i class="fas fa-birthday-cake"></i>
+        <div class="login-wrapper">
+            <!-- Panel izquierdo - Branding -->
+            <div class="brand-panel">
+                <div class="brand-content">
+                    <div class="brand-logo">
+                        <i class="fas fa-shopping-basket"></i>
                     </div>
+                    <h1 class="brand-title">Lunatic</h1>
+                    <p class="brand-subtitle">MINIMARKET</p>
+                    
+                    <ul class="brand-features">
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <span>Gestión completa de inventario</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span>Reportes y análisis en tiempo real</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span>Control de clientes y proveedores</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span>Sistema seguro y confiable</span>
+                        </li>
+                    </ul>
                 </div>
-                <h1 class="brand-title">Lunatic</h1>
-                <p class="brand-subtitle">Sabores Únicos</p>
             </div>
 
-            <!-- Formulario de login -->
-            <form id="frm_login">
-                <div class="form-group">
-                    <label class="form-label" for="username">Usuario</label>
-                    <div class="input-container">
-                        <i class="fas fa-user input-icon"></i>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            name="username" 
-                            class="form-input"
-                            placeholder="Ingresa tu usuario"
-                            required
-                            autocomplete="username"
-                        >
-                        <div class="input-focus-effect"></div>
+            <!-- Panel derecho - Formulario -->
+            <div class="form-panel">
+                <div class="form-header">
+                    <h2 class="form-title">Bienvenido de nuevo</h2>
+                    <p class="form-description">Ingresa tus credenciales para continuar</p>
+                </div>
+
+                <form id="frm_login">
+                    <div class="form-group">
+                        <label class="form-label" for="username">Usuario</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                class="form-input"
+                                placeholder="Ingresa tu usuario"
+                                required
+                                autocomplete="username"
+                            >
+                            <i class="fas fa-user input-icon"></i>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="password">Contraseña</label>
-                    <div class="input-container">
-                        <i class="fas fa-lock input-icon"></i>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-input"
-                            placeholder="Ingresa tu contraseña"
-                            required
-                            autocomplete="current-password"
-                        >
-                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
-                        <div class="input-focus-effect"></div>
+                    <div class="form-group">
+                        <label class="form-label" for="password">Contraseña</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input"
+                                placeholder="Ingresa tu contraseña"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <i class="fas fa-lock input-icon"></i>
+                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
                     </div>
+
+                    <div class="form-options">
+                        <label class="remember-checkbox">
+                            <input type="checkbox" id="remember">
+                            <span>Recordarme</span>
+                        </label>
+                        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="button" class="login-button" onclick="iniciar_sesion();">
+                        <span class="button-text">Iniciar Sesión</span>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span class="divider-text">O continúa con</span>
                 </div>
 
-                <div class="form-options">
-                    <label class="remember-checkbox">
-                        <input type="checkbox" id="remember">
-                        <span>Recordarme</span>
-                    </label>
-                    <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                <div class="social-buttons">
+                    <button class="social-btn google" onclick="loginWithGoogle()">
+                        <i class="fab fa-google google-icon"></i>
+                        <span>Google</span>
+                    </button>
+                    <button class="social-btn facebook" onclick="loginWithFacebook()">
+                        <i class="fab fa-facebook facebook-icon"></i>
+                        <span>Facebook</span>
+                    </button>
                 </div>
 
-                <button type="button" class="login-button" onclick="iniciar_sesion();">
-                    <span class="button-text">Iniciar Sesión</span>
-                </button>
-            </form>
-
-            <!-- Divisor -->
-            <div class="divider">
-                <span class="divider-text">O continúa con</span>
-            </div>
-
-            <!-- Botones sociales -->
-            <div class="social-buttons">
-                <button class="social-btn google" onclick="loginWithGoogle()">
-                    <i class="fab fa-google google-icon"></i>
-                    <span>Google</span>
-                </button>
-                <button class="social-btn facebook" onclick="loginWithFacebook()">
-                    <i class="fab fa-facebook facebook-icon"></i>
-                    <span>Facebook</span>
-                </button>
-            </div>
-
-            <!-- Link de registro -->
-            <div class="register-text">
-                ¿No tienes una cuenta? <a href="#" class="register-link">Regístrate aquí</a>
+                <div class="register-text">
+                    ¿No tienes una cuenta? <a href="#" class="register-link">Regístrate aquí</a>
+                </div>
             </div>
         </div>
     </div>
-
+</script> <!-- Tu script original --> <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
     <script>
-        // Generar partículas brillantes
+        // Crear partículas
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = window.innerWidth < 768 ? 25 : 50;
+            const particleCount = window.innerWidth < 768 ? 30 : 60;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                const x = Math.random() * window.innerWidth;
-                const y = Math.random() * window.innerHeight;
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * window.innerHeight;
+                const endX = startX + (Math.random() - 0.5) * 200;
+                const endY = startY - Math.random() * window.innerHeight;
+                const duration = 3 + Math.random() * 4;
+                const delay = Math.random() * 5;
                 
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                particle.style.animationDelay = Math.random() * 3 + 's';
-                particle.style.animationDuration = (2 + Math.random() * 2) + 's';
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
                 
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        createParticles();
-
-        // Toggle de contraseña
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-
-        // Función de inicio de sesión
-        function iniciar_sesion() {
-            const button = document.querySelector('.login-button');
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (!username || !password) {
-                alert('Por favor, completa todos los campos');
-                return;
-            }
-
-            button.classList.add('btn-loading');
-
-            // Simulación - reemplazar con tu lógica real
-            setTimeout(() => {
-                button.classList.remove('btn-loading');
-                // Aquí va tu función original de login
-                // window.iniciar_sesion(); 
-            }, 2000);
-        }
-
-        // Login con Google
-        function loginWithGoogle() {
-            console.log('Login con Google');
-            // Implementar OAuth de Google
-        }
-
-        // Login con Facebook
-        function loginWithFacebook() {
-            console.log('Login con Facebook');
-            // Implementar OAuth de Facebook
-        }
-
-        // Enviar con Enter
-        document.getElementById('password').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                iniciar_sesion();
-            }
-        });
-
-        // Animación al hacer focus en los inputs
-        const inputs = document.querySelectorAll('.form-input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-            });
-            
-            input.addEventListener('blur', function() {
-                if (!this.value) {
-                    this.parentElement.classList.remove('focused');
-                }
-            });
-        });
-    </script>
-
-    <!-- Tu script original -->
-    <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
-</body>
-</html>
+                const animation = particle.animate([
+                    { transform: 'translate(0, 0)', opacity: 0 },
+                    { transform: `translate(${endX - startX}px, ${endY - startY}px)`, opacity: 1, offset: 0.1 },
+                    { transform: `translate(${endX - startX}px, ${endY - startY}px)`, opacity: 1, offset: 0.9 },
+                    { transform: `translate(${endX - startX}px, ${endY - startY}px)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    iterations: Infinity,
+                    easing: 'linear'
+                });}}
